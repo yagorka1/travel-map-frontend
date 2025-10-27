@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+echo "🧪 Running tests..."
+npx nx test --skip-nx-cache
