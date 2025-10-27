@@ -6,9 +6,9 @@ import {
 import { provideRouter } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { authInterceptor } from '@app/auth/lib/auth/interceptors/auth.interceptor';
-import { refreshInterceptor } from '@app/auth/lib/auth/interceptors/refresh.interceptor';
-import { endpointInterceptor } from '@app/auth/lib/auth/interceptors/endpoint.interceptor';
+import { refreshInterceptor } from '@app/core/interceptors/refresh.interceptor';
+import { authInterceptor } from '@app/core/interceptors/auth.interceptor';
+import { endpointInterceptor } from '@app/core/interceptors/endpoint.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [

@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { authApi } from '@app/auth/lib/auth/libs/api/auth.api';
+import { authApi } from '../api/auth.api';
 
 @Injectable({
   providedIn: 'root'

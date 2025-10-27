@@ -7,7 +7,7 @@
   },
   "lint-staged": {
     "*.{ts,html,scss}": [
-      "nx lint --fix"
+      "nx affected --target=lint --fix=true --parallel=3"
     ]
   },
   "private": true,
