@@ -1,8 +1,8 @@
 import { inject } from '@angular/core';
 import { HttpRequest, HttpHandlerFn, HttpEvent, HttpInterceptorFn } from '@angular/common/http';
 import { catchError, switchMap, throwError, Observable, BehaviorSubject, filter, take } from 'rxjs';
-import { AuthService } from '@app/auth/lib/auth/services/auth.service';
-import { authApi } from '@app/auth/lib/auth/libs/api/auth.api';
+import { AuthService } from '../services/auth.service';
+import { authApi } from '../api/auth.api';
 
 let isRefreshing = false;
 const refreshSubject = new BehaviorSubject<string | null>(null);

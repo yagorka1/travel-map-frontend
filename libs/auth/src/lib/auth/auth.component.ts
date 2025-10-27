@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { AuthService } from '@app/auth/lib/auth/services/auth.service';
+import { AuthService } from '@app/core/services/auth.service';
 
 @Component({
   selector: 'lib-auth',

@@ -1,8 +1,6 @@
 import { HttpRequest, HttpHandlerFn, HttpEvent, HttpInterceptorFn } from '@angular/common/http';
-import { inject } from '@angular/core';
-import { AuthService } from '@app/auth/lib/auth/services/auth.service';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../../../environments/environment';
+import { environment } from '@env/environment';
 
 export const endpointInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: HttpHandlerFn): Observable<HttpEvent<any>> => {
 

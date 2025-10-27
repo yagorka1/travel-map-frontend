@@ -1,7 +1,7 @@
 import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
 import { inject } from '@angular/core';
-import { AuthService } from '@app/auth/lib/auth/services/auth.service';
 import { catchError, map, Observable, of } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 
 export const authenticatedGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> => {
   const authService: AuthService = inject(AuthService);
