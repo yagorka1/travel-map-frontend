@@ -1,4 +1,4 @@
-import { Route } from '@angular/router';
+import type { Route } from '@angular/router';
 import { authenticatedGuard } from '@app/core/guards/authenticated.guard';
 import { notAuthenticatedGuard } from '@app/core/guards/not-authenticated.guard';
 
