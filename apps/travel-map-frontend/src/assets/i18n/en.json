@@ -6,6 +6,10 @@
     "or": "Or",
     "create_new_account": "create a new account",
     "forgot_your_password": "Forgot your password?",
-    "sign_in": "Sign in"
+    "sign_in": "Sign in",
+    "already_have_an_account_sign_in": "Already have an account? Sign In",
+    "sign_up": "Sign Up",
+    "create_an_account": "Create an account",
+    "confirm_password": "Confirm Password"
   }
 }
