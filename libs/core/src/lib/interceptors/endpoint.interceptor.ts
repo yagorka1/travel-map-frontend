@@ -6,6 +6,10 @@ export const endpointInterceptor: HttpInterceptorFn = (
   req: HttpRequest<any>,
   next: HttpHandlerFn,
 ): Observable<HttpEvent<any>> => {
+  if (req.url.includes('i18n')) {
+    return next(req);
+  }
+
   const clone = req.clone({
     url: environment.apiHost + req.url,
   });

@@ -1,0 +1,11 @@
+{
+  "auth": {
+    "sign_in_to_your_account": "Увайдзіце ў свой акаунт",
+    "email": "Электронная пошта",
+    "password": "Пароль",
+    "or": "Ці",
+    "create_new_account": "стварыць новы акаунт",
+    "forgot_your_password": "Забылі пароль?",
+    "sign_in": "Увайсці"
+  }
+}
