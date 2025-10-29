@@ -9,6 +9,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { refreshInterceptor } from '@app/core/interceptors/refresh.interceptor';
 import { authInterceptor } from '@app/core/interceptors/auth.interceptor';
 import { endpointInterceptor } from '@app/core/interceptors/endpoint.interceptor';
+import { spinnerInterceptor } from '@app/core/interceptors/spinner.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,7 +17,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
     provideHttpClient(
-      withInterceptors([authInterceptor, refreshInterceptor, endpointInterceptor])
+      withInterceptors([authInterceptor, refreshInterceptor, endpointInterceptor, spinnerInterceptor])
     ),
   ],
 };
