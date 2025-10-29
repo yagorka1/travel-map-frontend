@@ -19,7 +19,7 @@ export const refreshInterceptor: HttpInterceptorFn = (
 
   return next(authReq).pipe(
     catchError(err => {
-      if (err.status === 401 && !req.url.includes(authApi.refresh)) {
+      if (err.status === 401 && !req.url.includes(authApi.refresh) && !req.url.includes(authApi.login)) {
         if (!isRefreshing) {
           isRefreshing = true;
           refreshSubject.next(null);

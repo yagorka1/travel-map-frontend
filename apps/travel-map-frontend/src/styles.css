@@ -1,0 +1,17 @@
+@import "tailwindcss";
+@import "flowbite";
+
+@source "../../../libs";
+
+/* Using @variant instead of @custom-variant for built-in dark mode */
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: #2563eb;
+  --color-secondary: #9333ea;
+}
+
+/* Removed body.dark styles - dark: variants will handle everything */
+body {
+  @apply bg-gray-50 text-gray-900 transition-colors duration-300;
+}
