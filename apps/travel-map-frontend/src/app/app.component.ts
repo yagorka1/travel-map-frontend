@@ -7,5 +7,4 @@ import { SpinnerComponent } from '@app/core/components/spinner/spinner.component
   selector: 'app-root',
   templateUrl: './app.component.html',
 })
-export class AppComponent {
-}
+export class AppComponent {}

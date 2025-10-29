@@ -6,9 +6,7 @@ import { AsyncPipe } from '@angular/common';
 @UntilDestroy()
 @Component({
   selector: 'lib-spinner',
-  imports: [
-    AsyncPipe,
-  ],
+  imports: [AsyncPipe],
   templateUrl: './spinner.component.html',
   styleUrl: './spinner.component.scss',
 })

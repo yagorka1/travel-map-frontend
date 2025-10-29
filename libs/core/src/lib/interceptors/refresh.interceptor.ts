@@ -9,16 +9,14 @@ const refreshSubject = new BehaviorSubject<string | null>(null);
 
 export const refreshInterceptor: HttpInterceptorFn = (
   req: HttpRequest<any>,
-  next: HttpHandlerFn
+  next: HttpHandlerFn,
 ): Observable<HttpEvent<any>> => {
   const auth = inject(AuthService);
 
-  const authReq = auth.token
-    ? req.clone({ setHeaders: { Authorization: `Bearer ${auth.token}` } })
-    : req;
+  const authReq = auth.token ? req.clone({ setHeaders: { Authorization: `Bearer ${auth.token}` } }) : req;
 
   return next(authReq).pipe(
-    catchError(err => {
+    catchError((err) => {
       if (err.status === 401 && !req.url.includes(authApi.refresh) && !req.url.includes(authApi.login)) {
         if (!isRefreshing) {
           isRefreshing = true;
@@ -31,24 +29,24 @@ export const refreshInterceptor: HttpInterceptorFn = (
               const cloned = req.clone({ setHeaders: { Authorization: `Bearer ${auth.token}` } });
               return next(cloned);
             }),
-            catchError(refreshErr => {
+            catchError((refreshErr) => {
               isRefreshing = false;
               auth.logout();
               return throwError(() => refreshErr);
-            })
+            }),
           );
         } else {
           return refreshSubject.pipe(
-            filter(token => token !== null),
+            filter((token) => token !== null),
             take(1),
-            switchMap(token => {
+            switchMap((token) => {
               const cloned = req.clone({ setHeaders: { Authorization: `Bearer ${token}` } });
               return next(cloned);
-            })
+            }),
           );
         }
       }
       return throwError(() => err);
-    })
+    }),
   );
 };

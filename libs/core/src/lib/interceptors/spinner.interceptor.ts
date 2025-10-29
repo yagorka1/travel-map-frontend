@@ -5,11 +5,9 @@ import { SpinnerService } from '../services/spinner.service';
 
 export const spinnerInterceptor: HttpInterceptorFn = (
   req: HttpRequest<any>,
-  next: HttpHandlerFn
+  next: HttpHandlerFn,
 ): Observable<HttpEvent<any>> => {
   const spinner = inject(SpinnerService);
   spinner.show();
-  return next(req).pipe(
-    finalize(() => spinner.hide())
-  );
+  return next(req).pipe(finalize(() => spinner.hide()));
 };
