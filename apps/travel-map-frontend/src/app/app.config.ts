@@ -6,6 +6,9 @@ import { refreshInterceptor } from '@app/core/interceptors/refresh.interceptor';
 import { authInterceptor } from '@app/core/interceptors/auth.interceptor';
 import { endpointInterceptor } from '@app/core/interceptors/endpoint.interceptor';
 import { spinnerInterceptor } from '@app/core/interceptors/spinner.interceptor';
+import { provideTranslateService } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LanguageEnum } from '@app/core';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,5 +16,13 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
     provideHttpClient(withInterceptors([authInterceptor, refreshInterceptor, endpointInterceptor, spinnerInterceptor])),
+    provideTranslateService({
+      lang: LanguageEnum.EN,
+      fallbackLang: LanguageEnum.EN,
+      loader: provideTranslateHttpLoader({
+        prefix: 'assets/i18n/',
+        suffix: '.json',
+      }),
+    }),
   ],
 };

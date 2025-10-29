@@ -7,3 +7,5 @@ export * from './interceptors/auth.interceptor';
 export * from './interceptors/refresh.interceptor';
 export * from './interceptors/endpoint.interceptor';
 export * from './interceptors/spinner.interceptor';
+
+export * from './enums/language.enum';
