@@ -4,3 +4,4 @@
 echo "🧪 Running tests..."
 npx nx test travel-map-frontend --watch=false
 npx nx test auth --watch=false
+npx nx test core --watch=false

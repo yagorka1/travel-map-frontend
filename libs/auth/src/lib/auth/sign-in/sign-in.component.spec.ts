@@ -4,13 +4,20 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from '@app/core/services/auth.service';
 import { of } from 'rxjs';
-import { By } from '@angular/platform-browser';
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 
 describe('SignInComponent', () => {
   let component: SignInComponent;
   let fixture: ComponentFixture<SignInComponent>;
   let authService: AuthService;
+
+  beforeAll(() => {
+    Object.defineProperty(global, 'crypto', {
+      value: {
+        randomUUID: () => 'test-uuid',
+      },
+    });
+  });
 
   beforeEach(waitForAsync(() => {
     const authServiceMock = {

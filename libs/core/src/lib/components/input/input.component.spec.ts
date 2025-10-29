@@ -5,6 +5,14 @@ describe('InputComponent', () => {
   let component: InputComponent;
   let fixture: ComponentFixture<InputComponent>;
 
+  beforeAll(() => {
+    Object.defineProperty(global, 'crypto', {
+      value: {
+        randomUUID: () => 'test-uuid',
+      },
+    });
+  });
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [InputComponent],
