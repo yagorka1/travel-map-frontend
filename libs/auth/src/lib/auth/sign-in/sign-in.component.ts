@@ -8,11 +8,7 @@ import { NgOptimizedImage } from '@angular/common';
 @UntilDestroy()
 @Component({
   selector: 'lib-sign-in',
-  imports: [
-    RouterLink,
-    ReactiveFormsModule,
-    NgOptimizedImage
-  ],
+  imports: [RouterLink, ReactiveFormsModule, NgOptimizedImage],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.scss',
 })

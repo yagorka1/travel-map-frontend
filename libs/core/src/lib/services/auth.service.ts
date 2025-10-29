@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { authApi } from '../api/auth.api';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private accessToken$ = new BehaviorSubject<string | null>(null);
@@ -22,17 +22,17 @@ export class AuthService {
 
   public login(dto: { email: string; password: string }): Observable<any> {
     return this.http.post(authApi.login, dto, { withCredentials: true }).pipe(
-      tap((res: any) =>  {
+      tap((res: any) => {
         this.setToken(res.accessToken);
         this.router.navigate(['/']);
-      })
+      }),
     );
   }
 
   public refresh(): Observable<any> {
-    return this.http.post(authApi.refresh, {}, { withCredentials: true }).pipe(
-      tap((res: any) => this.setToken(res.accessToken))
-    );
+    return this.http
+      .post(authApi.refresh, {}, { withCredentials: true })
+      .pipe(tap((res: any) => this.setToken(res.accessToken)));
   }
 
   public logout() {
