@@ -1,10 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { InputComponent } from '@app/core/components/input/input.component';
+import { TranslatePipe } from '@ngx-translate/core';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'lib-sign-up',
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [RouterLink, ReactiveFormsModule, InputComponent, TranslatePipe, NgOptimizedImage],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss',
 })

@@ -5,11 +5,12 @@ import { AuthService } from '@app/core/services/auth.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { NgOptimizedImage } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
+import { InputComponent } from '@app/core/components/input/input.component';
 
 @UntilDestroy()
 @Component({
   selector: 'lib-sign-in',
-  imports: [RouterLink, ReactiveFormsModule, NgOptimizedImage, TranslatePipe],
+  imports: [RouterLink, ReactiveFormsModule, NgOptimizedImage, TranslatePipe, InputComponent],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.scss',
 })
