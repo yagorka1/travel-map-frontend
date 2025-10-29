@@ -1,6 +1,7 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import type { ControlValueAccessor } from '@angular/forms';
+import { FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @UntilDestroy()
 @Component({
