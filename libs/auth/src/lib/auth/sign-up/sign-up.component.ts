@@ -4,12 +4,9 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 
 @Component({
   selector: 'lib-sign-up',
-  imports: [
-    RouterLink,
-    ReactiveFormsModule
-  ],
+  imports: [RouterLink, ReactiveFormsModule],
   templateUrl: './sign-up.component.html',
-  styleUrl: './sign-up.component.scss'
+  styleUrl: './sign-up.component.scss',
 })
 export class SignUpComponent implements OnInit {
   public signUpForm!: FormGroup;
@@ -20,7 +17,7 @@ export class SignUpComponent implements OnInit {
     this.signUpForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
-      confirmPassword: ['', Validators.required]
+      confirmPassword: ['', Validators.required],
     });
   }
 

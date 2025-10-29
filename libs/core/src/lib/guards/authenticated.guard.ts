@@ -3,7 +3,10 @@ import { inject } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
-export const authenticatedGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> => {
+export const authenticatedGuard: CanActivateFn = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot,
+): boolean | Observable<boolean> => {
   const authService: AuthService = inject(AuthService);
   const router: Router = inject(Router);
 
@@ -21,6 +24,6 @@ export const authenticatedGuard: CanActivateFn = (route: ActivatedRouteSnapshot,
     catchError(() => {
       router.navigate(['/auth']);
       return of(false);
-    })
+    }),
   );
 };

@@ -3,7 +3,10 @@ import { inject } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
-export const notAuthenticatedGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> => {
+export const notAuthenticatedGuard: CanActivateFn = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot,
+): Observable<boolean> => {
   const authService: AuthService = inject(AuthService);
   const router: Router = inject(Router);
 
@@ -19,6 +22,6 @@ export const notAuthenticatedGuard: CanActivateFn = (route: ActivatedRouteSnapsh
     }),
     catchError(() => {
       return of(true);
-    })
+    }),
   );
 };
