@@ -7,8 +7,6 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { NgOptimizedImage } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { InputComponent } from '@app/core/components/input/input.component';
-import { NotificationService } from '@app/core/ui/notification/services/notification.service';
-import { NotificationTypeEnum } from '@app/core/ui/notification/enums/notification-type.enum';
 
 @UntilDestroy()
 @Component({
@@ -24,23 +22,26 @@ export class SignInComponent implements OnInit {
 
   private authService: AuthService = inject(AuthService);
 
-  private notificationService: NotificationService = inject(NotificationService);
-
   public ngOnInit(): void {
     this.signInForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
-
-    this.notificationService.show({
-      message: 'Sign in',
-      type: NotificationTypeEnum.Success,
-    });
   }
 
   public onSubmit(): void {
     if (this.signInForm.valid) {
-      this.authService.login(this.signInForm.value).pipe(untilDestroyed(this)).subscribe();
+      this.authService
+        .login(this.signInForm.value)
+        .pipe(untilDestroyed(this))
+        .subscribe({
+          next: (data) => {
+            console.log('login success', data);
+          },
+          error: (err) => {
+            console.log('subscribe error', err);
+          },
+        });
     }
   }
 }

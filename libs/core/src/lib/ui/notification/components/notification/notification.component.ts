@@ -1,12 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NotificationStyles } from '../../constants/notification-styles.const';
 import { NotificationInterface } from '../../interfaces/notification.interface';
+import { TranslatePipe } from '@ngx-translate/core';
 
 const NOTIFICATION_DURATION = 5000;
 
 @Component({
   selector: 'lib-notification',
   templateUrl: './notification.component.html',
+  imports: [TranslatePipe],
 })
 export class NotificationComponent implements OnInit {
   @Input() notification!: NotificationInterface;
