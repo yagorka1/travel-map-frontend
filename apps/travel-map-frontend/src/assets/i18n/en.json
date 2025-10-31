@@ -11,5 +11,8 @@
     "sign_up": "Sign Up",
     "create_an_account": "Create an account",
     "confirm_password": "Confirm Password"
+  },
+  "errors": {
+    "INVALID_LOGIN_OR_PASSWORD": "Incorrect login or password"
   }
 }

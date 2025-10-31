@@ -10,13 +10,22 @@ import { spinnerInterceptor } from '@app/core/interceptors/spinner.interceptor';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LanguageEnum } from '@app/core';
+import { errorInterceptor } from '@app/core/interceptors/error.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
-    provideHttpClient(withInterceptors([authInterceptor, refreshInterceptor, endpointInterceptor, spinnerInterceptor])),
+    provideHttpClient(
+      withInterceptors([
+        authInterceptor,
+        refreshInterceptor,
+        endpointInterceptor,
+        spinnerInterceptor,
+        errorInterceptor,
+      ]),
+    ),
     provideTranslateService({
       lang: LanguageEnum.EN,
       fallbackLang: LanguageEnum.EN,
