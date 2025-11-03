@@ -11,3 +11,5 @@ export * from './interceptors/spinner.interceptor';
 export * from './interceptors/error.interceptor';
 
 export * from './enums/language.enum';
+
+export * from './validators/password-match.validator';

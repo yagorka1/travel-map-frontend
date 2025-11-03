@@ -29,6 +29,14 @@ export class AuthService {
     );
   }
 
+  public signUp(dto: { email: string; password: string; name: string }): Observable<any> {
+    return this.http.post(authApi.signUp, dto, { withCredentials: true }).pipe(
+      tap((res: any) => {
+        this.router.navigate(['/']);
+      }),
+    );
+  }
+
   public refresh(): Observable<any> {
     return this.http
       .post(authApi.refresh, {}, { withCredentials: true })
@@ -38,9 +46,5 @@ export class AuthService {
   public logout() {
     this.accessToken$.next(null);
     this.http.post(authApi.logout, {}, { withCredentials: true }).subscribe();
-  }
-
-  public test1(): Observable<any> {
-    return this.http.get('/auth/protected');
   }
 }

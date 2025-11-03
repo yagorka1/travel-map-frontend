@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { InputComponent } from './input.component';
+import { ControlContainer } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('InputComponent', () => {
   let component: InputComponent;
@@ -15,7 +17,8 @@ describe('InputComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InputComponent],
+      imports: [InputComponent, TranslateModule.forRoot()],
+      providers: [ControlContainer],
     }).compileComponents();
 
     fixture = TestBed.createComponent(InputComponent);

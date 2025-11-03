@@ -5,7 +5,11 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { InputComponent } from '@app/core/components/input/input.component';
 import { TranslatePipe } from '@ngx-translate/core';
 import { NgOptimizedImage } from '@angular/common';
+import { AuthService, NotificationService, passwordMatchValidator } from '@app/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { NotificationTypeEnum } from '@app/core/ui/notification/enums/notification-type.enum';
 
+@UntilDestroy()
 @Component({
   selector: 'lib-sign-up',
   imports: [RouterLink, ReactiveFormsModule, InputComponent, TranslatePipe, NgOptimizedImage],
@@ -17,16 +21,37 @@ export class SignUpComponent implements OnInit {
 
   private fb: FormBuilder = inject(FormBuilder);
 
+  private authService: AuthService = inject(AuthService);
+
+  private notificationService: NotificationService = inject(NotificationService);
+
   public ngOnInit(): void {
-    this.signUpForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
-    });
+    this.signUpForm = this.fb.group(
+      {
+        name: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', Validators.required],
+        confirmPassword: ['', Validators.required],
+      },
+      {
+        validators: passwordMatchValidator,
+      },
+    );
   }
 
   public onSubmit(): void {
     if (this.signUpForm.invalid) return;
-    console.log('Sign Up', this.signUpForm.value);
+
+    const { name, email, password } = this.signUpForm.value;
+
+    this.authService
+      .signUp({ name, email, password })
+      .pipe(untilDestroyed(this))
+      .subscribe(() => {
+        this.notificationService.show({
+          message: 'auth.account_created_successfully',
+          type: NotificationTypeEnum.Success,
+        });
+      });
   }
 }

@@ -1,13 +1,23 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { Component, Input, AfterViewInit, inject, ElementRef, ViewChild } from '@angular/core';
+import {
+  ControlValueAccessor,
+  FormControl,
+  NG_VALUE_ACCESSOR,
+  UntypedFormGroup,
+  FormGroupDirective,
+  ControlContainer,
+  FormGroup,
+} from '@angular/forms';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import type { ControlValueAccessor } from '@angular/forms';
-import { FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { forwardRef } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { NgClass } from '@angular/common';
 
 @UntilDestroy()
 @Component({
   selector: 'lib-input',
   templateUrl: './input.component.html',
-  styleUrl: './input.component.scss',
+  styleUrls: ['./input.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -15,26 +25,42 @@ import { FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
       multi: true,
     },
   ],
+  imports: [NgClass],
 })
-export class InputComponent implements ControlValueAccessor {
-  @Input() id = crypto.randomUUID();
+export class InputComponent implements ControlValueAccessor, AfterViewInit {
+  @ViewChild('input') input!: ElementRef;
 
-  @Input() public type = 'text';
+  @Input()
+  public id = crypto.randomUUID();
 
-  @Input() public placeholder = '';
+  @Input()
+  public type = 'text';
 
-  @Input() public label = '';
+  @Input()
+  public placeholder = '';
 
-  @Input() public errorMessage = 'Invalid input';
+  @Input()
+  public label = '';
+
+  @Input()
+  public autocomplete = 'off';
+
+  @Input() formControlName = '';
 
   public value: any;
 
-  public onChange = (_: any) => {
-    console.log(_);
-  };
+  private controlContainer = inject(ControlContainer);
+
+  private translateService = inject(TranslateService);
+
+  public ngAfterViewInit() {
+    if (this.value) {
+      this.input.nativeElement.classList.add('filled');
+    }
+  }
 
   public onTouched = () => {
-    console.log('onTouched');
+    /* empty */
   };
 
   public writeValue(value: any): void {
@@ -44,6 +70,10 @@ export class InputComponent implements ControlValueAccessor {
   public registerOnChange(fn: any): void {
     this.onChange = fn;
   }
+
+  public onChange = (value: any) => {
+    /* empty */
+  };
 
   public registerOnTouched(fn: any): void {
     this.onTouched = fn;
@@ -56,5 +86,49 @@ export class InputComponent implements ControlValueAccessor {
     this.onChange(value);
   }
 
-  public control?: FormControl;
+  private get form(): UntypedFormGroup | null {
+    return this.controlContainer.formDirective
+      ? ((this.controlContainer.formDirective as FormGroupDirective).form as FormGroup)
+      : null;
+  }
+
+  public get formControl(): FormControl | null {
+    return this.controlContainer.formDirective
+      ? (((this.controlContainer.formDirective as FormGroupDirective).form as FormGroup)?.get(
+          this.formControlName,
+        ) as FormControl)
+      : null;
+  }
+
+  public get isFormControlDisabled(): boolean {
+    if (this.form?.get(this.formControlName)) {
+      return !!this.form.get(this.formControlName)?.disabled;
+    }
+
+    return false;
+  }
+
+  public get isFormControlError(): boolean {
+    if (this.formControl) {
+      return !!this.formControl.errors;
+    }
+
+    return false;
+  }
+
+  public get errorMessage(): string {
+    if (this.isFormControlError && this.formControl?.touched && this.formControl?.invalid) {
+      let errors = '';
+
+      const controlErrors = this.formControl.errors || {};
+
+      for (const errorKey of Object.keys(controlErrors)) {
+        errors += this.translateService.instant(`errors.${errorKey}`) + '\n';
+      }
+
+      return errors;
+    }
+
+    return '';
+  }
 }
