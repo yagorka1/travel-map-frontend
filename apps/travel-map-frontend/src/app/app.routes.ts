@@ -12,6 +12,18 @@ export const appRoutes: Route[] = [
     path: '',
     canActivate: [authenticatedGuard],
     loadComponent: () =>
-      import('./core/components/main-layout/main-layout.component').then((m) => m.MainLayoutComponent),
+      import('./core/components/layouts/main-layout/main-layout.component').then((m) => m.MainLayoutComponent),
+    children: [
+      {
+        path: 'dashboard',
+        loadComponent: () =>
+          import('./pages/dashboard/components/dashboard/dashboard.component').then((m) => m.DashboardComponent),
+      },
+      {
+        path: 'chats',
+        loadComponent: () => import('./pages/chats/components/chats/chats.component').then((m) => m.ChatsComponent),
+      },
+      { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
+    ],
   },
 ];
