@@ -14,6 +14,12 @@
     "account_created_successfully": "Account created successfully",
     "confirm_password": "Confirm Password"
   },
+  "aside_menu": {
+    "dashboard": "Dashboard",
+    "chats": "Chats",
+    "users": "Users",
+    "settings": "Settings"
+  },
   "errors": {
     "INVALID_LOGIN_OR_PASSWORD": "Incorrect login or password",
     "USER_ALREADY_EXISTS": "User already exists",
