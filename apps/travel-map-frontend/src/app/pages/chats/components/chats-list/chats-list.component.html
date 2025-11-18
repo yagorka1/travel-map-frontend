@@ -1,5 +1,10 @@
 @if (user) {
-  <li class="p-4 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer">
+  <li class="p-4 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer"
+      [class.bg-blue-300]="isActive"
+      [class.text-gray-900]="isActive"
+      [class.hover:bg-gray-200]="!isActive"
+      [class.dark:hover:bg-gray-700]="!isActive"
+  >
     <div class="flex items-center">
       @if (user.avatarUrl) {
         <img class="w-10 h-10 rounded-full mr-3" ngSrc="{{ user.avatarUrl }}" alt="User"/>
@@ -15,7 +20,12 @@
 }
 
 @if (chat) {
-  <li class="p-4 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer">
+  <li class="p-4 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer"
+      [class.bg-blue-800]="isActive"
+      [class.text-white]="isActive"
+      [class.hover:bg-gray-200]="!isActive"
+      [class.dark:hover:bg-gray-700]="!isActive">
+
     <div class="flex items-center">
       @if (chat.user.avatarUrl) {
         <img class="w-10 h-10 rounded-full mr-3" ngSrc="{{ user.avatarUrl }}" alt="User"/>

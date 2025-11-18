@@ -19,4 +19,7 @@ export class ChatsListComponent {
 
   @Input()
   public messages: ChatMessageInterface[] = [];
+
+  @Input()
+  public isActive = false;
 }
