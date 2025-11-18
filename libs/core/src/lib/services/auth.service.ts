@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { authApi } from '../api/auth.api';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,14 @@ export class AuthService {
 
   public get token(): string | null {
     return this.accessToken$.value;
+  }
+
+  public get userId(): string | null {
+    if (this.token) {
+      return (jwtDecode(this.token) as any).id;
+    }
+
+    return null;
   }
 
   public setToken(token: string) {

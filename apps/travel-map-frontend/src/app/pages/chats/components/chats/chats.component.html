@@ -1,1 +1,71 @@
-Chats
+<div class="flex flex-1 h-full overflow-hidden">
+  <div class="w-80 bg-gray-100 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col">
+    <div class="p-4">
+      <div class="relative">
+        <input
+          type="text"
+          placeholder="Search chats..."
+          (input)="loadAvailableUsers($event.target.value)"
+          (focusin)="onInputFocus(true)"
+          class="w-full rounded-lg border border-gray-300 dark:border-gray-700 p-2 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+        />
+
+        @if (isUserSelected) {
+          <button
+            type="button"
+            (click)="onInputFocus(false)"
+            class="cursor-pointer absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+          >
+            ✕
+          </button>
+        }
+
+      </div>
+    </div>
+
+
+    <ul class="flex-1 overflow-y-auto divide-y divide-gray-200 dark:divide-gray-700">
+      @if (isUserSelected) {
+        @for (user of users(); track user.id) {
+          <app-chats-list [user]="user" (click)="selectUser(user)"></app-chats-list>
+        }
+      } @else {
+        @for (chat of chats; track chat.id) {
+          <app-chats-list [chat]="chat" (click)="selectChat(chat)"></app-chats-list>
+        }
+      }
+    </ul>
+  </div>
+
+  <div class="flex-1 flex flex-col bg-white dark:bg-gray-900 p-4 h-full">
+    @if (selectedUser || selectedChat) {
+      <span [ngStyle]="{ color: 'red' }">{{ selectedUser?.name || selectedChat?.user?.name }}</span>
+      <div class="flex-1 overflow-y-auto p-4 space-y-2  scrollbar-thin">
+        <app-messages [messages]="messages"></app-messages>
+      </div>
+
+      <div class="mt-4">
+        <form [formGroup]="form" (ngSubmit)="sendMessage()" class="flex">
+          <input
+            type="text"
+            placeholder="Type a message..."
+            formControlName="message"
+            class="flex-1 rounded-l-lg border border-gray-300 dark:border-gray-700 p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+          />
+          <button
+            type="submit"
+            class="cursor-pointer bg-blue-500 hover:bg-blue-600 text-white px-4 rounded-r-lg"
+          >
+            Send
+          </button>
+        </form>
+      </div>
+    } @else {
+      <div class="flex-1 flex flex-col items-center justify-center text-center">
+        <p class="text-gray-500 dark:text-gray-400 mt-2">
+          Pick a user to start the conversation.
+        </p>
+      </div>
+    }
+  </div>
+</div>
