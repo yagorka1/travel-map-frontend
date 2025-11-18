@@ -1,10 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
 import { ChatService } from '../../services/chat.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { combineLatest, debounceTime, distinctUntilChanged, filter, map, switchMap } from 'rxjs';
+import { combineLatest, debounceTime, distinctUntilChanged, filter, map, Subscription, switchMap } from 'rxjs';
 import { ChatUserInterface } from '../../interfaces/chat-user.interface';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '@app/core';
+import { WebSocketService } from '@app/core';
 import { ChatMemberInterface } from '../../interfaces/chat-member.interface';
 import { ChatMessageInterface } from '../../interfaces/chat-message.interface';
 import { ChatsListComponent } from '../chats-list/chats-list.component';
@@ -32,9 +33,12 @@ export class ChatsComponent {
   private chatService: ChatService = inject(ChatService);
   private authService: AuthService = inject(AuthService);
   private fb: FormBuilder = inject(FormBuilder);
+  private socketService: WebSocketService = inject(WebSocketService);
 
   private search = signal('');
   public isFocused = signal(false);
+
+  private messageSub: Subscription | null = null;
 
   private search$ = toObservable(this.search);
   private isFocused$ = toObservable(this.isFocused);
@@ -53,6 +57,31 @@ export class ChatsComponent {
   public constructor() {
     this.loadChats();
     this.initForm();
+    this.connectChat();
+  }
+
+  private connectChat(): void {
+    const token: string | null = this.authService.token;
+    const chatId: string | undefined = this.selectedChat?.chat.id;
+
+    if (token && chatId) {
+      this.socketService
+        .connect(token)
+        .then(() => {
+          this.socketService.joinChat(chatId);
+          this.messageSub?.unsubscribe();
+
+          this.messageSub = this.socketService
+            .onNewMessage()
+            .pipe(filter((msg) => msg.chatId === chatId))
+            .subscribe((msg) => {
+              this.messages.push(msg);
+            });
+        })
+        .catch((err) => {
+          console.error('WebSocket connection failed', err);
+        });
+    }
   }
 
   public loadAvailableUsers(name: string) {
@@ -102,6 +131,7 @@ export class ChatsComponent {
     this.selectedChat = chat;
     this.selectedUser = null;
     this.loadMessages(chat.chat.id);
+    this.connectChat();
   }
 
   private loadMessages(id: string): void {
