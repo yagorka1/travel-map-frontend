@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChatsListComponent } from './chats-list.component';
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 
 describe('ChatsListComponent', () => {
   let component: ChatsListComponent;
@@ -7,7 +8,7 @@ describe('ChatsListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ChatsListComponent],
+      imports: [ChatsListComponent, TranslatePipe, TranslateModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ChatsListComponent);

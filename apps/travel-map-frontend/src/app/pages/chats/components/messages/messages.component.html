@@ -2,18 +2,33 @@
   @for (message of messages; track message.id) {
     @if (message.sender.id === userId) {
       <div class="flex justify-end">
-        <div class="bg-blue-500 text-white p-2 rounded-lg">
-          <p class="text-sm">{{ message.content }}</p>
+          <div class="bg-blue-500 text-white p-2 rounded-lg inline-block max-w-[70%] relative">
+          <p class="text-sm text-gray-900 dark:text-white">
+            {{ message.content }}
+
+            <span class="ml-2 text-xs text-gray-500 dark:text-gray-700 align-bottom">
+              {{ message.created_at | date:'HH:mm' }}
+            </span>
+          </p>
         </div>
       </div>
     } @else {
       <div class="flex">
         <img class="w-8 h-8 rounded-full mr-3" src="https://flowbite.com/docs/images/people/profile-picture-1.jpg"
              alt="User"/>
-        <div class="bg-gray-200 dark:bg-gray-700 p-2 rounded-lg">
-          <p class="text-sm text-gray-900 dark:text-white">{{ message.content }}</p>
+
+        <div class="bg-gray-200 dark:bg-gray-700 p-2 rounded-lg inline-block max-w-[70%] relative">
+          <p class="text-sm text-gray-900 dark:text-white">
+            {{ message.content }}
+
+            <span class="ml-2 text-xs text-gray-500 dark:text-gray-400 align-bottom">
+              {{ message.created_at | date:'HH:mm' }}
+            </span>
+          </p>
         </div>
       </div>
     }
   }
+
+  <div #messagesEnd></div>
 </div>

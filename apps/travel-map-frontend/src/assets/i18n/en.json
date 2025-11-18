@@ -26,5 +26,12 @@
     "email": "Invalid email",
     "required": "Field is required",
     "PASSWORD_MISMATCH": "Passwords do not match"
+  },
+  "chats": {
+    "send": "Send",
+    "search_chats": "Search chats...",
+    "type_a_message": "Type a message...",
+    "pick_a_user_to_start_the_conversation": "Pick a user to start the conversation.",
+    "message": "Message"
   }
 }

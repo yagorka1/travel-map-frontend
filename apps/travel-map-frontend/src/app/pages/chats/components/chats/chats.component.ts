@@ -11,11 +11,12 @@ import { ChatsListComponent } from '../chats-list/chats-list.component';
 import { MessagesComponent } from '../messages/messages.component';
 import { NgStyle } from '@angular/common';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @UntilDestroy()
 @Component({
   selector: 'app-chats',
-  imports: [ReactiveFormsModule, ChatsListComponent, MessagesComponent, NgStyle],
+  imports: [ReactiveFormsModule, ChatsListComponent, MessagesComponent, NgStyle, TranslatePipe],
   providers: [ChatService],
   templateUrl: './chats.component.html',
   styleUrls: ['./chats.component.scss'],
@@ -60,7 +61,7 @@ export class ChatsComponent {
 
   private initForm(): void {
     this.form = this.fb.group({
-      message: [null, Validators.required],
+      message: [null, [Validators.required]],
     });
   }
 
@@ -86,7 +87,15 @@ export class ChatsComponent {
 
   public selectUser(user: ChatUserInterface): void {
     this.selectedUser = user;
-    this.selectedChat = null;
+
+    this.selectedChat = this.chats.find((chat) => chat.user.id === user.id) || null;
+
+    if (this.selectedChat) {
+      this.selectChat(this.selectedChat);
+    } else {
+      this.selectedChat = null;
+      this.messages = [];
+    }
   }
 
   public selectChat(chat: any): void {
@@ -107,17 +116,20 @@ export class ChatsComponent {
   public sendMessage(): void {
     if (!this.selectedUser && !this.selectedChat) return;
 
-    this.chatService
-      .sendMessage(
-        this.form.value.message,
-        this.authService.userId as string,
-        this.selectedUser?.id || this.selectedChat?.id || '',
-        this.selectedChat?.chat?.id,
-      )
-      .pipe(untilDestroyed(this))
-      .subscribe((data) => {
-        this.loadMessages(data.chat.id);
-        this.form.reset();
-      });
+    if (this.form.valid) {
+      this.chatService
+        .sendMessage(
+          this.form.value.message,
+          this.authService.userId as string,
+          this.selectedUser?.id || this.selectedChat?.user.id || '',
+          this.selectedChat?.chat?.id,
+        )
+        .pipe(untilDestroyed(this))
+        .subscribe((data) => {
+          this.loadMessages(data.chat.id);
+          this.loadChats();
+          this.form.reset();
+        });
+    }
   }
 }
