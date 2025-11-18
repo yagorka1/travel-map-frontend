@@ -1,4 +1,5 @@
 export * from './services/auth.service';
+export * from './services/web-socket.service';
 export * from './ui/notification/services/notification.service';
 
 export * from './guards/not-authenticated.guard';
