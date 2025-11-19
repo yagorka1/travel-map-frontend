@@ -129,7 +129,6 @@ export class ChatsComponent {
           .pipe(filter((msg) => msg.chatId === chatId))
           .subscribe((msg) => {
             this.messages.push(msg);
-            this.showScrollDown = true;
           });
       }
     });
