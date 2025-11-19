@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, ViewChild } from '@angular/core';
 import { ChatService } from '../../services/chat.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { combineLatest, debounceTime, distinctUntilChanged, filter, map, Subscription, switchMap } from 'rxjs';
@@ -10,19 +10,19 @@ import { ChatMemberInterface } from '../../interfaces/chat-member.interface';
 import { ChatMessageInterface } from '../../interfaces/chat-message.interface';
 import { ChatsListComponent } from '../chats-list/chats-list.component';
 import { MessagesComponent } from '../messages/messages.component';
-import { NgStyle } from '@angular/common';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @UntilDestroy()
 @Component({
   selector: 'app-chats',
-  imports: [ReactiveFormsModule, ChatsListComponent, MessagesComponent, NgStyle, TranslatePipe],
+  imports: [ReactiveFormsModule, ChatsListComponent, MessagesComponent, TranslatePipe],
   providers: [ChatService],
   templateUrl: './chats.component.html',
   styleUrls: ['./chats.component.scss'],
 })
 export class ChatsComponent {
+  @ViewChild('messagesComponent') messagesComponent!: MessagesComponent;
   public chats: ChatMemberInterface[] = [];
   public isUserSelected = false;
   public selectedUser: ChatUserInterface | null = null;
@@ -43,6 +43,8 @@ export class ChatsComponent {
   private search$ = toObservable(this.search);
   private isFocused$ = toObservable(this.isFocused);
 
+  public showScrollDown = false;
+
   public users = toSignal(
     combineLatest([this.search$, this.isFocused$]).pipe(
       filter(([_, focused]) => focused),
@@ -53,6 +55,21 @@ export class ChatsComponent {
     ),
     { initialValue: [] as ChatUserInterface[] },
   );
+
+  public scrollToBottomSmooth(): void {
+    this.messagesComponent.scrollToBottomSmooth();
+    this.showScrollDown = false;
+  }
+
+  public onScroll(event: Event): void {
+    const element = event.target as HTMLElement;
+    const scrollTop = element.scrollTop;
+    const scrollHeight = element.scrollHeight;
+    const clientHeight = element.clientHeight;
+
+    const isAtBottom = scrollHeight - scrollTop - clientHeight < 50;
+    this.showScrollDown = !isAtBottom;
+  }
 
   public constructor() {
     this.loadChats();
@@ -76,6 +93,7 @@ export class ChatsComponent {
             .pipe(filter((msg) => msg.chatId === chatId))
             .subscribe((msg) => {
               this.messages.push(msg);
+              this.showScrollDown = true;
             });
         })
         .catch((err) => {
@@ -127,7 +145,7 @@ export class ChatsComponent {
     }
   }
 
-  public selectChat(chat: any): void {
+  public selectChat(chat: ChatMemberInterface): void {
     this.selectedChat = chat;
     this.selectedUser = null;
     this.loadMessages(chat.chat.id);
@@ -140,6 +158,7 @@ export class ChatsComponent {
       .pipe(untilDestroyed(this))
       .subscribe((data: ChatMessageInterface[]) => {
         this.messages = data;
+        this.messagesComponent.scrollToBottomSmooth();
       });
   }
 
@@ -155,7 +174,7 @@ export class ChatsComponent {
           this.selectedChat?.chat?.id,
         )
         .pipe(untilDestroyed(this))
-        .subscribe((data) => {
+        .subscribe((data: ChatMessageInterface) => {
           this.loadMessages(data.chat.id);
           this.loadChats();
           this.form.reset();

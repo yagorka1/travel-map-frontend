@@ -18,8 +18,13 @@ export class ChatService {
     return this.http.get<ChatMemberInterface[]>(chatApi.chatsList);
   }
 
-  public sendMessage(content: string, senderId: string, receiverId: string, chatId?: string): Observable<any> {
-    return this.http.post(chatApi.sendMessage, { content, senderId, receiverId, chatId });
+  public sendMessage(
+    content: string,
+    senderId: string,
+    receiverId: string,
+    chatId?: string,
+  ): Observable<ChatMessageInterface> {
+    return this.http.post<ChatMessageInterface>(chatApi.sendMessage, { content, senderId, receiverId, chatId });
   }
 
   public loadMessages(id: string): Observable<ChatMessageInterface[]> {
