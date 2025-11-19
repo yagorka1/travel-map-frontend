@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ChatService } from '../../services/chat.service';
 import { ChatUserInterface } from '../../interfaces/chat-user.interface';
 import { NgOptimizedImage } from '@angular/common';

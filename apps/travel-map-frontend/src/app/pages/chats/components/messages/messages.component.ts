@@ -1,6 +1,6 @@
-import { AfterViewChecked, Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, Input, OnChanges, ViewChild } from '@angular/core';
 import { ChatService } from '../../services/chat.service';
-import { DatePipe, NgOptimizedImage } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { ChatMessageInterface } from '../../interfaces/chat-message.interface';
 import { AuthService } from '@app/core';
 import { ChatUserInterface } from '../../interfaces/chat-user.interface';
@@ -8,12 +8,12 @@ import { ChatMemberInterface } from '../../interfaces/chat-member.interface';
 
 @Component({
   selector: 'app-messages',
-  imports: [NgOptimizedImage, DatePipe],
+  imports: [DatePipe],
   providers: [ChatService],
   templateUrl: './messages.component.html',
   styleUrl: './messages.component.scss',
 })
-export class MessagesComponent implements AfterViewChecked {
+export class MessagesComponent implements OnChanges {
   @Input()
   public messages: ChatMessageInterface[] = [];
 
@@ -27,18 +27,28 @@ export class MessagesComponent implements AfterViewChecked {
 
   public userId: string | null = null;
 
+  private previousChatId: string | null = null;
+
   private authService: AuthService = inject(AuthService);
 
   constructor() {
     this.userId = this.authService.userId;
   }
 
-  public ngAfterViewChecked() {
-    this.scrollToBottom();
+  public ngOnChanges() {
+    const chatId = this.selectedChat?.chat?.id || this.selectedUser?.id;
+
+    if (chatId && chatId !== this.previousChatId && this.messages.length > 0) {
+      setTimeout(() => this.scrollToBottomAuto(), 0);
+      this.previousChatId = chatId;
+    }
   }
 
-  private scrollToBottom() {
+  private scrollToBottomAuto() {
     this.messagesEnd?.nativeElement?.scrollIntoView?.({ behavior: 'auto' });
-    // this.messagesEnd.nativeElement.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  public scrollToBottomSmooth() {
+    this.messagesEnd?.nativeElement?.scrollIntoView({ behavior: 'smooth' });
   }
 }
