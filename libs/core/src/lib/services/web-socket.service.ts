@@ -13,7 +13,10 @@ export class WebSocketService {
       if (this.socket) return resolve();
 
       this.socket = io(environment.apiWebSocketHost, {
-        auth: { token },
+        auth: {
+          token: token,
+        },
+        transports: ['websocket'],
       });
 
       this.socket.on('connect', () => {
@@ -33,7 +36,6 @@ export class WebSocketService {
       console.warn('Socket not connected yet');
       return;
     }
-    console.log('sending join', chatId);
     this.socket.emit('join', chatId);
   }
 
@@ -41,6 +43,14 @@ export class WebSocketService {
     return new Observable((observer) => {
       this.socket?.on(WebSocketEvents.NEW_MESSAGE, (msg) => {
         observer.next(msg);
+      });
+    });
+  }
+
+  onUnreadCount(): Observable<any> {
+    return new Observable((observer) => {
+      this.socket?.on(WebSocketEvents.UNREAD_COUNT, (data) => {
+        observer.next(data);
       });
     });
   }

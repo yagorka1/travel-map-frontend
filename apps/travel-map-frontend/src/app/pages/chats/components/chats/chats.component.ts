@@ -1,7 +1,17 @@
-import { Component, inject, signal, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, signal, ViewChild } from '@angular/core';
 import { ChatService } from '../../services/chat.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { combineLatest, debounceTime, distinctUntilChanged, filter, map, Subscription, switchMap } from 'rxjs';
+import {
+  combineLatest,
+  debounceTime,
+  distinctUntilChanged,
+  exhaustMap,
+  filter,
+  map,
+  Subject,
+  Subscription,
+  switchMap,
+} from 'rxjs';
 import { ChatUserInterface } from '../../interfaces/chat-user.interface';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '@app/core';
@@ -12,6 +22,7 @@ import { ChatsListComponent } from '../chats-list/chats-list.component';
 import { MessagesComponent } from '../messages/messages.component';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { TranslatePipe } from '@ngx-translate/core';
+import { UnreadMessagesService } from '../../services/unread-messages.service';
 
 @UntilDestroy()
 @Component({
@@ -23,27 +34,51 @@ import { TranslatePipe } from '@ngx-translate/core';
 })
 export class ChatsComponent {
   @ViewChild('messagesComponent') messagesComponent!: MessagesComponent;
+
+  @ViewChild('scrollContainer') scrollContainer!: ElementRef<HTMLDivElement>;
+
   public chats: ChatMemberInterface[] = [];
+
   public isUserSelected = false;
+
   public selectedUser: ChatUserInterface | null = null;
+
   public selectedChat: ChatMemberInterface | null = null;
+
   public form!: FormGroup;
+
   public messages: ChatMessageInterface[] = [];
 
+  public showScrollDown = false;
+
   private chatService: ChatService = inject(ChatService);
+
   private authService: AuthService = inject(AuthService);
+
   private fb: FormBuilder = inject(FormBuilder);
+
   private socketService: WebSocketService = inject(WebSocketService);
 
   private search = signal('');
+
   public isFocused = signal(false);
 
   private messageSub: Subscription | null = null;
 
+  private readMessages$ = new Subject<void>();
+
+  private unreadMessagesService = inject(UnreadMessagesService);
+
   private search$ = toObservable(this.search);
+
   private isFocused$ = toObservable(this.isFocused);
 
-  public showScrollDown = false;
+  public constructor() {
+    this.loadChats();
+    this.initForm();
+    this.connectChat();
+    this.readMessages();
+  }
 
   public users = toSignal(
     combineLatest([this.search$, this.isFocused$]).pipe(
@@ -57,7 +92,7 @@ export class ChatsComponent {
   );
 
   public scrollToBottomSmooth(): void {
-    this.messagesComponent.scrollToBottomSmooth();
+    this.messagesComponent?.scrollToBottomSmooth();
     this.showScrollDown = false;
   }
 
@@ -69,37 +104,35 @@ export class ChatsComponent {
 
     const isAtBottom = scrollHeight - scrollTop - clientHeight < 50;
     this.showScrollDown = !isAtBottom;
-  }
 
-  public constructor() {
-    this.loadChats();
-    this.initForm();
-    this.connectChat();
+    if (
+      isAtBottom &&
+      this.selectedChat?.chat?.id &&
+      this.unreadMessagesService.getUnreadForChat(this.selectedChat.chat.id)()
+    ) {
+      this.readMessages$.next();
+    }
   }
 
   private connectChat(): void {
     const token: string | null = this.authService.token;
-    const chatId: string | undefined = this.selectedChat?.chat.id;
+    if (!token) return;
 
-    if (token && chatId) {
-      this.socketService
-        .connect(token)
-        .then(() => {
-          this.socketService.joinChat(chatId);
-          this.messageSub?.unsubscribe();
+    this.socketService.connect(token).then(() => {
+      if (this.selectedChat) {
+        const chatId = this.selectedChat.chat.id;
+        this.socketService.joinChat(chatId);
 
-          this.messageSub = this.socketService
-            .onNewMessage()
-            .pipe(filter((msg) => msg.chatId === chatId))
-            .subscribe((msg) => {
-              this.messages.push(msg);
-              this.showScrollDown = true;
-            });
-        })
-        .catch((err) => {
-          console.error('WebSocket connection failed', err);
-        });
-    }
+        this.messageSub?.unsubscribe();
+        this.messageSub = this.socketService
+          .onNewMessage()
+          .pipe(filter((msg) => msg.chatId === chatId))
+          .subscribe((msg) => {
+            this.messages.push(msg);
+            this.showScrollDown = true;
+          });
+      }
+    });
   }
 
   public loadAvailableUsers(name: string) {
@@ -158,11 +191,15 @@ export class ChatsComponent {
       .pipe(untilDestroyed(this))
       .subscribe((data: ChatMessageInterface[]) => {
         this.messages = data;
-        this.messagesComponent.scrollToBottomSmooth();
+        this.messagesComponent?.scrollToBottomSmooth();
       });
   }
 
   public sendMessage(): void {
+    if (this.selectedChat?.chat?.id) {
+      this.chatService.readMessages(this.selectedChat.chat.id).pipe(untilDestroyed(this)).subscribe();
+    }
+
     if (!this.selectedUser && !this.selectedChat) return;
 
     if (this.form.valid) {
@@ -177,8 +214,19 @@ export class ChatsComponent {
         .subscribe((data: ChatMessageInterface) => {
           this.loadMessages(data.chat.id);
           this.loadChats();
+
+          if (!this.selectedChat?.chat?.id) {
+            this.selectChat({ chat: data.chat, user: this.selectedUser as ChatUserInterface });
+          }
+
           this.form.reset();
         });
     }
+  }
+
+  private readMessages(): void {
+    this.readMessages$
+      .pipe(exhaustMap(() => this.chatService.readMessages(this.selectedChat?.chat.id as string)))
+      .subscribe();
   }
 }
