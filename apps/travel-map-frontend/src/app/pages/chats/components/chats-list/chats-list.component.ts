@@ -29,6 +29,8 @@ export class ChatsListComponent implements OnInit {
   private unreadMessagesService = inject(UnreadMessagesService);
 
   public ngOnInit() {
-    this.unreadMessages = this.unreadMessagesService.getUnreadForChat(this.chat.chat.id);
+    if (this.chat) {
+      this.unreadMessages = this.unreadMessagesService.getUnreadForChat(this.chat.chat.id);
+    }
   }
 }

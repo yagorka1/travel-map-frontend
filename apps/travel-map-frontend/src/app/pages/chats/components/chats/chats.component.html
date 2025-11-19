@@ -38,21 +38,19 @@
 
   <div class="flex-1 flex flex-col bg-white dark:bg-gray-900 p-4 h-full relative">
     @if (selectedUser || selectedChat) {
-      <div class="flex items-center justify-between p-4 bg-gray-100 dark:bg-gray-800 rounded-t-lg shadow-md">
-        <span class="text-lg font-semibold text-gray-800 dark:text-white">
-          {{ selectedUser?.name || selectedChat?.user?.name }}
-        </span>
+      <div class="flex items-center justify-between p-4 bg-gray-100 dark:bg-gray-800 rounded-t-lg shadow-md flex-shrink-0">
+      <span class="text-lg font-semibold text-gray-800 dark:text-white">
+        {{ selectedUser?.name || selectedChat?.user?.name }}
+      </span>
       </div>
 
-      @if (messages && messages.length) {
-        <div
-          #scrollContainer
-          (scroll)="onScroll($event)"
-          class="flex-1 overflow-y-auto p-4 space-y-2 scrollbar-thin  relative">
-          <app-messages #messagesComponent [selectedUser]="selectedUser" [selectedChat]="selectedChat"
-                        [messages]="messages"></app-messages>
-        </div>
-      }
+      <div
+        #scrollContainer
+        (scroll)="onScroll($event)"
+        class="flex-1 overflow-y-auto p-4 space-y-2 scrollbar-thin relative">
+        <app-messages #messagesComponent [selectedUser]="selectedUser" [selectedChat]="selectedChat"
+                      [messages]="messages"></app-messages>
+      </div>
 
       @if (showScrollDown) {
         <button
@@ -66,31 +64,29 @@
         </button>
       }
 
-      <div class="mt-4">
-        <form [formGroup]="form" (ngSubmit)="sendMessage()" class="flex">
-          <input
-            type="text"
-            [placeholder]="'chats.type_a_message' | translate"
-            formControlName="message"
-            class="flex-1 rounded-l-lg border border-transparent p-2
-         focus:outline-none focus:ring-0 focus:shadow-md
-         dark:bg-gray-700 dark:text-white box-border"
-          />
-
-          <button
-            type="submit"
-            [disabled]="form.invalid"
-            class="bg-blue-500 text-white px-4 rounded-r-lg
-         hover:bg-blue-600
-         disabled:bg-gray-400
-         disabled:cursor-not-allowed
-         disabled:opacity-50
-         cursor-pointer"
-          >
-            {{ 'chats.send' | translate }}
-          </button>
-        </form>
-      </div>
+      <form [formGroup]="form" (ngSubmit)="sendMessage()"
+            class="flex mt-2 flex-shrink-0">
+        <input
+          type="text"
+          [placeholder]="'chats.type_a_message' | translate"
+          formControlName="message"
+          class="flex-1 rounded-l-lg border border-transparent p-2
+               focus:outline-none focus:ring-0 focus:shadow-md
+               dark:bg-gray-700 dark:text-white box-border"
+        />
+        <button
+          type="submit"
+          [disabled]="form.invalid"
+          class="bg-blue-500 text-white px-4 rounded-r-lg
+               hover:bg-blue-600
+               disabled:bg-gray-400
+               disabled:cursor-not-allowed
+               disabled:opacity-50
+               cursor-pointer"
+        >
+          {{ 'chats.send' | translate }}
+        </button>
+      </form>
     } @else {
       <div class="flex-1 flex flex-col items-center justify-center text-center">
         <p class="text-gray-500 dark:text-gray-400 mt-2">
