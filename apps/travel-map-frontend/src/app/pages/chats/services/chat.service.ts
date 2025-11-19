@@ -30,4 +30,8 @@ export class ChatService {
   public loadMessages(id: string): Observable<ChatMessageInterface[]> {
     return this.http.get<ChatMessageInterface[]>(chatApi.messages(id));
   }
+
+  public readMessages(id: string): Observable<void> {
+    return this.http.post<void>(chatApi.readMessages(id), {});
+  }
 }

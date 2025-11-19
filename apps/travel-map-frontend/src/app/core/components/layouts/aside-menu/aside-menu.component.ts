@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { UnreadMessagesService } from '../../../../pages/chats/services/unread-messages.service';
 
 @Component({
   selector: 'app-aside-menu',
@@ -8,4 +9,17 @@ import { TranslatePipe } from '@ngx-translate/core';
   templateUrl: './aside-menu.component.html',
   styleUrl: './aside-menu.component.scss',
 })
-export class AsideMenuComponent {}
+export class AsideMenuComponent {
+  public unreadMessages = 0;
+  private unreadMessagesService = inject(UnreadMessagesService);
+
+  constructor() {
+    this.unreadMessagesService.initialize();
+
+    this.unreadMessagesService.totalUnread$.subscribe((totalUnread) => {
+      this.unreadMessages = totalUnread || 0;
+    });
+
+    this.unreadMessagesService.setInitialUnreadMessagesCount();
+  }
+}
