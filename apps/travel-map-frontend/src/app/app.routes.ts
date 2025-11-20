@@ -23,6 +23,10 @@ export const appRoutes: Route[] = [
         path: 'chats',
         loadComponent: () => import('./pages/chats/components/chats/chats.component').then((m) => m.ChatsComponent),
       },
+      {
+        path: 'settings',
+        loadChildren: () => import('./pages/settings/settings.routes').then((m) => m.settingsRoutes),
+      },
       { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
     ],
   },

@@ -10,6 +10,10 @@ import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LanguageEnum } from '@app/core';
 import { errorInterceptor } from '@app/core/interceptors/error.interceptor';
+import { provideStore } from '@ngrx/store';
+import { profileReducer } from './core/store/profile/profile.reducer';
+import { provideEffects } from '@ngrx/effects';
+import * as ProfileEffects from './core/store/profile/profile.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,5 +29,9 @@ export const appConfig: ApplicationConfig = {
         suffix: '.json',
       }),
     }),
+    provideStore({
+      profile: profileReducer,
+    }),
+    provideEffects(ProfileEffects),
   ],
 };
