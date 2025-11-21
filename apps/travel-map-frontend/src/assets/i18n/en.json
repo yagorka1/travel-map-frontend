@@ -25,7 +25,40 @@
     "USER_ALREADY_EXISTS": "User already exists",
     "email": "Invalid email",
     "required": "Field is required",
-    "PASSWORD_MISMATCH": "Passwords do not match"
+    "PASSWORD_MISMATCH": "Passwords do not match",
+    "minlength": "Minimum length not met",
+    "INCORRECT_CURRENT_PASSWORD": "Current password is incorrect"
+  },
+  "profile": {
+    "edit_profile": "Edit Profile",
+    "name": "Name",
+    "email": "Email",
+    "new_password": "New Password",
+    "change_avatar": "Change Avatar",
+    "save_changes": "Save Changes",
+    "enter_your_name": "Enter your name",
+    "leave_empty_to_keep_password": "Leave empty to keep current password",
+    "email_cannot_be_changed": "Email cannot be changed",
+    "language": "Language",
+    "select_language": "Select language"
+  },
+  "settings": {
+    "profile": "Profile",
+    "password": "Password"
+  },
+  "password": {
+    "change_password": "Change Password",
+    "current_password": "Current Password",
+    "enter_current_password": "Enter your current password",
+    "new_password": "New Password",
+    "enter_new_password": "Enter your new password",
+    "confirm_password": "Confirm Password",
+    "confirm_new_password": "Confirm your new password",
+    "passwords_do_not_match": "Passwords do not match",
+    "update_password": "Update Password",
+    "updating": "Updating...",
+    "password_changed_success": "Password changed successfully",
+    "password_change_error": "Failed to change password. Please try again."
   },
   "chats": {
     "send": "Send",

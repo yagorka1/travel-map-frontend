@@ -6,6 +6,65 @@
     "or": "Или",
     "create_new_account": "создайте новый аккаунт",
     "forgot_your_password": "Забыли пароль?",
-    "sign_in": "Войти"
+    "sign_in": "Войти",
+    "name": "Имя",
+    "confirm_password": "Подтвердите пароль",
+    "create_an_account": "Создать аккаунт",
+    "account_created_successfully": "Аккаунт успешно создан",
+    "already_have_an_account_sign_in": "Уже есть аккаунт? Войти",
+    "sign_up": "Зарегистрироваться"
+  },
+  "aside_menu": {
+    "dashboard": "Панель управления",
+    "chats": "Чаты",
+    "users": "Пользователи",
+    "settings": "Настройки"
+  },
+  "errors": {
+    "INVALID_LOGIN_OR_PASSWORD": "Неверный логин или пароль",
+    "USER_ALREADY_EXISTS": "Пользователь уже существует",
+    "email": "Неверный email",
+    "required": "Поле обязательно для заполнения",
+    "PASSWORD_MISMATCH": "Пароли не совпадают",
+    "minlength": "Минимальная длина не достигнута",
+    "INCORRECT_CURRENT_PASSWORD": "Текущий пароль неверный"
+  },
+  "profile": {
+    "edit_profile": "Редактировать профиль",
+    "name": "Имя",
+    "email": "Электронная почта",
+    "new_password": "Новый пароль",
+    "change_avatar": "Изменить аватар",
+    "save_changes": "Сохранить изменения",
+    "enter_your_name": "Введите ваше имя",
+    "leave_empty_to_keep_password": "Оставьте пустым, чтобы сохранить текущий пароль",
+    "email_cannot_be_changed": "Email нельзя изменить",
+    "language": "Язык",
+    "select_language": "Выберите язык"
+  },
+  "settings": {
+    "profile": "Профиль",
+    "password": "Пароль"
+  },
+  "password": {
+    "change_password": "Изменить пароль",
+    "current_password": "Текущий пароль",
+    "enter_current_password": "Введите текущий пароль",
+    "new_password": "Новый пароль",
+    "enter_new_password": "Введите новый пароль",
+    "confirm_password": "Подтвердите пароль",
+    "confirm_new_password": "Подтвердите новый пароль",
+    "passwords_do_not_match": "Пароли не совпадают",
+    "update_password": "Обновить пароль",
+    "updating": "Обновление...",
+    "password_changed_success": "Пароль успешно изменен",
+    "password_change_error": "Не удалось изменить пароль. Пожалуйста, попробуйте снова."
+  },
+  "chats": {
+    "send": "Отправить",
+    "search_chats": "Поиск чатов...",
+    "type_a_message": "Введите сообщение...",
+    "pick_a_user_to_start_the_conversation": "Выберите пользователя, чтобы начать разговор.",
+    "message": "Сообщение"
   }
 }

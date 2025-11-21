@@ -1,0 +1,33 @@
+.text-fg-brand {
+  color: #7c3aed;
+}
+
+.border-brand {
+  border-color: #7c3aed;
+}
+
+.border-transparent {
+  border-color: transparent;
+}
+
+.border-default {
+  border-color: #e5e7eb;
+}
+
+.text-body {
+  color: #374151;
+}
+
+.text-fg-disabled {
+  color: #9ca3af;
+}
+
+a:hover {
+  &.hover\:text-fg-brand {
+    color: #7c3aed;
+  }
+  
+  &.hover\:border-brand {
+    border-color: #7c3aed;
+  }
+}

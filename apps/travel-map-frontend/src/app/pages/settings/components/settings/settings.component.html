@@ -1,2 +1,26 @@
-Settings
+<div class="text-sm font-medium text-center text-body border-b border-default">
+    <ul class="flex flex-wrap -mb-px">
+        <li class="me-2">
+            <a [routerLink]="['profile']" 
+               #profileLink="routerLinkActive"
+               routerLinkActive="text-fg-brand border-brand active"
+               [attr.aria-current]="profileLink.isActive ? 'page' : null"
+               [routerLinkActiveOptions]="{exact: true}"
+               class="inline-block p-4 border-b border-transparent rounded-t-base hover:text-fg-brand hover:border-brand">
+                {{ 'settings.profile' | translate }}
+            </a>
+        </li>
+        <li class="me-2">
+            <a [routerLink]="['password']" 
+               #passwordLink="routerLinkActive"
+               routerLinkActive="text-fg-brand border-brand active"
+               [attr.aria-current]="passwordLink.isActive ? 'page' : null"
+               [routerLinkActiveOptions]="{exact: true}"
+               class="inline-block p-4 border-b border-transparent rounded-t-base hover:text-fg-brand hover:border-brand">
+                {{ 'settings.password' | translate }}
+            </a>
+        </li>
+    </ul>
+</div>
+
 <router-outlet></router-outlet>
