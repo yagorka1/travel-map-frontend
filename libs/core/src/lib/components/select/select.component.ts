@@ -7,6 +7,8 @@ import {
   FormGroupDirective,
   ControlContainer,
   FormGroup,
+  ReactiveFormsModule,
+  FormsModule,
 } from '@angular/forms';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { forwardRef } from '@angular/core';
@@ -30,7 +32,7 @@ export interface SelectOption {
       multi: true,
     },
   ],
-  imports: [NgClass],
+  imports: [NgClass, ReactiveFormsModule, FormsModule],
 })
 export class SelectComponent implements ControlValueAccessor {
   @Input()

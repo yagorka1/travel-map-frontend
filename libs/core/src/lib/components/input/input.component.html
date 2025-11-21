@@ -9,8 +9,8 @@
     #input
     [id]="id"
     [type]="type"
-    [value]="value"
-    (input)="onInput($event)"
+    [(ngModel)]="value"
+    (ngModelChange)="onChange($event)"
     (blur)="onTouched()"
     [autocomplete]="autocomplete"
     [placeholder]="placeholder"
