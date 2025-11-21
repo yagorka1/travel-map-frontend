@@ -8,21 +8,12 @@
       <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
         <div class="flex flex-col items-center mb-6 pb-6 border-b border-gray-200 dark:border-gray-700">
           <div class="relative mb-4">
-            @if (avatarPreview) {
-              <img
-                [src]="avatarPreview"
-                alt="Profile avatar"
-                class="w-32 h-32 rounded-full object-cover border-4 border-gray-200 dark:border-gray-700"
-              />
-            } @else {
-              <div
-                class="w-32 h-32 rounded-full bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center border-4 border-gray-200 dark:border-gray-700"
-              >
-                <span class="text-5xl font-bold text-white">
-                  {{ currentProfile?.name?.charAt(0)?.toUpperCase() || 'U' }}
-                </span>
-              </div>
-            }
+            <lib-avatar
+              [src]="currentProfile?.avatarUrl"
+              [name]="currentProfile?.name || 'User'"
+              size="xl"
+              alt="Profile avatar"
+            />
           </div>
           <input type="file" id="avatar" accept="image/*" (change)="onFileSelected($event)" #fileInput class="hidden" />
           <button
