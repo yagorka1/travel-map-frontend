@@ -14,3 +14,5 @@ export * from './interceptors/error.interceptor';
 export * from './enums/language.enum';
 
 export * from './validators/password-match.validator';
+
+export * from './components/select/select.component';

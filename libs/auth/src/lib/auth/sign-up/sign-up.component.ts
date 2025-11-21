@@ -34,7 +34,7 @@ export class SignUpComponent implements OnInit {
         confirmPassword: ['', Validators.required],
       },
       {
-        validators: passwordMatchValidator,
+        validators: passwordMatchValidator(),
       },
     );
   }

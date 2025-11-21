@@ -11,6 +11,11 @@ export const settingsRoutes: Route[] = [
         path: 'profile',
         loadComponent: () => import('./components/profile/profile.component').then((m) => m.ProfileComponent),
       },
+      {
+        path: 'password',
+        loadComponent: () =>
+          import('./components/change-password/change-password.component').then((m) => m.ChangePasswordComponent),
+      },
       { path: '', pathMatch: 'full', redirectTo: 'profile' },
     ],
   },

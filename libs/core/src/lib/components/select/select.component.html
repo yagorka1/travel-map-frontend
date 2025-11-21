@@ -1,0 +1,29 @@
+<div class="mb-4">
+  @if (label) {
+    <label [for]="id" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+      {{ label }}
+    </label>
+  }
+
+  <select
+    [id]="id"
+    [value]="value"
+    (change)="onSelectChange($event)"
+    (blur)="onTouched()"
+    class="appearance-none rounded-md w-full px-4 py-3 border border-gray-300 dark:border-gray-700 placeholder-gray-400 text-gray-900 dark:text-gray-100 dark:bg-gray-800 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+    [ngClass]="{ '!border-red-500': isFormControlError && formControl?.touched && formControl?.invalid }"
+  >
+    @if (placeholder) {
+      <option value="" disabled [selected]="!value">{{ placeholder }}</option>
+    }
+    @for (option of options; track option.value) {
+      <option [value]="option.value">{{ option.label }}</option>
+    }
+  </select>
+
+  @if (isFormControlError && formControl?.touched && formControl?.invalid) {
+    <div class="text-red-500 text-xs mt-1">
+      {{ errorMessage }}
+    </div>
+  }
+</div>
