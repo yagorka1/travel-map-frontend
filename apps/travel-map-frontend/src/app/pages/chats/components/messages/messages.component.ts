@@ -1,14 +1,14 @@
 import { Component, ElementRef, inject, Input, OnChanges, ViewChild } from '@angular/core';
 import { ChatService } from '../../services/chat.service';
-import { DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { ChatMessageInterface } from '../../interfaces/chat-message.interface';
-import { AuthService } from '@app/core';
+import { AuthService, AvatarComponent } from '@app/core';
 import { ChatUserInterface } from '../../interfaces/chat-user.interface';
 import { ChatMemberInterface } from '../../interfaces/chat-member.interface';
 
 @Component({
   selector: 'app-messages',
-  imports: [DatePipe],
+  imports: [CommonModule, AvatarComponent],
   providers: [ChatService],
   templateUrl: './messages.component.html',
   styleUrl: './messages.component.scss',

@@ -1,14 +1,14 @@
 import { Component, inject, Input, OnInit, Signal } from '@angular/core';
 import { ChatService } from '../../services/chat.service';
 import { ChatUserInterface } from '../../interfaces/chat-user.interface';
-import { NgOptimizedImage } from '@angular/common';
 import { ChatMessageInterface } from '../../interfaces/chat-message.interface';
 import { ChatMemberInterface } from '../../interfaces/chat-member.interface';
 import { UnreadMessagesService } from '../../services/unread-messages.service';
+import { AvatarComponent } from '@app/core';
 
 @Component({
   selector: 'app-chats-list',
-  imports: [NgOptimizedImage],
+  imports: [AvatarComponent],
   providers: [ChatService],
   templateUrl: './chats-list.component.html',
   styleUrl: './chats-list.component.scss',
