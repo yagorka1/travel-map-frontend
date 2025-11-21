@@ -7,6 +7,7 @@ import {
   FormGroupDirective,
   ControlContainer,
   FormGroup,
+  FormsModule,
 } from '@angular/forms';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { forwardRef } from '@angular/core';
@@ -25,7 +26,7 @@ import { NgClass } from '@angular/common';
       multi: true,
     },
   ],
-  imports: [NgClass],
+  imports: [NgClass, FormsModule],
 })
 export class InputComponent implements ControlValueAccessor, AfterViewInit {
   @ViewChild('input') input!: ElementRef;

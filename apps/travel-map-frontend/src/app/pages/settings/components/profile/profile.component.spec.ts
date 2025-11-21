@@ -5,7 +5,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { of } from 'rxjs';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-// Polyfill for crypto.randomUUID in Node.js test environment
 if (typeof crypto === 'undefined') {
   (global as any).crypto = {};
 }
