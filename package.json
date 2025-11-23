@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "prepare": "husky"
+    "prepare": "husky",
+    "test:coverage": "jest --coverage"
   },
   "lint-staged": {
     "*.{ts,html,scss}": [

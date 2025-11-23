@@ -19,11 +19,11 @@ export class AvatarComponent {
     if (!this.src) {
       return null;
     }
-    // If the src is already a full URL, return it as-is
+
     if (this.src.startsWith('http://') || this.src.startsWith('https://')) {
       return this.src;
     }
-    // Otherwise, prepend the server URL and normalize path separators
+
     return `http://localhost:3000/${this.src.replace(/\\/g, '/')}`;
   }
 
