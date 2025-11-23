@@ -1,5 +1,4 @@
-import { Component, inject } from '@angular/core';
-import { AuthService } from '@app/core/services/auth.service';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -8,12 +7,4 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss',
 })
-export class AuthComponent {
-  private auth: AuthService = inject(AuthService);
-
-  constructor() {
-    // setTimeout(() => {
-    //   this.auth.login({ email: 'test@mail.com', password: '123456' }).subscribe();
-    // }, 5000);
-  }
-}
+export class AuthComponent {}
