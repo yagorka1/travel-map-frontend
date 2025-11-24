@@ -27,6 +27,10 @@ export const appRoutes: Route[] = [
         path: 'settings',
         loadChildren: () => import('./pages/settings/settings.routes').then((m) => m.settingsRoutes),
       },
+      {
+        path: 'trips',
+        loadChildren: () => import('./pages/trips/trips.routes').then((m) => m.tripsRoutes),
+      },
       { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
     ],
   },
