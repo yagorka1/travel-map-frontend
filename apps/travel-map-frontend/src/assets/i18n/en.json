@@ -27,7 +27,19 @@
     "map_placeholder": "Map View Placeholder",
     "list_placeholder": "Trips List Placeholder",
     "create_trip_form": "Create Trip Form",
-    "trip_details": "Trip Details / Edit"
+    "trip_details": "Trip Details / Edit",
+    "trip_name": "Trip Name",
+    "enter_trip_name": "Enter trip name",
+    "trip_description": "Trip Description",
+    "enter_trip_description": "Enter trip description",
+    "route_points": "Route Points",
+    "click_map_to_add_points": "Click on the map to add route points",
+    "clear_route": "Clear Route",
+    "create_trip_success_title": "Trip created successfully",
+    "create_trip_success_message": "Your trip has been created successfully. You received {{points}} points!"
+  },
+  "common": {
+    "cancel": "Cancel"
   },
   "errors": {
     "INVALID_LOGIN_OR_PASSWORD": "Incorrect login or password",
