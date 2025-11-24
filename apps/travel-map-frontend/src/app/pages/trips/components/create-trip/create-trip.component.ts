@@ -6,7 +6,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { TripsService } from '../../services/trips.service';
 import { CreateTripInterface } from '../../interfaces/create-trip.interface';
 import { Router } from '@angular/router';
-import { InputComponent, NotificationService } from '@app/core';
+import { InputComponent, NotificationService, dateRangeValidator } from '@app/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { NotificationTypeEnum } from '@app/core/ui/notification/enums/notification-type.enum';
 import { TranslateService } from '@ngx-translate/core';
@@ -18,7 +18,7 @@ import { TripInterface } from '../../interfaces/trip.interface';
   imports: [CommonModule, TranslateModule, MapComponent, ReactiveFormsModule, InputComponent],
   providers: [TripsService],
   templateUrl: './create-trip.component.html',
-  styleUrl: './create-trip.component.scss',
+  styleUrls: ['./create-trip.component.scss'],
 })
 export class CreateTripComponent {
   @ViewChild(MapComponent) mapComponent!: MapComponent;
@@ -28,11 +28,16 @@ export class CreateTripComponent {
   private notificationService: NotificationService = inject(NotificationService);
   private translateService: TranslateService = inject(TranslateService);
 
-  public form = new FormGroup({
-    name: new FormControl('', [Validators.required]),
-    description: new FormControl('', [Validators.required]),
-    points: new FormControl<{ lat: number; lng: number }[]>([], [Validators.required]),
-  });
+  public form = new FormGroup(
+    {
+      name: new FormControl('', [Validators.required]),
+      description: new FormControl('', [Validators.required]),
+      startDate: new FormControl<Date | null>(null, [Validators.required]),
+      endDate: new FormControl<Date | null>(null, [Validators.required]),
+      points: new FormControl<{ lat: number; lng: number }[]>([], [Validators.required]),
+    },
+    { validators: dateRangeValidator },
+  );
 
   public routePoints: { lat: number; lng: number }[] = [];
 
@@ -44,6 +49,7 @@ export class CreateTripComponent {
   public clearRoute() {
     this.routePoints = [];
     this.form.patchValue({ points: [] });
+
     if (this.mapComponent) {
       this.mapComponent.clearRoute();
     }

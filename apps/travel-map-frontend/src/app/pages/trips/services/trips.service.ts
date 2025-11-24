@@ -13,4 +13,8 @@ export class TripsService {
   public createTrip(trip: Partial<CreateTripInterface>): Observable<TripInterface> {
     return this.http.post<TripInterface>(tripsApi.create, trip);
   }
+
+  public getTrips(): Observable<TripInterface[]> {
+    return this.http.get<TripInterface[]>(tripsApi.list);
+  }
 }

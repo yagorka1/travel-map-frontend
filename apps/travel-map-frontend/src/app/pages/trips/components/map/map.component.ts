@@ -1,8 +1,9 @@
-import { Component, AfterViewInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, AfterViewInit, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import * as L from 'leaflet';
-import { antPath } from 'leaflet-ant-path';
+import 'leaflet-ant-path';
+import { TripInterface } from '../../interfaces/trip.interface';
 
 @Component({
   selector: 'app-map',
@@ -10,10 +11,11 @@ import { antPath } from 'leaflet-ant-path';
   templateUrl: './map.component.html',
   styleUrl: './map.component.scss',
 })
-export class MapComponent implements AfterViewInit {
+export class MapComponent implements AfterViewInit, OnChanges {
   @Output() pointAdded = new EventEmitter<{ lat: number; lng: number }>();
 
   @Input() isCreateRoute = false;
+  @Input() trips: TripInterface[] | null = null;
 
   public map: any;
 
@@ -22,6 +24,9 @@ export class MapComponent implements AfterViewInit {
   private markers: L.Marker[] = [];
 
   private routeLine: L.Polyline | null = null;
+  private tripLines: any[] = [];
+
+  private colors = ['#FF0000', '#0000FF', '#00FF00', '#FF00FF', '#FFFF00', '#00FFFF', '#FFA500', '#800080'];
 
   public ngAfterViewInit(): void {
     const defaultCoords: [number, number] = [51.505, -0.09];
@@ -51,23 +56,59 @@ export class MapComponent implements AfterViewInit {
       });
     }
 
-    // L.marker([0, 0]).bindPopup('<b>Hello!!</b>').addTo(this.map);
+    if (this.trips && this.trips.length > 0) {
+      this.renderTrips();
+    }
+  }
 
-    // antPath(
-    //   [
-    //     [43.068661, 141.350755],
-    //     [42.768651, 141.750955],
-    //   ],
-    //   { color: '#FF0000', weight: 5, opacity: 0.6 },
-    // ).addTo(this.map);
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['trips'] && !changes['trips'].firstChange && this.map) {
+      this.renderTrips();
+    }
+  }
 
-    // antPath(
-    //   [
-    //     [43.668661, 140.250755],
-    //     [42.368651, 141.150955],
-    //   ],
-    //   { color: '#0000FF', weight: 5, opacity: 0.6, reverse: true },
-    // ).addTo(this.map);
+  private renderTrips(): void {
+    console.log('renderTrips called with:', this.trips);
+
+    // Clear existing trip lines
+    this.tripLines.forEach((line) => line.remove());
+    this.tripLines = [];
+
+    if (!this.trips || this.trips.length === 0) {
+      return;
+    }
+
+    // Render each trip
+    this.trips.forEach((trip, index) => {
+      const coordinates = trip.geometry.coordinates;
+      // Convert from [lng, lat] (GeoJSON format) to [lat, lng] (Leaflet format)
+      const latLngs: L.LatLngExpression[] = coordinates.map((coord) => [coord[1], coord[0]]);
+
+      const color = this.colors[index % this.colors.length];
+
+      const tripLine = (L.polyline as any)
+        .antPath(latLngs, {
+          color: color,
+          weight: 4,
+          opacity: 0.7,
+          delay: 800,
+        })
+        .addTo(this.map);
+
+      this.tripLines.push(tripLine);
+    });
+
+    // Fit map bounds to show all trips
+    if (this.trips.length > 0) {
+      const allCoords: L.LatLngExpression[] = [];
+      this.trips.forEach((trip) => {
+        trip.geometry.coordinates.forEach((coord) => {
+          allCoords.push([coord[1], coord[0]]);
+        });
+      });
+      const bounds = L.latLngBounds(allCoords);
+      this.map.fitBounds(bounds, { padding: [50, 50] });
+    }
   }
 
   public addRoutePoint(latlng: L.LatLng) {

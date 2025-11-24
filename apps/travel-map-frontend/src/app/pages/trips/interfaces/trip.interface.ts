@@ -9,5 +9,7 @@ export interface TripInterface {
   };
   distance: number;
   pointsEarned: number;
+  startDate: string;
+  endDate: string;
   createdAt: string;
 }

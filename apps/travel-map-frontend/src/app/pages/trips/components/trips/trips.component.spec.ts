@@ -1,9 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TripsComponent } from './trips.component';
-import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { Component } from '@angular/core';
 import { MapComponent } from '../map/map.component';
+import { Component, Input } from '@angular/core';
+import { TripsListComponent } from '../trips-list/trips-list.component';
+import { TripsService } from '../../services/trips.service';
+import { of } from 'rxjs';
+import { RouterTestingModule } from '@angular/router/testing';
 
 // Mock MapComponent
 @Component({
@@ -11,7 +14,22 @@ import { MapComponent } from '../map/map.component';
   template: '<div></div>',
   standalone: true,
 })
-class MockMapComponent {}
+class MockMapComponent {
+  @Input() trips: unknown;
+}
+
+@Component({
+  selector: 'app-trips-list',
+  template: '<div></div>',
+  standalone: true,
+})
+class MockTripsListComponent {}
+
+class MockTripsService {
+  getTrips() {
+    return of([]);
+  }
+}
 
 describe('TripsComponent', () => {
   let component: TripsComponent;
@@ -19,11 +37,14 @@ describe('TripsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TripsComponent, RouterTestingModule, TranslateModule.forRoot()],
+      imports: [TripsComponent, TranslateModule.forRoot(), RouterTestingModule],
     })
       .overrideComponent(TripsComponent, {
-        remove: { imports: [MapComponent] },
-        add: { imports: [MockMapComponent] },
+        remove: { imports: [MapComponent, TripsListComponent] },
+        add: {
+          imports: [MockMapComponent, MockTripsListComponent],
+          providers: [{ provide: TripsService, useClass: MockTripsService }],
+        },
       })
       .compileComponents();
 

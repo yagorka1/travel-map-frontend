@@ -27,7 +27,26 @@
     "map_placeholder": "Карта",
     "list_placeholder": "Спіс паездак",
     "create_trip_form": "Форма стварэння паездкі",
-    "trip_details": "Дэталі паездкі / Рэдагаванне"
+    "trip_details": "Дэталі паездкі / Рэдагаванне",
+    "trip_name": "Назва паездкі",
+    "enter_trip_name": "Увядзіце назву паездкі",
+    "trip_description": "Апісанне паездкі",
+    "enter_trip_description": "Увядзіце апісанне паездкі",
+    "start_date": "Дата пачатку",
+    "end_date": "Дата заканчэння",
+    "end_date_validation_error": "Дата заканчэння павінна быць большай або роўнай даце пачатку",
+    "route_points": "Кропкі маршруту",
+    "click_map_to_add_points": "Націсніце на карту, каб дадаць кропкі маршруту",
+    "clear_route": "Ачысціць маршрут",
+    "create_trip_success_title": "Паездка паспяхова створана",
+    "create_trip_success_message": "Ваша паездка паспяхова створана. Вы атрымалі {{points}} балаў!",
+    "your_trips": "Вашы паездкі",
+    "no_trips_found": "Паездкі не знойдзены. Стварыце сваю першую паездку!",
+    "distance_km": "км",
+    "points_abbr": "б."
+  },
+  "common": {
+    "cancel": "Адмена"
   },
   "errors": {
     "INVALID_LOGIN_OR_PASSWORD": "Няправільны лагін або пароль",
