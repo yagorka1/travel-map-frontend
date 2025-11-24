@@ -32,11 +32,18 @@
     "enter_trip_name": "Enter trip name",
     "trip_description": "Trip Description",
     "enter_trip_description": "Enter trip description",
+    "start_date": "Start Date",
+    "end_date": "End Date",
+    "end_date_validation_error": "End date must be greater than or equal to start date",
     "route_points": "Route Points",
     "click_map_to_add_points": "Click on the map to add route points",
     "clear_route": "Clear Route",
     "create_trip_success_title": "Trip created successfully",
-    "create_trip_success_message": "Your trip has been created successfully. You received {{points}} points!"
+    "create_trip_success_message": "Your trip has been created successfully. You received {{points}} points!",
+    "your_trips": "Your Trips",
+    "no_trips_found": "No trips found. Create your first trip!",
+    "distance_km": "km",
+    "points_abbr": "pts"
   },
   "common": {
     "cancel": "Cancel"

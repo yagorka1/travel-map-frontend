@@ -27,7 +27,26 @@
     "map_placeholder": "Карта",
     "list_placeholder": "Список поездок",
     "create_trip_form": "Форма создания поездки",
-    "trip_details": "Детали поездки / Редактирование"
+    "trip_details": "Детали поездки / Редактирование",
+    "trip_name": "Название поездки",
+    "enter_trip_name": "Введите название поездки",
+    "trip_description": "Описание поездки",
+    "enter_trip_description": "Введите описание поездки",
+    "start_date": "Дата начала",
+    "end_date": "Дата окончания",
+    "end_date_validation_error": "Дата окончания должна быть больше или равна дате начала",
+    "route_points": "Точки маршрута",
+    "click_map_to_add_points": "Нажмите на карту, чтобы добавить точки маршрута",
+    "clear_route": "Очистить маршрут",
+    "create_trip_success_title": "Поездка успешно создана",
+    "create_trip_success_message": "Ваша поездка успешно создана. Вы получили {{points}} баллов!",
+    "your_trips": "Ваши поездки",
+    "no_trips_found": "Поездки не найдены. Создайте свою первую поездку!",
+    "distance_km": "км",
+    "points_abbr": "б."
+  },
+  "common": {
+    "cancel": "Отмена"
   },
   "errors": {
     "INVALID_LOGIN_OR_PASSWORD": "Неверный логин или пароль",
