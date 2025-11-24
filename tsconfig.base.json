@@ -20,7 +20,7 @@
 
       "@app/core": ["libs/core/src/index.ts"],
       "@app/core/*": ["libs/core/src/lib/*"],
-      "@env/*": ["environments/*"],
+      "@env/*": ["environments/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -17,8 +17,17 @@
   "aside_menu": {
     "dashboard": "Панель управления",
     "chats": "Чаты",
-    "users": "Пользователи",
-    "settings": "Настройки"
+    "settings": "Настройки",
+    "trips": "Поездки",
+    "users": "Пользователи"
+  },
+  "trips": {
+    "title": "Поездки",
+    "create_trip": "Создать поездку",
+    "map_placeholder": "Карта",
+    "list_placeholder": "Список поездок",
+    "create_trip_form": "Форма создания поездки",
+    "trip_details": "Детали поездки / Редактирование"
   },
   "errors": {
     "INVALID_LOGIN_OR_PASSWORD": "Неверный логин или пароль",

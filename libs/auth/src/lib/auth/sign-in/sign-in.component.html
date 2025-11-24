@@ -1,13 +1,16 @@
 <div class="space-y-6">
   <div class="text-center">
-    <img class="mx-auto h-12 w-auto" ngSrc="assets/images/logo.png" alt="Logo" height="1024" width="1024"/>
-    <h2
-      class="mt-6 text-3xl font-bold text-gray-900 dark:text-white"> {{ 'auth.sign_in_to_your_account' | translate }}</h2>
+    <img class="mx-auto h-12 w-auto" ngSrc="assets/images/logo.png" alt="Logo" height="1024" width="1024" />
+    <h2 class="mt-6 text-3xl font-bold text-gray-900 dark:text-white">
+      {{ 'auth.sign_in_to_your_account' | translate }}
+    </h2>
 
     <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">
       {{ 'auth.or' | translate }}
-      <a routerLink="/auth/sign-up"
-         class="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300">
+      <a
+        routerLink="/auth/sign-up"
+        class="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
+      >
         {{ 'auth.create_new_account' | translate }}
       </a>
     </p>
@@ -31,8 +34,9 @@
     <div class="flex items-center justify-between mb-4">
       <div class="text-sm">
         <a
-           routerLink="/auth/forgot-password"
-           class="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300">
+          routerLink="/auth/forgot-password"
+          class="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
+        >
           {{ 'auth.forgot_your_password' | translate }}
         </a>
       </div>

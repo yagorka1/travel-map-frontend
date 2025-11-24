@@ -2,12 +2,12 @@
   @for (message of messages; track message.id) {
     @if (message.sender.id === userId) {
       <div class="flex justify-end">
-          <div class="bg-blue-500 text-white p-2 rounded-lg inline-block max-w-[70%] relative">
+        <div class="bg-blue-500 text-white p-2 rounded-lg inline-block max-w-[70%] relative">
           <p class="text-sm text-gray-900 dark:text-white">
             {{ message.content }}
 
             <span class="ml-2 text-xs text-gray-500 dark:text-gray-700 align-bottom">
-              {{ message.created_at | date:'HH:mm' }}
+              {{ message.created_at | date: 'HH:mm' }}
             </span>
           </p>
         </div>
@@ -15,12 +15,7 @@
     } @else {
       <div class="flex">
         <div class="mr-3">
-          <lib-avatar
-            [src]="message.sender.avatarUrl"
-            [name]="message.sender.name"
-            size="sm"
-            alt="User avatar"
-          />
+          <lib-avatar [src]="message.sender.avatarUrl" [name]="message.sender.name" size="sm" alt="User avatar" />
         </div>
 
         <div class="bg-gray-200 dark:bg-gray-700 p-2 rounded-lg inline-block max-w-[70%] relative">
@@ -28,7 +23,7 @@
             {{ message.content }}
 
             <span class="ml-2 text-xs text-gray-500 dark:text-gray-400 align-bottom">
-              {{ message.created_at | date:'HH:mm' }}
+              {{ message.created_at | date: 'HH:mm' }}
             </span>
           </p>
         </div>

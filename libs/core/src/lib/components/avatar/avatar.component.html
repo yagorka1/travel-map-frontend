@@ -1,11 +1,6 @@
 <div [ngClass]="sizeClasses" class="relative inline-block">
   @if (formattedSrc) {
-    <img
-      [src]="formattedSrc"
-      [alt]="alt"
-      class="rounded-full object-cover"
-      [ngClass]="sizeClasses"
-    />
+    <img [src]="formattedSrc" [alt]="alt" class="rounded-full object-cover" [ngClass]="sizeClasses" />
   } @else {
     <div
       class="rounded-full bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center"

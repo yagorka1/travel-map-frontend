@@ -18,7 +18,16 @@
     "dashboard": "Dashboard",
     "chats": "Chats",
     "users": "Users",
-    "settings": "Settings"
+    "settings": "Settings",
+    "trips": "Trips"
+  },
+  "trips": {
+    "title": "Trips",
+    "create_trip": "Create Trip",
+    "map_placeholder": "Map View Placeholder",
+    "list_placeholder": "Trips List Placeholder",
+    "create_trip_form": "Create Trip Form",
+    "trip_details": "Trip Details / Edit"
   },
   "errors": {
     "INVALID_LOGIN_OR_PASSWORD": "Incorrect login or password",

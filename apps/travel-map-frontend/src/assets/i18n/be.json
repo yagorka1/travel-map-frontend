@@ -17,8 +17,17 @@
   "aside_menu": {
     "dashboard": "Панэль кіравання",
     "chats": "Чаты",
-    "users": "Карыстальнікі",
-    "settings": "Налады"
+    "settings": "Налады",
+    "trips": "Паездкі",
+    "users": "Карыстальнікі"
+  },
+  "trips": {
+    "title": "Паездкі",
+    "create_trip": "Стварыць паездку",
+    "map_placeholder": "Карта",
+    "list_placeholder": "Спіс паездак",
+    "create_trip_form": "Форма стварэння паездкі",
+    "trip_details": "Дэталі паездкі / Рэдагаванне"
   },
   "errors": {
     "INVALID_LOGIN_OR_PASSWORD": "Няправільны лагін або пароль",
