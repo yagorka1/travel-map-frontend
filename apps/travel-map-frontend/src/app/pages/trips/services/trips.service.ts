@@ -17,4 +17,8 @@ export class TripsService {
   public getTrips(): Observable<TripInterface[]> {
     return this.http.get<TripInterface[]>(tripsApi.list);
   }
+
+  public getTrip(id: string): Observable<TripInterface> {
+    return this.http.get<TripInterface>(tripsApi.byId(id));
+  }
 }

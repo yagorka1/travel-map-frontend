@@ -43,7 +43,11 @@
     "your_trips": "Your Trips",
     "no_trips_found": "No trips found. Create your first trip!",
     "distance_km": "km",
-    "points_abbr": "pts"
+    "points_abbr": "pts",
+    "distance": "Distance",
+    "route_color": "Route Color",
+    "points_earned": "Points Earned",
+    "created_at": "Created"
   },
   "common": {
     "cancel": "Cancel"

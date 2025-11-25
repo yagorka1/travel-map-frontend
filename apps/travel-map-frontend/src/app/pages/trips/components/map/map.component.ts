@@ -1,5 +1,5 @@
-import { Component, AfterViewInit, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import * as L from 'leaflet';
 import 'leaflet-ant-path';
@@ -16,6 +16,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
   @Input() isCreateRoute = false;
   @Input() trips: TripInterface[] | null = null;
+  @Input() routeColor = '#3B82F6';
 
   public map: any;
 
@@ -25,13 +26,19 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
   private routeLine: L.Polyline | null = null;
   private tripLines: any[] = [];
+  private boundsFitted = false;
 
   private colors = ['#FF0000', '#0000FF', '#00FF00', '#FF00FF', '#FFFF00', '#00FFFF', '#FFA500', '#800080'];
 
   public ngAfterViewInit(): void {
     const defaultCoords: [number, number] = [51.505, -0.09];
 
-    this.map = L.map('map').setView(defaultCoords, 8);
+    this.map = L.map('map', {
+      zoomControl: true,
+      scrollWheelZoom: true,
+      doubleClickZoom: true,
+      touchZoom: true,
+    }).setView(defaultCoords, 8);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(this.map);
@@ -68,9 +75,6 @@ export class MapComponent implements AfterViewInit, OnChanges {
   }
 
   private renderTrips(): void {
-    console.log('renderTrips called with:', this.trips);
-
-    // Clear existing trip lines
     this.tripLines.forEach((line) => line.remove());
     this.tripLines = [];
 
@@ -78,13 +82,11 @@ export class MapComponent implements AfterViewInit, OnChanges {
       return;
     }
 
-    // Render each trip
     this.trips.forEach((trip, index) => {
       const coordinates = trip.geometry.coordinates;
-      // Convert from [lng, lat] (GeoJSON format) to [lat, lng] (Leaflet format)
       const latLngs: L.LatLngExpression[] = coordinates.map((coord) => [coord[1], coord[0]]);
 
-      const color = this.colors[index % this.colors.length];
+      const color = trip.color || this.colors[index % this.colors.length];
 
       const tripLine = (L.polyline as any)
         .antPath(latLngs, {
@@ -98,8 +100,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
       this.tripLines.push(tripLine);
     });
 
-    // Fit map bounds to show all trips
-    if (this.trips.length > 0) {
+    if (this.trips.length > 0 && !this.boundsFitted) {
       const allCoords: L.LatLngExpression[] = [];
       this.trips.forEach((trip) => {
         trip.geometry.coordinates.forEach((coord) => {
@@ -107,7 +108,15 @@ export class MapComponent implements AfterViewInit, OnChanges {
         });
       });
       const bounds = L.latLngBounds(allCoords);
-      this.map.fitBounds(bounds, { padding: [50, 50] });
+
+      setTimeout(() => {
+        this.map.fitBounds(bounds, {
+          padding: [80, 80],
+          maxZoom: 15,
+        });
+      }, 100);
+
+      this.boundsFitted = true;
     }
   }
 
@@ -115,7 +124,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
     const marker = L.marker(latlng, {
       icon: L.divIcon({
         className: 'route-marker',
-        html: `<div style="background-color: #3b82f6; width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>`,
+        html: `<div style="background-color: ${this.routeColor}; width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>`,
         iconSize: [12, 12],
         iconAnchor: [6, 6],
       }),
@@ -129,7 +138,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
         this.routeLine.setLatLngs(this.routePoints);
       } else {
         this.routeLine = L.polyline(this.routePoints, {
-          color: '#3b82f6',
+          color: this.routeColor,
           weight: 3,
           opacity: 0.7,
         }).addTo(this.map);

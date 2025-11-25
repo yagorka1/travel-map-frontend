@@ -1,1 +1,155 @@
-<p>{{ 'trips.trip_details' | translate }}</p>
+<div class="h-full overflow-y-auto p-6">
+  @if (trip) {
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 p-6">
+        <div class="flex items-center gap-3 mb-4">
+          <h1 class="text-2xl font-bold text-black dark:text-gray-300">{{ trip.name }}</h1>
+          <div
+            class="w-6 h-6 rounded-full border-2 border-gray-300 dark:border-gray-600"
+            [style.background-color]="trip.color"
+            [title]="trip.color"
+          ></div>
+        </div>
+
+        <div class="mb-6">
+          <h2 class="text-sm font-semibold text-gray-900 dark:text-gray-400 mb-2">
+            {{ 'trips.trip_description' | translate }}
+          </h2>
+          <p class="text-gray-900 dark:text-gray-500">{{ trip.description }}</p>
+        </div>
+
+        <div class="space-y-4">
+          <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+            <div class="flex items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 text-blue-600 dark:text-blue-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                /></svg
+              ><span class="text-sm font-medium text-gray-900 dark:text-gray-600">{{
+                'trips.distance' | translate
+              }}</span>
+            </div>
+            <span class="text-lg font-semibold text-black dark:text-gray-600">
+              {{ (trip.distance / 1000).toFixed(2) }} {{ 'trips.distance_km' | translate }}
+            </span>
+          </div>
+
+          <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+            <div class="flex items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 text-yellow-600 dark:text-yellow-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+                /></svg
+              ><span class="text-sm font-medium text-gray-900 dark:text-gray-600">{{
+                'trips.points_earned' | translate
+              }}</span>
+            </div>
+            <span class="text-lg font-semibold text-black dark:text-gray-600">
+              {{ trip.pointsEarned }} {{ 'trips.points_abbr' | translate }}
+            </span>
+          </div>
+
+          <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+            <div class="flex items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 text-green-600 dark:text-green-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                /></svg
+              ><span class="text-sm font-medium text-gray-900 dark:text-gray-600">{{
+                'trips.start_date' | translate
+              }}</span>
+            </div>
+            <span class="text-sm font-semibold text-black dark:text-gray-600">
+              {{ trip.startDate | date: 'shortDate' }}
+            </span>
+          </div>
+
+          <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+            <div class="flex items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 text-red-600 dark:text-red-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                /></svg
+              ><span class="text-sm font-medium text-gray-900 dark:text-gray-600">{{
+                'trips.end_date' | translate
+              }}</span>
+            </div>
+            <span class="text-sm font-semibold text-black dark:text-gray-600">
+              {{ trip.endDate | date: 'shortDate' }}
+            </span>
+          </div>
+
+          <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+            <div class="flex items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 text-gray-600 dark:text-gray-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                /></svg
+              ><span class="text-sm font-medium text-gray-900 dark:text-gray-600">{{
+                'trips.created_at' | translate
+              }}</span>
+            </div>
+            <span class="text-sm font-semibold text-black dark:text-gray-600">
+              {{ trip.createdAt | date: 'shortDate' }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 h-full min-h-[500px]"
+      >
+        <app-map [trips]="tripArray"></app-map>
+      </div>
+    </div>
+  } @else {
+    <div class="flex justify-center items-center h-full">
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+    </div>
+  }
+</div>
