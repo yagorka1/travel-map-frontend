@@ -1,13 +1,13 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CreateTripComponent } from './create-trip.component';
-import { TranslateModule } from '@ngx-translate/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Component, Input, forwardRef } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { MapComponent } from '../map/map.component';
-import { TripsService } from '../../services/trips.service';
-import { of } from 'rxjs';
 import { InputComponent, NotificationService } from '@app/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { of } from 'rxjs';
+import { TripsService } from '../../services/trips.service';
+import { MapComponent } from '../map/map.component';
+import { CreateTripComponent } from './create-trip.component';
 
 @Component({
   selector: 'app-map',
@@ -16,6 +16,7 @@ import { InputComponent, NotificationService } from '@app/core';
 })
 class MockMapComponent {
   @Input() isCreateRoute = false;
+  @Input() routeColor = '#3B82F6';
 }
 
 @Component({

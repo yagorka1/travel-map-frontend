@@ -16,7 +16,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
   @Input() isCreateRoute = false;
   @Input() trips: TripInterface[] | null = null;
-  @Input() routeColor = '#3B82F6'; // Color for route being created
+  @Input() routeColor = '#3B82F6';
 
   public map: any;
 
@@ -83,7 +83,6 @@ export class MapComponent implements AfterViewInit, OnChanges {
     }
 
     this.trips.forEach((trip, index) => {
-      console.log('Trip color:', trip.color, 'Trip:', trip.name); // Debug log
       const coordinates = trip.geometry.coordinates;
       const latLngs: L.LatLngExpression[] = coordinates.map((coord) => [coord[1], coord[0]]);
 

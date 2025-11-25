@@ -58,7 +58,6 @@ export class CreateTripComponent {
   public createTrip(): void {
     if (this.form.valid) {
       const tripData = this.form.value as CreateTripInterface;
-      console.log('Creating trip with data:', tripData); // Debug log
 
       this.tripsService
         .createTrip(tripData)
