@@ -37,6 +37,29 @@
               ></lib-input>
             </div>
 
+            <div>
+              <label for="route-color" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                {{ 'trips.route_color' | translate }}
+              </label>
+              <div class="flex items-center gap-3">
+                <input
+                  id="route-color"
+                  type="color"
+                  formControlName="color"
+                  class="h-10 w-20 rounded border border-gray-300 dark:border-gray-600 cursor-pointer"
+                />
+                <div class="flex-1 flex items-center gap-2">
+                  <div
+                    class="w-full h-10 rounded border border-gray-300 dark:border-gray-600"
+                    [style.background-color]="form.get('color')?.value"
+                  ></div>
+                  <span class="text-sm font-mono text-gray-600 dark:text-gray-400 min-w-[80px]">
+                    {{ form.get('color')?.value }}
+                  </span>
+                </div>
+              </div>
+            </div>
+
             <div class="grid grid-cols-2 gap-4">
               <div>
                 <lib-input
@@ -103,7 +126,12 @@
       </div>
 
       <div class="flex-1 bg-gray-100 dark:bg-gray-900">
-        <app-map [isCreateRoute]="true" class="w-full h-full" (pointAdded)="onMapPointAdded($event)"></app-map>
+        <app-map
+          [isCreateRoute]="true"
+          [routeColor]="form.get('color')?.value || '#3B82F6'"
+          class="w-full h-full"
+          (pointAdded)="onMapPointAdded($event)"
+        ></app-map>
       </div>
     </div>
   </div>

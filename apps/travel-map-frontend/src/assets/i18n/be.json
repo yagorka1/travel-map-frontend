@@ -43,7 +43,11 @@
     "your_trips": "Вашы паездкі",
     "no_trips_found": "Паездкі не знойдзены. Стварыце сваю першую паездку!",
     "distance_km": "км",
-    "points_abbr": "б."
+    "points_abbr": "б.",
+    "distance": "Адлегласць",
+    "route_color": "Колер маршруту",
+    "points_earned": "Заработана балаў",
+    "created_at": "Створана"
   },
   "common": {
     "cancel": "Адмена"

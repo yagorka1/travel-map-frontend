@@ -1,16 +1,15 @@
-import { Component, inject, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
-import { MapComponent } from '../map/map.component';
+import { Component, inject, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { TripsService } from '../../services/trips.service';
-import { CreateTripInterface } from '../../interfaces/create-trip.interface';
 import { Router } from '@angular/router';
-import { InputComponent, NotificationService, dateRangeValidator } from '@app/core';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { dateRangeValidator, InputComponent, NotificationService } from '@app/core';
 import { NotificationTypeEnum } from '@app/core/ui/notification/enums/notification-type.enum';
-import { TranslateService } from '@ngx-translate/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { CreateTripInterface } from '../../interfaces/create-trip.interface';
 import { TripInterface } from '../../interfaces/trip.interface';
+import { TripsService } from '../../services/trips.service';
+import { MapComponent } from '../map/map.component';
 
 @UntilDestroy()
 @Component({
@@ -35,6 +34,7 @@ export class CreateTripComponent {
       startDate: new FormControl<Date | null>(null, [Validators.required]),
       endDate: new FormControl<Date | null>(null, [Validators.required]),
       points: new FormControl<{ lat: number; lng: number }[]>([], [Validators.required]),
+      color: new FormControl('#3B82F6', [Validators.required]),
     },
     { validators: dateRangeValidator },
   );
@@ -57,8 +57,11 @@ export class CreateTripComponent {
 
   public createTrip(): void {
     if (this.form.valid) {
+      const tripData = this.form.value as CreateTripInterface;
+      console.log('Creating trip with data:', tripData); // Debug log
+
       this.tripsService
-        .createTrip(this.form.value as CreateTripInterface)
+        .createTrip(tripData)
         .pipe(untilDestroyed(this))
         .subscribe({
           next: (data: TripInterface) => {

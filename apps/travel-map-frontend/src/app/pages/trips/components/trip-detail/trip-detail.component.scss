@@ -1,0 +1,16 @@
+:host {
+  display: block;
+  height: 100%;
+
+  ::ng-deep #map {
+    height: 100%;
+    min-height: 500px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 1023px) {
+  :host ::ng-deep #map {
+    min-height: 400px;
+  }
+}

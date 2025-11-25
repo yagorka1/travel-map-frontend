@@ -12,4 +12,5 @@ export interface TripInterface {
   startDate: string;
   endDate: string;
   createdAt: string;
+  color: string;
 }

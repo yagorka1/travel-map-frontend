@@ -4,4 +4,5 @@ export interface CreateTripInterface {
   points: Array<{ lat: number; lng: number }>;
   startDate: Date;
   endDate: Date;
+  color: string;
 }
