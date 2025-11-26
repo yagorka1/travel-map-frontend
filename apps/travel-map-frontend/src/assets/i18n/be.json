@@ -19,7 +19,8 @@
     "chats": "Чаты",
     "settings": "Налады",
     "trips": "Паездкі",
-    "users": "Карыстальнікі"
+    "users": "Карыстальнікі",
+    "leaderboard": "Табліца лідэраў"
   },
   "trips": {
     "title": "Паездкі",
@@ -98,5 +99,16 @@
     "type_a_message": "Увядзіце паведамленне...",
     "pick_a_user_to_start_the_conversation": "Выберыце карыстальніка, каб пачаць размову.",
     "message": "Паведамленне"
+  },
+  "leaderboard": {
+    "title": "Табліца лідэраў",
+    "users_tab": "Карыстальнікі",
+    "trips_tab": "Паездкі",
+    "place": "Месца",
+    "name": "Імя",
+    "points": "Балы",
+    "trips_count": "Колькасць паездак",
+    "trip_name": "Назва паездкі",
+    "route_points": "Балы маршруту"
   }
 }

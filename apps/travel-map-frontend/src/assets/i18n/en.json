@@ -19,7 +19,8 @@
     "chats": "Chats",
     "users": "Users",
     "settings": "Settings",
-    "trips": "Trips"
+    "trips": "Trips",
+    "leaderboard": "Leaderboard"
   },
   "trips": {
     "title": "Trips",
@@ -75,6 +76,7 @@
     "select_language": "Select language"
   },
   "settings": {
+    "settings": "Settings",
     "profile": "Profile",
     "password": "Password"
   },
@@ -98,5 +100,20 @@
     "type_a_message": "Type a message...",
     "pick_a_user_to_start_the_conversation": "Pick a user to start the conversation.",
     "message": "Message"
+  },
+  "leaderboard": {
+    "title": "Leaderboard",
+    "users_tab": "Users",
+    "trips_tab": "Trips",
+    "place": "Place",
+    "name": "Name",
+    "points": "Points",
+    "trips_count": "Trips Count",
+    "trip_name": "Trip Name",
+    "route_points": "Route Points",
+    "distance": "Distance",
+    "start_date": "Start Date",
+    "end_date": "End Date",
+    "user_name": "User Name"
   }
 }

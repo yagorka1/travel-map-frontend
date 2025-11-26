@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import type { ApplicationConfig } from '@angular/core';
 import { provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
@@ -20,7 +21,14 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
-    provideHttpClient(withInterceptors([authInterceptor, refreshInterceptor, endpointInterceptor, errorInterceptor])),
+    provideHttpClient(
+      withInterceptors([
+        authInterceptor,
+        refreshInterceptor,
+        endpointInterceptor,
+        errorInterceptor,
+      ])
+    ),
     provideTranslateService({
       lang: LanguageEnum.EN,
       fallbackLang: LanguageEnum.EN,

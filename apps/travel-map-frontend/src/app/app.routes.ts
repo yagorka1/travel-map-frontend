@@ -31,6 +31,11 @@ export const appRoutes: Route[] = [
         path: 'trips',
         loadChildren: () => import('./pages/trips/trips.routes').then((m) => m.tripsRoutes),
       },
+      {
+        path: 'leaderboard',
+        loadChildren: () => import('./pages/leaderboard/leaderboard.routes').then((m) => m.leaderboardRoutes),
+      },
+
       { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
     ],
   },
