@@ -44,7 +44,8 @@
               "maximumError": "8kb"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing": "all",
+          "allowedCommonJsDependencies": ["leaflet", "leaflet-ant-path"]
         },
         "development": {
           "buildOptimizer": false,

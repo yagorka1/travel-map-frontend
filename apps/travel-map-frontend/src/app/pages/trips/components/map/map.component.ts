@@ -1,8 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-import * as L from 'leaflet';
-import 'leaflet-ant-path';
 import { TripInterface } from '../../interfaces/trip.interface';
 
 @Component({
@@ -19,27 +17,30 @@ export class MapComponent implements AfterViewInit, OnChanges {
   @Input() routeColor = '#3B82F6';
 
   public map: any;
+  private L: any;
 
-  private routePoints: L.LatLng[] = [];
+  private routePoints: any[] = [];
 
-  private markers: L.Marker[] = [];
+  private markers: any[] = [];
 
-  private routeLine: L.Polyline | null = null;
+  private routeLine: any | null = null;
   private tripLines: any[] = [];
   private boundsFitted = false;
 
   private colors = ['#FF0000', '#0000FF', '#00FF00', '#FF00FF', '#FFFF00', '#00FFFF', '#FFA500', '#800080'];
 
-  public ngAfterViewInit(): void {
+  public async ngAfterViewInit(): Promise<void> {
+    // Dynamic import of Leaflet libraries
+    await this.loadLeaflet();
     const defaultCoords: [number, number] = [51.505, -0.09];
 
-    this.map = L.map('map', {
+    this.map = this.L.map('map', {
       zoomControl: true,
       scrollWheelZoom: true,
       doubleClickZoom: true,
       touchZoom: true,
     }).setView(defaultCoords, 8);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    this.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(this.map);
 
@@ -58,7 +59,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
     }
 
     if (this.isCreateRoute) {
-      this.map.on('click', (e: L.LeafletMouseEvent) => {
+      this.map.on('click', (e: any) => {
         this.addRoutePoint(e.latlng);
       });
     }
@@ -66,6 +67,11 @@ export class MapComponent implements AfterViewInit, OnChanges {
     if (this.trips && this.trips.length > 0) {
       this.renderTrips();
     }
+  }
+
+  private async loadLeaflet(): Promise<void> {
+    const [leaflet] = await Promise.all([import('leaflet'), import('leaflet-ant-path')]);
+    this.L = leaflet.default || leaflet;
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -84,11 +90,11 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
     this.trips.forEach((trip, index) => {
       const coordinates = trip.geometry.coordinates;
-      const latLngs: L.LatLngExpression[] = coordinates.map((coord) => [coord[1], coord[0]]);
+      const latLngs: any[] = coordinates.map((coord) => [coord[1], coord[0]]);
 
       const color = trip.color || this.colors[index % this.colors.length];
 
-      const tripLine = (L.polyline as any)
+      const tripLine = (this.L.polyline as any)
         .antPath(latLngs, {
           color: color,
           weight: 4,
@@ -101,13 +107,13 @@ export class MapComponent implements AfterViewInit, OnChanges {
     });
 
     if (this.trips.length > 0 && !this.boundsFitted) {
-      const allCoords: L.LatLngExpression[] = [];
+      const allCoords: any[] = [];
       this.trips.forEach((trip) => {
         trip.geometry.coordinates.forEach((coord) => {
           allCoords.push([coord[1], coord[0]]);
         });
       });
-      const bounds = L.latLngBounds(allCoords);
+      const bounds = this.L.latLngBounds(allCoords);
 
       setTimeout(() => {
         this.map.fitBounds(bounds, {
@@ -120,9 +126,9 @@ export class MapComponent implements AfterViewInit, OnChanges {
     }
   }
 
-  public addRoutePoint(latlng: L.LatLng) {
-    const marker = L.marker(latlng, {
-      icon: L.divIcon({
+  public addRoutePoint(latlng: any) {
+    const marker = this.L.marker(latlng, {
+      icon: this.L.divIcon({
         className: 'route-marker',
         html: `<div style="background-color: ${this.routeColor}; width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>`,
         iconSize: [12, 12],
@@ -137,7 +143,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
       if (this.routeLine) {
         this.routeLine.setLatLngs(this.routePoints);
       } else {
-        this.routeLine = L.polyline(this.routePoints, {
+        this.routeLine = this.L.polyline(this.routePoints, {
           color: this.routeColor,
           weight: 3,
           opacity: 0.7,
