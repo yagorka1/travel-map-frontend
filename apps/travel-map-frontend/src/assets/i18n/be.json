@@ -78,7 +78,10 @@
   },
   "settings": {
     "profile": "Профіль",
-    "password": "Пароль"
+    "password": "Пароль",
+    "theme": "Тэма",
+    "light_mode": "Светлая тэма",
+    "dark_mode": "Цёмная тэма"
   },
   "password": {
     "change_password": "Змяніць пароль",
