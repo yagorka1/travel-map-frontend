@@ -8,7 +8,6 @@ import { TripsService } from '../../services/trips.service';
 
 @Component({
   selector: 'app-trips-list',
-  standalone: true,
   imports: [CommonModule, TranslateModule, RouterLink],
   providers: [TripsService],
   templateUrl: './trips-list.component.html',
@@ -18,7 +17,7 @@ export class TripsListComponent implements OnInit {
   private tripsService = inject(TripsService);
   public trips$: Observable<TripInterface[]> | null = null;
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.trips$ = this.tripsService.getTrips();
   }
 }

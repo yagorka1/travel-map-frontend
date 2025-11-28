@@ -8,7 +8,6 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-trips-leaderboard',
-  standalone: true,
   imports: [CommonModule, TranslateModule, RouterLink],
   templateUrl: './trips-leaderboard.component.html',
   styleUrls: ['./trips-leaderboard.component.scss'],
@@ -17,7 +16,7 @@ export class TripsLeaderboardComponent implements OnInit {
   private leaderboardService = inject(LeaderboardService);
   public trips$: Observable<LeaderboardTrip[]> | null = null;
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.trips$ = this.leaderboardService.getTopTrips();
   }
 }

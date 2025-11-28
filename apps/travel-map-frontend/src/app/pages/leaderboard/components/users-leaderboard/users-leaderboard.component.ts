@@ -16,7 +16,7 @@ export class UsersLeaderboardComponent implements OnInit {
   private leaderboardService = inject(LeaderboardService);
   public users$: Observable<LeaderboardUser[]> | null = null;
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.users$ = this.leaderboardService.getTopUsers();
   }
 }

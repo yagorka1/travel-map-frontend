@@ -20,7 +20,8 @@
     "users": "Users",
     "settings": "Settings",
     "trips": "Trips",
-    "leaderboard": "Leaderboard"
+    "leaderboard": "Leaderboard",
+    "logout": "Logout"
   },
   "trips": {
     "title": "Trips",

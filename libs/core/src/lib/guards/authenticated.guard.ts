@@ -22,7 +22,11 @@ export const authenticatedGuard: CanActivateFn = (
       router.navigate(['/auth']);
       return false;
     }),
-    catchError(() => {
+    catchError((err) => {
+      if (err.status === 0) {
+        return of(false);
+      }
+
       router.navigate(['/auth']);
       return of(false);
     }),

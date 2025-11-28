@@ -10,7 +10,6 @@ import { TripInterface } from '../../interfaces/trip.interface';
 
 @Component({
   selector: 'app-trips',
-  standalone: true,
   imports: [CommonModule, RouterLink, TranslateModule, MapComponent, TripsListComponent],
   providers: [TripsService],
   templateUrl: './trips.component.html',
@@ -20,7 +19,7 @@ export class TripsComponent implements OnInit {
   private tripsService = inject(TripsService);
   public trips$: Observable<TripInterface[]> | null = null;
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.trips$ = this.tripsService.getTrips();
   }
 }

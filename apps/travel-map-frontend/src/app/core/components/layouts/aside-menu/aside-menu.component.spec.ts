@@ -6,7 +6,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { AuthService } from '@app/core';
 import { UnreadMessagesService } from '../../../../pages/chats/services/unread-messages.service';
-import { BehaviorSubject, of } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { By } from '@angular/platform-browser';
 
 describe('AsideMenuComponent', () => {

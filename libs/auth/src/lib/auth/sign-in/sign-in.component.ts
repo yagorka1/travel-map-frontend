@@ -31,17 +31,7 @@ export class SignInComponent implements OnInit {
 
   public onSubmit(): void {
     if (this.signInForm.valid) {
-      this.authService
-        .login(this.signInForm.value)
-        .pipe(untilDestroyed(this))
-        .subscribe({
-          next: (data) => {
-            console.log('login success', data);
-          },
-          error: (err) => {
-            console.log('subscribe error', err);
-          },
-        });
+      this.authService.login(this.signInForm.value).pipe(untilDestroyed(this)).subscribe();
     }
   }
 }

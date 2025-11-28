@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '@app/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { UnreadMessagesService } from '../../../../pages/chats/services/unread-messages.service';
 
@@ -11,7 +12,9 @@ import { UnreadMessagesService } from '../../../../pages/chats/services/unread-m
 })
 export class AsideMenuComponent {
   public unreadMessages = 0;
+
   private unreadMessagesService = inject(UnreadMessagesService);
+  private authService = inject(AuthService);
 
   constructor() {
     this.unreadMessagesService.initialize();
@@ -21,5 +24,9 @@ export class AsideMenuComponent {
     });
 
     this.unreadMessagesService.setInitialUnreadMessagesCount();
+  }
+
+  public onLogout(): void {
+    this.authService.logout();
   }
 }
