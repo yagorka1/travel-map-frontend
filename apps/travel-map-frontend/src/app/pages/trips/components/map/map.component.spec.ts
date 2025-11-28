@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MapComponent } from './map.component';
 import { TranslateModule } from '@ngx-translate/core';
 
-// Mock Leaflet
 jest.mock('leaflet', () => ({
   map: jest.fn().mockReturnValue({
     setView: jest.fn().mockReturnThis(),
@@ -17,7 +16,6 @@ jest.mock('leaflet', () => ({
   }),
 }));
 
-// Mock leaflet-ant-path
 jest.mock('leaflet-ant-path', () => ({
   antPath: jest.fn().mockReturnValue({
     addTo: jest.fn(),
@@ -33,7 +31,6 @@ describe('MapComponent', () => {
       imports: [MapComponent, TranslateModule.forRoot()],
     }).compileComponents();
 
-    // Create the map div element that Leaflet expects
     const mapDiv = document.createElement('div');
     mapDiv.id = 'map';
     document.body.appendChild(mapDiv);
@@ -44,7 +41,6 @@ describe('MapComponent', () => {
   });
 
   afterEach(() => {
-    // Clean up the map element
     const mapDiv = document.getElementById('map');
     if (mapDiv) {
       document.body.removeChild(mapDiv);

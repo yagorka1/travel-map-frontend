@@ -8,7 +8,7 @@ import { WebSocketEvents } from '../enums/web-sockets-events.enum';
 export class WebSocketService {
   private socket: Socket | null = null;
 
-  connect(token: string): Promise<void> {
+  public connect(token: string): Promise<void> {
     return new Promise((resolve, reject) => {
       if (this.socket) return resolve();
 
@@ -31,7 +31,7 @@ export class WebSocketService {
     });
   }
 
-  joinChat(chatId: string) {
+  public joinChat(chatId: string): void {
     if (!this.socket?.connected) {
       console.warn('Socket not connected yet');
       return;
@@ -39,7 +39,7 @@ export class WebSocketService {
     this.socket.emit('join', chatId);
   }
 
-  onNewMessage(): Observable<any> {
+  public onNewMessage(): Observable<any> {
     return new Observable((observer) => {
       this.socket?.on(WebSocketEvents.NEW_MESSAGE, (msg) => {
         observer.next(msg);
@@ -47,7 +47,7 @@ export class WebSocketService {
     });
   }
 
-  onUnreadCount(): Observable<any> {
+  public onUnreadCount(): Observable<any> {
     return new Observable((observer) => {
       this.socket?.on(WebSocketEvents.UNREAD_COUNT, (data) => {
         observer.next(data);

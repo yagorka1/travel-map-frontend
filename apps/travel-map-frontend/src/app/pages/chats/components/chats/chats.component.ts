@@ -126,15 +126,15 @@ export class ChatsComponent {
         this.messageSub?.unsubscribe();
         this.messageSub = this.socketService
           .onNewMessage()
-          .pipe(filter((msg) => msg.chatId === chatId))
-          .subscribe((msg) => {
+          .pipe(filter((msg: ChatMessageInterface) => msg.chatId === chatId))
+          .subscribe((msg: ChatMessageInterface) => {
             this.messages.push(msg);
           });
       }
     });
   }
 
-  public loadAvailableUsers(name: string) {
+  public loadAvailableUsers(name: string): void {
     this.search.set(name);
   }
 
@@ -167,7 +167,7 @@ export class ChatsComponent {
   public selectUser(user: ChatUserInterface): void {
     this.selectedUser = user;
 
-    this.selectedChat = this.chats.find((chat) => chat.user.id === user.id) || null;
+    this.selectedChat = this.chats.find((chat: ChatMemberInterface) => chat.user.id === user.id) || null;
 
     if (this.selectedChat) {
       this.selectChat(this.selectedChat);

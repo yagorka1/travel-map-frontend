@@ -13,14 +13,11 @@
     </div>
 
     <div class="flex-1 flex overflow-hidden flex-col">
-      <!-- Content -->
       <div class="flex-1 flex overflow-hidden">
-        <!-- Sidebar -->
         <div class="w-1/3 border-r dark:border-gray-700 bg-white dark:bg-gray-800">
           <app-trips-list></app-trips-list>
         </div>
 
-        <!-- Map Section -->
         <div class="flex-1 bg-gray-100 dark:bg-gray-900">
           <app-map [trips]="trips$ | async" class="w-full h-full"></app-map>
         </div>

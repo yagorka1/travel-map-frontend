@@ -1,9 +1,9 @@
-import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { authApi } from '../api/auth.api';
 import { jwtDecode } from 'jwt-decode';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { authApi } from '../api/auth.api';
 
 @Injectable({
   providedIn: 'root',
@@ -52,8 +52,15 @@ export class AuthService {
       .pipe(tap((res: any) => this.setToken(res.accessToken)));
   }
 
-  public logout() {
+  public logout(): void {
     this.accessToken$.next(null);
-    this.http.post(authApi.logout, {}, { withCredentials: true }).subscribe();
+    this.http.post(authApi.logout, {}, { withCredentials: true }).subscribe({
+      next: () => {
+        this.router.navigate(['/auth/sign-in']);
+      },
+      error: () => {
+        this.router.navigate(['/auth/sign-in']);
+      },
+    });
   }
 }
