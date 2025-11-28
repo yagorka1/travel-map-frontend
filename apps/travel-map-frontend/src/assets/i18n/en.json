@@ -79,7 +79,10 @@
   "settings": {
     "settings": "Settings",
     "profile": "Profile",
-    "password": "Password"
+    "password": "Password",
+    "theme": "Theme",
+    "light_mode": "Light Mode",
+    "dark_mode": "Dark Mode"
   },
   "password": {
     "change_password": "Change Password",

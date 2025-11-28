@@ -1,18 +1,86 @@
 @import 'tailwindcss';
+
+/* Tailwind v4 dark mode - class-based configuration */
+/* Override Flowbite's default prefers-color-scheme behavior */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* CRITICAL: Override system dark mode when .dark class is not present */
+/* This prevents Flowbite from applying dark mode based on prefers-color-scheme */
+@media (prefers-color-scheme: dark) {
+  html:not(.dark) *,
+  html:not(.dark) {
+    color-scheme: light !important;
+  }
+
+  /* Force light mode colors even when system prefers dark */
+  html:not(.dark) {
+    background-color: #f9fafb !important; /* bg-gray-50 */
+    color: #111827 !important; /* text-gray-900 */
+  }
+
+  html:not(.dark) .bg-gray-50 {
+    background-color: #f9fafb !important;
+  }
+
+  html:not(.dark) .dark\:bg-gray-800 {
+    background-color: #f9fafb !important;
+  }
+
+  html:not(.dark) .dark\:text-white,
+  html:not(.dark) .dark\:text-gray-400 {
+    color: #111827 !important;
+  }
+
+  /* Input fields - force light mode styles */
+  html:not(.dark) input,
+  html:not(.dark) textarea,
+  html:not(.dark) select {
+    background-color: #ffffff !important; /* bg-white */
+    border-color: #d1d5db !important; /* border-gray-300 */
+    color: #111827 !important; /* text-gray-900 */
+  }
+
+  /* Disabled inputs - light gray background */
+  html:not(.dark) input:disabled,
+  html:not(.dark) textarea:disabled,
+  html:not(.dark) select:disabled {
+    background-color: #f3f4f6 !important; /* bg-gray-100 */
+    color: #6b7280 !important; /* text-gray-500 */
+  }
+
+  /* Hover effects for menu items - lighter gray */
+  html:not(.dark) .hover\:bg-gray-100:hover,
+  html:not(.dark) .dark\:hover\:bg-gray-700:hover {
+    background-color: #f3f4f6 !important; /* bg-gray-100 */
+  }
+
+  /* Chat-specific overrides */
+  html:not(.dark) .dark\:bg-gray-700 {
+    background-color: #ffffff !important; /* bg-white */
+  }
+
+  html:not(.dark) .dark\:bg-gray-900 {
+    background-color: #f9fafb !important; /* bg-gray-50 */
+  }
+
+  /* Border colors */
+  html:not(.dark) .dark\:border-gray-700,
+  html:not(.dark) .dark\:border-gray-600 {
+    border-color: #e5e7eb !important; /* border-gray-200 */
+  }
+}
+
 @import 'flowbite';
 @import 'leaflet/dist/leaflet.css';
 
 @source "../../../libs";
-
-/* Using @variant instead of @custom-variant for built-in dark mode */
-@variant dark (&:where(.dark, .dark *));
 
 @theme {
   --color-primary: #2563eb;
   --color-secondary: #9333ea;
 }
 
-/* Removed body.dark styles - dark: variants will handle everything */
+/* Dark mode styles for body */
 body {
-  @apply bg-gray-50 text-gray-900 transition-colors duration-300;
+  @apply bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300;
 }
