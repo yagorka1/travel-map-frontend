@@ -1,5 +1,19 @@
 @import 'tailwindcss';
 
+/* Global mobile responsiveness fixes */
+html {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+body {
+  max-width: 100vw;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 /* Tailwind v4 dark mode - class-based configuration */
 /* Override Flowbite's default prefers-color-scheme behavior */
 @custom-variant dark (&:where(.dark, .dark *));

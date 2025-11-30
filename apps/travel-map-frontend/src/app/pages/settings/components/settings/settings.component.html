@@ -1,16 +1,16 @@
-<div class="w-full p-4">
-  <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-    <h1 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+<div class="w-full p-2 sm:p-4">
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 sm:p-6">
+    <h1 class="text-xl sm:text-2xl font-bold mb-4 text-gray-900 dark:text-white">
       {{ 'settings.settings' | translate }}
     </h1>
 
     <div
       class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700"
     >
-      <ul class="flex flex-wrap -mb-px">
+      <ul class="flex flex-nowrap -mb-px min-w-max">
         <li class="me-2">
           <a
-           [routerLink]="['profile']"
+            [routerLink]="['profile']"
             #profileLink="routerLinkActive"
             routerLinkActive="text-blue-600 border-blue-600 dark:text-blue-500 dark:border-blue-500 active"
             [attr.aria-current]="profileLink.isActive ? 'page' : null"
