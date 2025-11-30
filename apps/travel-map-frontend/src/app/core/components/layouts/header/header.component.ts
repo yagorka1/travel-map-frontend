@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { ThemeToggleComponent } from '../../theme-toggle/theme-toggle.component';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ThemeToggleComponent } from '../../theme-toggle/theme-toggle.component';
 
 @Component({
   selector: 'app-header',
@@ -8,4 +8,10 @@ import { RouterLink } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+  @Output() toggleSidebar = new EventEmitter<void>();
+
+  public onToggleSidebar(): void {
+    this.toggleSidebar.emit();
+  }
+}
