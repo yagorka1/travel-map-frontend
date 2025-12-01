@@ -114,5 +114,24 @@
     "trips_count": "Колькасць паездак",
     "trip_name": "Назва паездкі",
     "route_points": "Балы маршруту"
+  },
+  "dashboard": {
+    "title": "Панэль кіравання",
+    "total_trips": "Усяго паездак",
+    "total_trips_value": "{{count}}",
+    "total_distance": "Агульная дыстанцыя",
+    "total_distance_value": "{{distance}} км",
+    "visited_cities": "Наведаныя гарады",
+    "visited_cities_value": "{{count}}",
+    "avg_trip_duration": "Сярэдняя працягласць паездкі",
+    "avg_trip_duration_value": "{{hours}} дзён",
+    "most_visited_city": "Самы наведвальны горад",
+    "most_visited_city_value": "{{city}} ({{count}})",
+    "visited_countries": "Наведаныя краіны",
+    "visited_countries_value": "{{count}}",
+    "most_visited_country": "Самая наведвальная краіна",
+    "most_visited_country_value": "{{country}} ({{count}})",
+    "total_points_level": "Усяго балаў / Узровень",
+    "points_to_next_level": "{{points}} балаў да ўзроўню {{level}}"
   }
 }
