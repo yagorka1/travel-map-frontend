@@ -132,6 +132,7 @@
       <div class="flex-1 bg-gray-100 dark:bg-gray-900 min-h-[300px] lg:min-h-0">
         <app-map
           [isCreateRoute]="true"
+          [isSetYourLocation]="true"
           [routeColor]="form.get('color')?.value || '#3B82F6'"
           class="w-full h-full"
           (pointAdded)="onMapPointAdded($event)"

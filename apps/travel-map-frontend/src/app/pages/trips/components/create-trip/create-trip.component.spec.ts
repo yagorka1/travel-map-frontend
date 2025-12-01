@@ -2,11 +2,10 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Component, Input, forwardRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { InputComponent, NotificationService } from '@app/core';
+import { NotificationService } from '@app/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
 import { TripsService } from '../../services/trips.service';
-import { MapComponent } from '../map/map.component';
 import { CreateTripComponent } from './create-trip.component';
 
 @Component({
@@ -70,19 +69,28 @@ describe('CreateTripComponent', () => {
   let component: CreateTripComponent;
   let fixture: ComponentFixture<CreateTripComponent>;
 
+  if (typeof global.crypto === 'undefined') {
+    (global as any).crypto = {};
+  }
+
+  if (typeof global.crypto.randomUUID === 'undefined') {
+    (global as any).crypto.randomUUID = () => 'test-uuid';
+  }
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CreateTripComponent, TranslateModule.forRoot(), HttpClientTestingModule],
-      providers: [{ provide: NotificationService, useClass: MockNotificationService }],
-    })
-      .overrideComponent(CreateTripComponent, {
-        remove: { imports: [MapComponent, InputComponent] },
-        add: {
-          imports: [MockMapComponent, MockInputComponent],
-          providers: [{ provide: TripsService, useClass: MockTripsService }],
-        },
-      })
-      .compileComponents();
+      imports: [
+        CreateTripComponent,
+        TranslateModule.forRoot(),
+        HttpClientTestingModule,
+        MockMapComponent,
+        MockInputComponent,
+      ],
+      providers: [
+        { provide: NotificationService, useClass: MockNotificationService },
+        { provide: TripsService, useClass: MockTripsService },
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(CreateTripComponent);
     component = fixture.componentInstance;

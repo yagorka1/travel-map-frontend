@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MapComponent } from './map.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 jest.mock('leaflet', () => ({
   map: jest.fn().mockReturnValue({
@@ -28,7 +29,7 @@ describe('MapComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MapComponent, TranslateModule.forRoot()],
+      imports: [MapComponent, TranslateModule.forRoot(), HttpClientTestingModule],
     }).compileComponents();
 
     const mapDiv = document.createElement('div');

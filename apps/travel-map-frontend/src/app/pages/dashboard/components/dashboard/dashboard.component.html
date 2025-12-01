@@ -29,4 +29,8 @@
       </app-points-level-card>
     </div>
   </div>
+
+  @if (highlightedCountries && highlightedCountries.length) {
+    <app-map [highlightedCountries]="highlightedCountries" [defaultZoom]="2" ></app-map>
+  }
 </div>
