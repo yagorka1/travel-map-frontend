@@ -12,4 +12,5 @@ export interface DashboardStats {
   mostVisitedCountry: MostVisitedLocation;
   averageTripDuration: number;
   totalPoints: number;
+  visitedCountriesList: string[];
 }

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { AfterViewInit, Component, EventEmitter, inject, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { TripInterface } from '../../interfaces/trip.interface';
 
@@ -15,6 +16,11 @@ export class MapComponent implements AfterViewInit, OnChanges {
   @Input() isCreateRoute = false;
   @Input() trips: TripInterface[] | null = null;
   @Input() routeColor = '#3B82F6';
+  @Input() highlightedCountries: string[] = [];
+  @Input() isSetYourLocation = false;
+  @Input() defaultZoom = 8;
+
+  private http: HttpClient = inject(HttpClient);
 
   public map: any;
   private L: any;
@@ -34,19 +40,29 @@ export class MapComponent implements AfterViewInit, OnChanges {
     await this.loadLeaflet();
     const defaultCoords: [number, number] = [51.505, -0.09];
 
+    // Define world bounds to prevent map repetition
+    const worldBounds = this.L.latLngBounds(
+      this.L.latLng(-90, -180), // Southwest corner
+      this.L.latLng(90, 180), // Northeast corner
+    );
+
     this.map = this.L.map('map', {
       zoomControl: true,
       scrollWheelZoom: true,
       doubleClickZoom: true,
       touchZoom: true,
-    }).setView(defaultCoords, 8);
+      maxBounds: worldBounds,
+      maxBoundsViscosity: 1.0,
+      minZoom: 2,
+    }).setView(defaultCoords, this.defaultZoom);
     this.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      noWrap: true,
     }).addTo(this.map);
 
     this.map.invalidateSize();
 
-    if (navigator.geolocation) {
+    if (this.isSetYourLocation && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const userCoords: [number, number] = [position.coords.latitude, position.coords.longitude];
@@ -66,6 +82,10 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
     if (this.trips && this.trips.length > 0) {
       this.renderTrips();
+    }
+
+    if (this.highlightedCountries && this.highlightedCountries.length > 0) {
+      this.renderCountries();
     }
   }
 
@@ -164,5 +184,26 @@ export class MapComponent implements AfterViewInit, OnChanges {
     }
 
     this.routePoints = [];
+  }
+
+  private renderCountries() {
+    this.http.get('assets/geo/countries.geo.json').subscribe((data: any) => {
+      this.L.geoJSON(data, {
+        style: (feature: any) => {
+          const countryName = feature.properties.name;
+          console.log(countryName);
+
+          return {
+            fillColor: this.highlightedCountries.includes(countryName) ? '#3478f6' : '#cccccc',
+            fillOpacity: this.highlightedCountries.includes(countryName) ? 0.7 : 0.2,
+            color: '#444',
+            weight: 1,
+          };
+        },
+        onEachFeature: (feature: any, layer: any) => {
+          layer.bindTooltip(feature.properties.name, { permanent: false, direction: 'top' });
+        },
+      }).addTo(this.map);
+    });
   }
 }

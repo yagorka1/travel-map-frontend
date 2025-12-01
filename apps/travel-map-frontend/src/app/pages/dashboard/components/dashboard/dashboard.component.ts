@@ -8,6 +8,7 @@ import { DashboardStats } from '../../interfaces/dashboard-stats.interface';
 import { PointsLevelCardComponent } from '../points-level-card/points-level-card.component';
 import { StatCardComponent } from '../stat-card/stat-card.component';
 import { forkJoin } from 'rxjs';
+import { MapComponent } from '../../../trips/components/map/map.component';
 
 interface StatCard {
   icon: string;
@@ -20,7 +21,7 @@ interface StatCard {
 @UntilDestroy()
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, TranslateModule, StatCardComponent, PointsLevelCardComponent],
+  imports: [CommonModule, TranslateModule, StatCardComponent, PointsLevelCardComponent, MapComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
   providers: [LeaderboardService],
@@ -33,6 +34,7 @@ export class DashboardComponent implements OnInit {
   public level = 1;
   public progressPercentage = 0;
   public pointsToNextLevel = 0;
+  public highlightedCountries: string[] = [];
 
   public ngOnInit(): void {
     forkJoin({
@@ -42,6 +44,7 @@ export class DashboardComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe(({ stats, levels }) => {
         this.updateStats(stats, levels);
+        this.highlightedCountries = stats.visitedCountriesList;
       });
   }
 

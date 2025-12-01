@@ -6,7 +6,7 @@ export const endpointInterceptor: HttpInterceptorFn = (
   req: HttpRequest<any>,
   next: HttpHandlerFn,
 ): Observable<HttpEvent<any>> => {
-  if (req.url.includes('i18n')) {
+  if (req.url.includes('i18n') || req.url.includes('assets/geo')) {
     return next(req);
   }
 
