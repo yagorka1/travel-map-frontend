@@ -119,5 +119,24 @@
     "start_date": "Start Date",
     "end_date": "End Date",
     "user_name": "User Name"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "total_trips": "Total Trips",
+    "total_trips_value": "{{count}}",
+    "total_distance": "Total Distance",
+    "total_distance_value": "{{distance}} km",
+    "visited_cities": "Visited Cities",
+    "visited_cities_value": "{{count}}",
+    "avg_trip_duration": "Average Trip Duration",
+    "avg_trip_duration_value": "{{hours}} days",
+    "most_visited_city": "Most Visited City",
+    "most_visited_city_value": "{{city}} ({{count}})",
+    "visited_countries": "Visited Countries",
+    "visited_countries_value": "{{count}}",
+    "most_visited_country": "Most Visited Country",
+    "most_visited_country_value": "{{country}} ({{count}})",
+    "total_points_level": "Total Points / Level",
+    "points_to_next_level": "{{points}} points to level {{level}}"
   }
 }

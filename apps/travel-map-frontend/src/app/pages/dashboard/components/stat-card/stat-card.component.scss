@@ -1,0 +1,11 @@
+img {
+  filter: brightness(0) saturate(100%);
+}
+
+:host ::ng-deep img.text-blue-500 {
+  filter: invert(44%) sepia(96%) saturate(2582%) hue-rotate(200deg) brightness(98%) contrast(101%);
+}
+
+:host ::ng-deep img.text-yellow-500 {
+  filter: invert(85%) sepia(66%) saturate(1815%) hue-rotate(359deg) brightness(99%) contrast(101%);
+}

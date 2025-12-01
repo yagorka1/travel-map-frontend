@@ -1,4 +1,6 @@
 export const leaderboardApi = {
-  getLeaderboard: '/leaderboard/users',
-  getLeaderboardTrips: '/leaderboard/trips',
+  getLeaderboard: '/statistics/users',
+  getLeaderboardTrips: '/statistics/trips',
+  levels: '/statistics/levels',
+  getDashboardStats: '/statistics/dashboard',
 };

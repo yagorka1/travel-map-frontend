@@ -114,5 +114,24 @@
     "trips_count": "Количество поездок",
     "trip_name": "Название поездки",
     "route_points": "Баллы маршрута"
+  },
+  "dashboard": {
+    "title": "Панель управления",
+    "total_trips": "Всего поездок",
+    "total_trips_value": "{{count}}",
+    "total_distance": "Общая дистанция",
+    "total_distance_value": "{{distance}} км",
+    "visited_cities": "Посещенные города",
+    "visited_cities_value": "{{count}}",
+    "avg_trip_duration": "Средняя продолжительность поездки",
+    "avg_trip_duration_value": "{{hours}} дней",
+    "most_visited_city": "Самый посещаемый город",
+    "most_visited_city_value": "{{city}} ({{count}})",
+    "visited_countries": "Посещенные страны",
+    "visited_countries_value": "{{count}}",
+    "most_visited_country": "Самая посещаемая страна",
+    "most_visited_country_value": "{{country}} ({{count}})",
+    "total_points_level": "Всего баллов / Уровень",
+    "points_to_next_level": "{{points}} баллов до уровня {{level}}"
   }
 }
