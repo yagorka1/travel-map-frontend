@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ChangePasswordDto } from '../../interfaces/profile.interface';
 import { InputComponent } from '@app/core/components/input/input.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { passwordMatchValidator, NotificationService } from '@app/core';
+import { passwordMatchValidator, NotificationService, SpinnerService } from '@app/core';
 import { ProfileService } from '../../../../core/services/profile.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { NotificationTypeEnum } from '@app/core/ui/notification/enums/notification-type.enum';
@@ -21,6 +21,7 @@ export class ChangePasswordComponent implements OnInit {
   private profileService = inject(ProfileService);
   private translateService = inject(TranslateService);
   private notificationService = inject(NotificationService);
+  private spinnerService: SpinnerService = inject(SpinnerService);
 
   public passwordForm!: FormGroup;
   public isSubmitting = false;
@@ -48,8 +49,8 @@ export class ChangePasswordComponent implements OnInit {
         confirmPassword: this.passwordForm.value.confirmPassword,
       };
 
-      this.profileService
-        .changePassword(changePasswordDto)
+      this.spinnerService
+        .show(this.profileService.changePassword(changePasswordDto))
         .pipe(untilDestroyed(this))
         .subscribe({
           next: () => {

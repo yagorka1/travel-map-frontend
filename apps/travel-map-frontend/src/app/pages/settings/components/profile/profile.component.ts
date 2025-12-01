@@ -1,15 +1,14 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, FormsModule } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { selectProfile } from '../../../../core/store/profile/profile.selectors';
-import * as ProfileActions from '../../../../core/store/profile/profile.actions';
 import { CommonModule } from '@angular/common';
-import { ProfileInterface, UpdateProfileDto } from '../../../../pages/settings/interfaces/profile.interface';
-import { InputComponent, AvatarComponent } from '@app/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AvatarComponent, InputComponent, LanguageEnum } from '@app/core';
 import { SelectComponent, SelectOption } from '@app/core/components/select/select.component';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { LanguageEnum } from '@app/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { Store } from '@ngrx/store';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import * as ProfileActions from '../../../../core/store/profile/profile.actions';
+import { selectProfile } from '../../../../core/store/profile/profile.selectors';
+import { ProfileInterface, UpdateProfileDto } from '../../../../pages/settings/interfaces/profile.interface';
 
 @UntilDestroy()
 @Component({

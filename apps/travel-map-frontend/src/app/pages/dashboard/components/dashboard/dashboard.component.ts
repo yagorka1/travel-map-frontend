@@ -9,6 +9,7 @@ import { PointsLevelCardComponent } from '../points-level-card/points-level-card
 import { StatCardComponent } from '../stat-card/stat-card.component';
 import { forkJoin } from 'rxjs';
 import { MapComponent } from '../../../trips/components/map/map.component';
+import { SpinnerService } from '@app/core';
 
 interface StatCard {
   icon: string;
@@ -29,6 +30,8 @@ interface StatCard {
 export class DashboardComponent implements OnInit {
   private readonly leaderboardService = inject(LeaderboardService);
 
+  private spinnerService: SpinnerService = inject(SpinnerService);
+
   public stats: StatCard[] = [];
   public totalPoints = 0;
   public level = 1;
@@ -37,10 +40,13 @@ export class DashboardComponent implements OnInit {
   public highlightedCountries: string[] = [];
 
   public ngOnInit(): void {
-    forkJoin({
-      stats: this.leaderboardService.getDashboardStats(),
-      levels: this.leaderboardService.getLevels(),
-    })
+    this.spinnerService
+      .show(
+        forkJoin({
+          stats: this.leaderboardService.getDashboardStats(),
+          levels: this.leaderboardService.getLevels(),
+        }),
+      )
       .pipe(untilDestroyed(this))
       .subscribe(({ stats, levels }) => {
         this.updateStats(stats, levels);

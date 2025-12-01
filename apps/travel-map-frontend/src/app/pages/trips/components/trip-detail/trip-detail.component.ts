@@ -6,6 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TripInterface } from '../../interfaces/trip.interface';
 import { TripsService } from '../../services/trips.service';
 import { MapComponent } from '../map/map.component';
+import { SpinnerService } from '@app/core';
 
 @UntilDestroy()
 @Component({
@@ -20,10 +21,11 @@ export class TripDetailComponent implements OnInit {
   private route: ActivatedRoute = inject(ActivatedRoute);
   private id: string = this.route.snapshot.params['id'];
   public trip: TripInterface | null = null;
+  private spinnerService: SpinnerService = inject(SpinnerService);
 
   public ngOnInit(): void {
-    this.tripService
-      .getTrip(this.id)
+    this.spinnerService
+      .show(this.tripService.getTrip(this.id))
       .pipe(untilDestroyed(this))
       .subscribe((trip: TripInterface) => {
         this.trip = trip;

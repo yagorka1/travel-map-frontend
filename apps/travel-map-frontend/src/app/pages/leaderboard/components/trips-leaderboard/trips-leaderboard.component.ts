@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { LeaderboardTrip } from '../../interfaces/leaderboard.interface';
 import { LeaderboardService } from '../../services/leaderboard.service';
 import { RouterLink } from '@angular/router';
+import { SpinnerService } from '@app/core';
 
 @Component({
   selector: 'app-trips-leaderboard',
@@ -14,9 +15,12 @@ import { RouterLink } from '@angular/router';
 })
 export class TripsLeaderboardComponent implements OnInit {
   private leaderboardService = inject(LeaderboardService);
+
+  private spinnerService: SpinnerService = inject(SpinnerService);
+
   public trips$: Observable<LeaderboardTrip[]> | null = null;
 
   public ngOnInit(): void {
-    this.trips$ = this.leaderboardService.getTopTrips();
+    this.trips$ = this.spinnerService.show(this.leaderboardService.getTopTrips());
   }
 }
