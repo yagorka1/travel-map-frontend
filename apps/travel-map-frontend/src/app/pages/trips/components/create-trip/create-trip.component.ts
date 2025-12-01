@@ -10,6 +10,7 @@ import { CreateTripInterface } from '../../interfaces/create-trip.interface';
 import { TripInterface } from '../../interfaces/trip.interface';
 import { TripsService } from '../../services/trips.service';
 import { MapComponent } from '../map/map.component';
+import { SpinnerService } from '@app/core/services/spinner.service';
 
 @UntilDestroy()
 @Component({
@@ -26,6 +27,7 @@ export class CreateTripComponent {
   private router: Router = inject(Router);
   private notificationService: NotificationService = inject(NotificationService);
   private translateService: TranslateService = inject(TranslateService);
+  private spinnerService: SpinnerService = inject(SpinnerService);
 
   public form = new FormGroup(
     {
@@ -59,8 +61,8 @@ export class CreateTripComponent {
     if (this.form.valid) {
       const tripData = this.form.value as CreateTripInterface;
 
-      this.tripsService
-        .createTrip(tripData)
+      this.spinnerService
+        .show(this.tripsService.createTrip(tripData))
         .pipe(untilDestroyed(this))
         .subscribe({
           next: (data: TripInterface) => {

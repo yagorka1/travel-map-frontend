@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { AvatarComponent } from '@app/core';
+import { AvatarComponent, SpinnerService } from '@app/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { LeaderboardUser } from '../../interfaces/leaderboard.interface';
@@ -14,9 +14,12 @@ import { LeaderboardService } from '../../services/leaderboard.service';
 })
 export class UsersLeaderboardComponent implements OnInit {
   private leaderboardService = inject(LeaderboardService);
+
+  private spinnerService: SpinnerService = inject(SpinnerService);
+
   public users$: Observable<LeaderboardUser[]> | null = null;
 
   public ngOnInit(): void {
-    this.users$ = this.leaderboardService.getTopUsers();
+    this.users$ = this.spinnerService.show(this.leaderboardService.getTopUsers());
   }
 }

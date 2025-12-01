@@ -5,6 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { TripInterface } from '../../interfaces/trip.interface';
 import { TripsService } from '../../services/trips.service';
+import { SpinnerService } from '@app/core';
 
 @Component({
   selector: 'app-trips-list',
@@ -16,8 +17,9 @@ import { TripsService } from '../../services/trips.service';
 export class TripsListComponent implements OnInit {
   private tripsService = inject(TripsService);
   public trips$: Observable<TripInterface[]> | null = null;
+  private spinnerService: SpinnerService = inject(SpinnerService);
 
   public ngOnInit(): void {
-    this.trips$ = this.tripsService.getTrips();
+    this.trips$ = this.spinnerService.show(this.tripsService.getTrips());
   }
 }

@@ -7,6 +7,7 @@ import { TripsListComponent } from '../trips-list/trips-list.component';
 import { TripsService } from '../../services/trips.service';
 import { Observable } from 'rxjs';
 import { TripInterface } from '../../interfaces/trip.interface';
+import { SpinnerService } from '@app/core';
 
 @Component({
   selector: 'app-trips',
@@ -18,8 +19,9 @@ import { TripInterface } from '../../interfaces/trip.interface';
 export class TripsComponent implements OnInit {
   private tripsService = inject(TripsService);
   public trips$: Observable<TripInterface[]> | null = null;
+  private spinnerService: SpinnerService = inject(SpinnerService);
 
   public ngOnInit(): void {
-    this.trips$ = this.tripsService.getTrips();
+    this.trips$ = this.spinnerService.show(this.tripsService.getTrips());
   }
 }

@@ -14,7 +14,7 @@ import {
 } from 'rxjs';
 import { ChatUserInterface } from '../../interfaces/chat-user.interface';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '@app/core';
+import { AuthService, SpinnerService } from '@app/core';
 import { WebSocketService } from '@app/core';
 import { ChatMemberInterface } from '../../interfaces/chat-member.interface';
 import { ChatMessageInterface } from '../../interfaces/chat-message.interface';
@@ -72,6 +72,8 @@ export class ChatsComponent {
   private search$ = toObservable(this.search);
 
   private isFocused$ = toObservable(this.isFocused);
+
+  private spinnerService: SpinnerService = inject(SpinnerService);
 
   public constructor() {
     this.loadChats();
