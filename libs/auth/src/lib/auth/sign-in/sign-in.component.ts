@@ -7,6 +7,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { NgOptimizedImage } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { InputComponent } from '@app/core/components/input/input.component';
+import { SpinnerService } from '@app/core';
 
 @UntilDestroy()
 @Component({
@@ -22,6 +23,8 @@ export class SignInComponent implements OnInit {
 
   private authService: AuthService = inject(AuthService);
 
+  private spinnerService: SpinnerService = inject(SpinnerService);
+
   public ngOnInit(): void {
     this.signInForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -31,7 +34,7 @@ export class SignInComponent implements OnInit {
 
   public onSubmit(): void {
     if (this.signInForm.valid) {
-      this.authService.login(this.signInForm.value).pipe(untilDestroyed(this)).subscribe();
+      this.spinnerService.show(this.authService.login(this.signInForm.value)).pipe(untilDestroyed(this)).subscribe();
     }
   }
 }

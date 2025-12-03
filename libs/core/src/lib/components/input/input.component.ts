@@ -1,18 +1,17 @@
-import { Component, Input, AfterViewInit, inject, ElementRef, ViewChild } from '@angular/core';
+import { NgClass } from '@angular/common';
+import { AfterViewInit, Component, ElementRef, forwardRef, inject, Input, ViewChild } from '@angular/core';
 import {
+  ControlContainer,
   ControlValueAccessor,
   FormControl,
+  FormGroup,
+  FormGroupDirective,
+  FormsModule,
   NG_VALUE_ACCESSOR,
   UntypedFormGroup,
-  FormGroupDirective,
-  ControlContainer,
-  FormGroup,
-  FormsModule,
 } from '@angular/forms';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { forwardRef } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { NgClass } from '@angular/common';
 
 @UntilDestroy()
 @Component({
@@ -47,6 +46,8 @@ export class InputComponent implements ControlValueAccessor, AfterViewInit {
   public autocomplete = 'off';
 
   @Input() formControlName = '';
+
+  @Input() dataTestId = '';
 
   public value: any;
 
