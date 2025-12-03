@@ -1,13 +1,13 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AsideMenuComponent } from './aside-menu.component';
-import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
-import { RouterTestingModule } from '@angular/router/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { AuthService } from '@app/core';
-import { UnreadMessagesService } from '../../../../pages/chats/services/unread-messages.service';
-import { BehaviorSubject } from 'rxjs';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AuthService } from '@app/core';
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
+import { BehaviorSubject } from 'rxjs';
+import { UnreadMessagesService } from '../../../../pages/chats/services/unread-messages.service';
+import { AsideMenuComponent } from './aside-menu.component';
 
 describe('AsideMenuComponent', () => {
   let component: AsideMenuComponent;
@@ -67,6 +67,17 @@ describe('AsideMenuComponent', () => {
     it('should default unreadMessages to 0 if service emits null/undefined', () => {
       totalUnreadSubject.next(null as any);
       expect(component.unreadMessages).toBe(0);
+    });
+  });
+
+  describe('Logout', () => {
+    it('should call authService.logout when onLogout is called', () => {
+      const mockAuthService = TestBed.inject(AuthService) as any;
+      mockAuthService.logout = jest.fn();
+
+      component.onLogout();
+
+      expect(mockAuthService.logout).toHaveBeenCalled();
     });
   });
 

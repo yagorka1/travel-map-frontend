@@ -8,6 +8,8 @@ export class SpinnerService {
 
   private requestCount = 0;
 
+  public show(): void;
+
   public show<T>(request$: Observable<T>): Observable<T>;
 
   public show<T>(request$?: Observable<T>): Observable<T> | void {

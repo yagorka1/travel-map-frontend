@@ -1,17 +1,17 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MainLayoutComponent } from './main-layout.component';
-import { RouterTestingModule } from '@angular/router/testing';
-import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { provideMockStore, MockStore } from '@ngrx/store/testing';
-import { AuthService } from '@app/core';
-import { UnreadMessagesService } from '../../../../pages/chats/services/unread-messages.service';
-import { of } from 'rxjs';
-import { loadProfile } from '../../../store/profile/profile.actions';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AuthService } from '@app/core';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
+import { of } from 'rxjs';
+import { UnreadMessagesService } from '../../../../pages/chats/services/unread-messages.service';
+import { loadProfile } from '../../../store/profile/profile.actions';
 import { AsideMenuComponent } from '../aside-menu/aside-menu.component';
 import { HeaderComponent } from '../header/header.component';
+import { MainLayoutComponent } from './main-layout.component';
 
 describe('MainLayoutComponent', () => {
   let component: MainLayoutComponent;
@@ -62,6 +62,40 @@ describe('MainLayoutComponent', () => {
 
   it('should dispatch loadProfile action on initialization', () => {
     expect(dispatchSpy).toHaveBeenCalledWith(loadProfile());
+  });
+
+  describe('Sidebar Methods', () => {
+    it('should toggle sidebar state from false to true', () => {
+      component.isSidebarOpen = false;
+
+      component.toggleSidebar();
+
+      expect(component.isSidebarOpen).toBe(true);
+    });
+
+    it('should toggle sidebar state from true to false', () => {
+      component.isSidebarOpen = true;
+
+      component.toggleSidebar();
+
+      expect(component.isSidebarOpen).toBe(false);
+    });
+
+    it('should close sidebar regardless of current state', () => {
+      component.isSidebarOpen = true;
+
+      component.closeSidebar();
+
+      expect(component.isSidebarOpen).toBe(false);
+    });
+
+    it('should keep sidebar closed when calling closeSidebar on closed sidebar', () => {
+      component.isSidebarOpen = false;
+
+      component.closeSidebar();
+
+      expect(component.isSidebarOpen).toBe(false);
+    });
   });
 
   describe('Template', () => {

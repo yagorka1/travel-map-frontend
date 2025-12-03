@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { SignInComponent } from './sign-in.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AuthService } from '@app/core/services/auth.service';
+import { AuthService } from '@app/core/services/auth/auth.service';
 import { of } from 'rxjs';
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 

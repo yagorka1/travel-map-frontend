@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { authApi } from '../api/auth.api';
+import { authApi } from '../../api/auth.api';
 
 @Injectable({
   providedIn: 'root',

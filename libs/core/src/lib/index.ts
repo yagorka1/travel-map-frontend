@@ -1,6 +1,6 @@
-export * from './services/auth.service';
-export * from './services/spinner.service';
-export * from './services/web-socket.service';
+export * from './services/auth/auth.service';
+export * from './services/spinner/spinner.service';
+export * from './services/web-socket/web-socket.service';
 export * from './ui/notification/services/notification.service';
 
 export * from './guards/authenticated.guard';
