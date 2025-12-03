@@ -1,7 +1,7 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { SpinnerService } from '../../services/spinner.service';
-import { AsyncPipe } from '@angular/common';
+import { SpinnerService } from '../../services/spinner/spinner.service';
 
 @UntilDestroy()
 @Component({

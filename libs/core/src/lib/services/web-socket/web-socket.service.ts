@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { io, Socket } from 'socket.io-client';
 import { Observable } from 'rxjs';
 import { environment } from '@env/environment';
-import { WebSocketEvents } from '../enums/web-sockets-events.enum';
+import { WebSocketEvents } from '../../enums/web-sockets-events.enum';
 
 @Injectable({ providedIn: 'root' })
 export class WebSocketService {

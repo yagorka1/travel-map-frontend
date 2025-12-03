@@ -10,7 +10,7 @@ import { CreateTripInterface } from '../../interfaces/create-trip.interface';
 import { TripInterface } from '../../interfaces/trip.interface';
 import { TripsService } from '../../services/trips.service';
 import { MapComponent } from '../map/map.component';
-import { SpinnerService } from '@app/core/services/spinner.service';
+import { SpinnerService } from '@app/core/services/spinner/spinner.service';
 
 @UntilDestroy()
 @Component({

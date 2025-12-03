@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BehaviorSubject } from 'rxjs';
+import { SpinnerService } from '../../services/spinner/spinner.service';
 import { SpinnerComponent } from './spinner.component';
-import { SpinnerService } from '../../services/spinner.service';
-import { BehaviorSubject, of } from 'rxjs';
 
 describe('SpinnerComponent', () => {
   let component: SpinnerComponent;

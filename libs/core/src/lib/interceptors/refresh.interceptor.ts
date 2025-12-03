@@ -1,8 +1,8 @@
+import type { HttpEvent, HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
 import { inject } from '@angular/core';
-import type { HttpRequest, HttpHandlerFn, HttpEvent, HttpInterceptorFn } from '@angular/common/http';
-import { catchError, switchMap, throwError, Observable, BehaviorSubject, filter, take } from 'rxjs';
-import { AuthService } from '../services/auth.service';
+import { BehaviorSubject, catchError, filter, Observable, switchMap, take, throwError } from 'rxjs';
 import { authApi } from '../api/auth.api';
+import { AuthService } from '../services/auth/auth.service';
 
 let isRefreshing = false;
 const refreshSubject = new BehaviorSubject<string | null>(null);
