@@ -1,7 +1,14 @@
 <div class="space-y-6">
   <div class="text-center">
-    <img class="mx-auto h-12 w-auto" ngSrc="assets/images/logo.png" alt="Logo" height="1024" width="1024" />
-    <h2 class="mt-6 text-3xl font-bold text-gray-900 dark:text-white">
+    <img
+      class="mx-auto h-12 w-auto"
+      ngSrc="assets/images/logo.png"
+      alt="Logo"
+      height="1024"
+      width="1024"
+      data-testid="sign-in-logo"
+    />
+    <h2 class="mt-6 text-3xl font-bold text-gray-900 dark:text-white" data-testid="sign-in-heading">
       {{ 'auth.sign_in_to_your_account' | translate }}
     </h2>
 
@@ -10,18 +17,20 @@
       <a
         routerLink="/auth/sign-up"
         class="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
+        data-testid="sign-up-link"
       >
         {{ 'auth.create_new_account' | translate }}
       </a>
     </p>
   </div>
 
-  <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="signInForm" (ngSubmit)="onSubmit()" data-testid="sign-in-form">
     <lib-input
       formControlName="email"
       [type]="'email'"
       [placeholder]="'auth.email' | translate"
       [label]="'auth.email' | translate"
+      [dataTestId]="'email-input'"
     ></lib-input>
 
     <lib-input
@@ -29,6 +38,7 @@
       [type]="'password'"
       [placeholder]="'auth.password' | translate"
       [label]="'auth.password' | translate"
+      [dataTestId]="'password-input'"
     ></lib-input>
 
     <div class="flex items-center justify-between mb-4">
@@ -36,6 +46,7 @@
         <a
           routerLink="/auth/forgot-password"
           class="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
+          data-testid="forgot-password-link"
         >
           {{ 'auth.forgot_your_password' | translate }}
         </a>
@@ -45,6 +56,7 @@
     <button
       type="submit"
       class="cursor-pointer group relative w-full flex justify-center py-3 px-6 border border-transparent text-sm font-semibold rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      data-testid="submit-button"
     >
       {{ 'auth.sign_in' | translate }}
     </button>
