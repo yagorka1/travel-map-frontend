@@ -1,15 +1,18 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { SignInComponent } from './sign-in.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
+import type { AuthResponse } from '@app/core/services/auth/auth.interface';
 import { AuthService } from '@app/core/services/auth/auth.service';
-import { of } from 'rxjs';
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
+import { of } from 'rxjs';
+import { SignInComponent } from './sign-in.component';
 
 describe('SignInComponent', () => {
   let component: SignInComponent;
   let fixture: ComponentFixture<SignInComponent>;
   let authService: AuthService;
+
+  const mockAuthResponse: AuthResponse = { accessToken: 'mock-access-token' };
 
   beforeAll(() => {
     Object.defineProperty(global, 'crypto', {
@@ -21,7 +24,7 @@ describe('SignInComponent', () => {
 
   beforeEach(waitForAsync(() => {
     const authServiceMock = {
-      login: jest.fn().mockReturnValue(of(true)),
+      login: jest.fn().mockReturnValue(of(mockAuthResponse)),
     };
 
     TestBed.configureTestingModule({
@@ -51,11 +54,11 @@ describe('SignInComponent', () => {
 
   it('should call authService.login on valid form submit', () => {
     component.signInForm.setValue({ email: 'test@test.com', password: '123456' });
-    const loginSpy = jest.spyOn(authService, 'login').mockReturnValue(of(true));
+    const loginSpy = jest.spyOn(authService, 'login').mockReturnValue(of(mockAuthResponse));
 
     component.onSubmit();
 
-    expect(loginSpy).toHaveBeenCalledWith({ email: 'test@test.com', password: '123456' });
+    expect(loginSpy).toHaveBeenCalledWith({ email: 'test@test.com', password: '123456' }, '/');
   });
 
   it('should not call authService.login on invalid form submit', () => {
