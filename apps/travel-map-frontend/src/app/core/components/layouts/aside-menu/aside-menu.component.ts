@@ -27,6 +27,6 @@ export class AsideMenuComponent {
   }
 
   public onLogout(): void {
-    this.authService.logout();
+    this.authService.logout().subscribe();
   }
 }

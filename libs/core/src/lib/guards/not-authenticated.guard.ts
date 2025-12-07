@@ -5,8 +5,8 @@ import { catchError, map, Observable, of } from 'rxjs';
 import { AuthService } from '../services/auth/auth.service';
 
 export const notAuthenticatedGuard: CanActivateFn = (
-  route: ActivatedRouteSnapshot,
-  state: RouterStateSnapshot,
+  _route: ActivatedRouteSnapshot,
+  _state: RouterStateSnapshot,
 ): Observable<boolean> => {
   const authService: AuthService = inject(AuthService);
   const router: Router = inject(Router);
@@ -16,7 +16,7 @@ export const notAuthenticatedGuard: CanActivateFn = (
     return of(false);
   }
 
-  return authService.refresh().pipe(
+  return authService.refreshWithQueue().pipe(
     map(() => {
       router.navigate(['/']);
       return false;

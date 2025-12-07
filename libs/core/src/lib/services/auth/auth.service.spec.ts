@@ -125,7 +125,7 @@ describe('AuthService', () => {
   describe('logout', () => {
     it('should logout user and navigate to sign-in on success', () => {
       service.setToken('some-token');
-      service.logout();
+      service.logout().subscribe();
 
       expect(service.token).toBeNull();
 
@@ -140,7 +140,7 @@ describe('AuthService', () => {
 
     it('should navigate to sign-in even on logout error', () => {
       service.setToken('some-token');
-      service.logout();
+      service.logout().subscribe();
 
       expect(service.token).toBeNull();
 

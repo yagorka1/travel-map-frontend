@@ -73,7 +73,7 @@ describe('AsideMenuComponent', () => {
   describe('Logout', () => {
     it('should call authService.logout when onLogout is called', () => {
       const mockAuthService = TestBed.inject(AuthService) as any;
-      mockAuthService.logout = jest.fn();
+      mockAuthService.logout = jest.fn().mockReturnValue({ subscribe: jest.fn() });
 
       component.onLogout();
 

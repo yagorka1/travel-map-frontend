@@ -2,6 +2,7 @@ import { inject } from '@angular/core';
 import type { CanActivateFn } from '@angular/router';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { catchError, map, Observable, of } from 'rxjs';
+import { HttpStatusCode } from '../constants/http-status-code.constant';
 import { AuthService } from '../services/auth/auth.service';
 
 export const authenticatedGuard: CanActivateFn = (
@@ -15,19 +16,17 @@ export const authenticatedGuard: CanActivateFn = (
     return true;
   }
 
-  return authService.refresh().pipe(
-    map((success) => {
-      if (success) return true;
-
-      router.navigate(['/auth']);
-      return false;
-    }),
+  return authService.refreshWithQueue().pipe(
+    map(() => true),
     catchError((err) => {
-      if (err.status === 0) {
+      if (err.status === HttpStatusCode.NETWORK_ERROR) {
         return of(false);
       }
 
-      router.navigate(['/auth']);
+      // Save the attempted URL for redirecting after login
+      router.navigate(['/auth'], {
+        queryParams: { returnUrl: state.url },
+      });
       return of(false);
     }),
   );
