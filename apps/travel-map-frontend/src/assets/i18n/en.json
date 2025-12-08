@@ -12,7 +12,8 @@
     "name": "Name",
     "create_an_account": "Create an account",
     "account_created_successfully": "Account created successfully",
-    "confirm_password": "Confirm Password"
+    "confirm_password": "Confirm Password",
+    "or_continue_with": "Or continue with"
   },
   "aside_menu": {
     "dashboard": "Dashboard",

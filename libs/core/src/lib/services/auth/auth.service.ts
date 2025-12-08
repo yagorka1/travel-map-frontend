@@ -101,6 +101,7 @@ export class AuthService implements OnDestroy {
   public logout(): Observable<void> {
     this.clearRefreshTimeout();
     this.accessToken$.next(null);
+    localStorage.removeItem('language');
 
     return this.http.post<void>(authApi.logout, {}, { withCredentials: true }).pipe(
       finalize(() => {
@@ -147,5 +148,14 @@ export class AuthService implements OnDestroy {
       this.refreshSubscription.unsubscribe();
       this.refreshSubscription = null;
     }
+  }
+
+  public googleLogin(dto: { credential: string }): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(authApi.googleLogin, dto, { withCredentials: true }).pipe(
+      tap((res: AuthResponse) => {
+        this.setToken(res.accessToken);
+        this.router.navigate(['/']);
+      }),
+    );
   }
 }

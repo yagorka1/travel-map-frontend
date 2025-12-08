@@ -12,7 +12,8 @@
     "create_an_account": "Создать аккаунт",
     "account_created_successfully": "Аккаунт успешно создан",
     "already_have_an_account_sign_in": "Уже есть аккаунт? Войти",
-    "sign_up": "Зарегистрироваться"
+    "sign_up": "Зарегистрироваться",
+    "or_continue_with": "Или войти через"
   },
   "aside_menu": {
     "dashboard": "Панель управления",

@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
 
 type AvatarSize = 'sm' | 'md' | 'lg' | 'xl';
 
@@ -15,8 +15,10 @@ export class AvatarComponent {
   @Input() size: AvatarSize = 'md';
   @Input() alt = 'User avatar';
 
-  get formattedSrc(): string | null {
-    if (!this.src) {
+  public imageLoadError = false;
+
+  public get formattedSrc(): string | null {
+    if (!this.src || this.imageLoadError) {
       return null;
     }
 
@@ -27,11 +29,11 @@ export class AvatarComponent {
     return `http://localhost:3000/${this.src.replace(/\\/g, '/')}`;
   }
 
-  get initials(): string {
+  public get initials(): string {
     return this.name.charAt(0).toUpperCase();
   }
 
-  get sizeClasses(): string {
+  public get sizeClasses(): string {
     const sizes = {
       sm: 'w-8 h-8 text-sm',
       md: 'w-10 h-10 text-base',
@@ -39,5 +41,9 @@ export class AvatarComponent {
       xl: 'w-32 h-32 text-5xl',
     };
     return sizes[this.size];
+  }
+
+  public onImageError(): void {
+    this.imageLoadError = true;
   }
 }
