@@ -191,7 +191,6 @@ export class MapComponent implements AfterViewInit, OnChanges {
       this.L.geoJSON(data, {
         style: (feature: any) => {
           const countryName = feature.properties.name;
-          console.log(countryName);
 
           return {
             fillColor: this.highlightedCountries.includes(countryName) ? '#3478f6' : '#cccccc',

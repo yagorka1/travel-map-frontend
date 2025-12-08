@@ -6,8 +6,11 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { SpinnerService } from '@app/core';
 import { InputComponent } from '@app/core/components/input/input.component';
 import { AuthService } from '@app/core/services/auth/auth.service';
+import { environment } from '@env/environment';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TranslatePipe } from '@ngx-translate/core';
+
+declare const google: any;
 
 @UntilDestroy()
 @Component({
@@ -29,6 +32,8 @@ export class SignInComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
+
+    this.initGoogleAuth();
   }
 
   public onSubmit(): void {
@@ -38,6 +43,30 @@ export class SignInComponent implements OnInit {
         .show(this.authService.login(this.signInForm.value, returnUrl))
         .pipe(untilDestroyed(this))
         .subscribe();
+    }
+  }
+
+  private initGoogleAuth(): void {
+    if (typeof google === 'undefined') return;
+
+    google.accounts.id.initialize({
+      client_id: environment.googleClientId,
+      callback: ({ credential }: any) => {
+        this.spinnerService.show(this.authService.googleLogin({ credential })).pipe(untilDestroyed(this)).subscribe();
+      },
+    });
+
+    this.renderGoogleButton();
+  }
+
+  private renderGoogleButton(): void {
+    const container = document.getElementById('google-btn');
+    if (container) {
+      google.accounts.id.renderButton(container, {
+        theme: 'outline',
+        size: 'medium',
+        locale: 'en',
+      });
     }
   }
 }

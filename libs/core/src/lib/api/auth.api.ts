@@ -3,4 +3,5 @@ export const authApi = {
   signUp: '/auth/sign-up',
   refresh: '/auth/refresh',
   logout: '/auth/logout',
+  googleLogin: '/auth/google',
 };

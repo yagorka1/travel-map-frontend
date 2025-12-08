@@ -58,10 +58,6 @@ export class ProfileComponent implements OnInit {
             name: profile.name,
             language: profile.language,
           });
-
-          if (profile.language && profile.language !== this.translateService.currentLang) {
-            this.translateService.use(profile.language);
-          }
         }
       });
   }
