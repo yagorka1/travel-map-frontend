@@ -14,4 +14,7 @@
 // ***********************************************************
 
 // Import commands.ts using ES2015 syntax:
+// Import commands.ts using ES2015 syntax:
 import './commands';
+import './dashboard.commands';
+import './settings.commands';

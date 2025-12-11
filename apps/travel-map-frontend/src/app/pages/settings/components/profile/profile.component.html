@@ -1,7 +1,7 @@
 <div class="w-full p-2 sm:p-4">
   <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 sm:p-6">
     <div class="w-full md:w-2/3 lg:w-1/2 max-w-[600px]">
-      <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6" data-testid="profile-title">
         {{ 'profile.edit_profile' | translate }}
       </h2>
 
@@ -32,6 +32,7 @@
             [placeholder]="'profile.enter_your_name' | translate"
             [type]="'text'"
             autocomplete="name"
+            data-testid="profile-name-input"
           ></lib-input>
         </div>
 
@@ -45,6 +46,7 @@
             [value]="currentProfile?.email || ''"
             readonly
             disabled
+            data-testid="profile-email-input"
             class="bg-gray-100 border border-gray-300 text-gray-500 text-sm rounded-lg block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:text-gray-400"
           />
           <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">
@@ -56,11 +58,13 @@
           formControlName="language"
           [label]="'profile.language' | translate"
           [options]="languages"
+          data-testid="profile-language-select"
         ></lib-select>
 
         <button
           type="submit"
           [disabled]="profileForm.invalid"
+          data-testid="profile-button"
           class="w-full text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {{ 'profile.save_changes' | translate }}

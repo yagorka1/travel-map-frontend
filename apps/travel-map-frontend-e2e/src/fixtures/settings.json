@@ -1,0 +1,32 @@
+{
+  "profile": {
+    "valid": {
+      "name": "John",
+      "email": "test@email.com",
+      "language": "en"
+    },
+    "update": {
+      "name": "John",
+      "language": "en"
+    }
+  },
+  "password": {
+    "valid": {
+      "current": "test@email.com",
+      "new": "test@email.com"
+    },
+    "invalid": {
+      "mismatch": {
+        "new": "123434",
+        "confirm": "455456"
+      }
+    },
+    "default": "password"
+  },
+  "api": {
+    "login": {
+      "email": "test@email.com",
+      "password": "test@email.com"
+    }
+  }
+}

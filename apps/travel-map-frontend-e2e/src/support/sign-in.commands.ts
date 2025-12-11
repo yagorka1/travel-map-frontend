@@ -18,7 +18,7 @@ Cypress.Commands.add('typeEmail', (email: string) => {
 });
 
 Cypress.Commands.add('typePassword', (password: string) => {
-  cy.get(signInPage.passwordInput).clear();
+  cy.get(signInPage.passwordInput).should('not.be.disabled').clear();
   cy.get(signInPage.passwordInput).type(password);
   cy.get(signInPage.passwordInput).should('have.value', password);
 });
@@ -72,4 +72,51 @@ Cypress.Commands.add('mockFailedLogin', (statusCode = 401, message = 'Incorrect 
     statusCode: statusCode,
     body: { message: message },
   }).as('loginRequest');
+});
+
+Cypress.Commands.add('setupAuthMocks', () => {
+  cy.fixture('dashboard.json').then((dashboard) => {
+    // Setup common API mocks
+    cy.intercept('POST', '**/auth/login', {
+      statusCode: 200,
+      body: { accessToken: 'mock-jwt-token' },
+    }).as('loginRequest');
+
+    cy.intercept('POST', '**/auth/refresh', {
+      statusCode: 401,
+      body: { message: 'No valid refresh token' },
+    }).as('refreshRequestFail');
+
+    cy.intercept('GET', '**/users/profile', {
+      statusCode: 200,
+      body: dashboard.mockResponses.profile,
+    }).as('getProfile');
+
+    cy.intercept('GET', '**/chats/unread-messages', {
+      statusCode: 200,
+      body: dashboard.mockResponses.unreadMessages,
+    }).as('getUnreadMessages');
+  });
+});
+
+Cypress.Commands.add('loginUI', (email = 'test@email.com', password = 'test@email.com') => {
+  cy.visit('/auth/sign-in');
+  cy.typeEmail(email);
+  cy.typePassword(password);
+  cy.submitSignIn();
+  cy.wait('@loginRequest');
+});
+
+Cypress.Commands.add('mockRefreshToken', (success = true) => {
+  if (success) {
+    cy.intercept('POST', '**/auth/refresh', {
+      statusCode: 200,
+      body: { accessToken: 'mock-jwt-token-refreshed' },
+    }).as('refreshRequestSuccess');
+  } else {
+    cy.intercept('POST', '**/auth/refresh', {
+      statusCode: 401,
+      body: { message: 'No valid refresh token' },
+    }).as('refreshRequestFail');
+  }
 });

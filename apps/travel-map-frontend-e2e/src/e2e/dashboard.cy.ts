@@ -4,33 +4,10 @@ import '../support/sign-in.commands';
 
 describe('Dashboard - UI & Mocked API', () => {
   beforeEach(() => {
-    // Clear session and setup mocks before EACH test
     cy.clearCookies();
     cy.clearLocalStorage();
-
-    // Load fixture and setup mocks
+    cy.setupAuthMocks();
     cy.fixture('dashboard.json').then((dashboard) => {
-      // Setup all API mocks using fixture data
-      cy.intercept('POST', '**/auth/login', {
-        statusCode: 200,
-        body: { accessToken: 'mock-jwt-token' },
-      }).as('loginRequest');
-
-      cy.intercept('POST', '**/auth/refresh', {
-        statusCode: 401,
-        body: { message: 'No valid refresh token' },
-      }).as('refreshRequestFail');
-
-      cy.intercept('GET', '**/users/profile', {
-        statusCode: 200,
-        body: dashboard.mockResponses.profile,
-      }).as('getProfile');
-
-      cy.intercept('GET', '**/chats/unread-messages', {
-        statusCode: 200,
-        body: dashboard.mockResponses.unreadMessages,
-      }).as('getUnreadMessages');
-
       cy.intercept('GET', '**/statistics/dashboard', {
         statusCode: 200,
         body: dashboard.mockResponses.dashboardStats,
@@ -42,20 +19,8 @@ describe('Dashboard - UI & Mocked API', () => {
       }).as('getLevels');
     });
 
-    // Sign in
-    cy.visit('/auth/sign-in');
-    cy.typeEmail('test@email.com');
-    cy.typePassword('test@email.com');
-    cy.submitSignIn();
-    cy.wait('@loginRequest');
-
-    // Mock refresh to succeed after login
-    cy.intercept('POST', '**/auth/refresh', {
-      statusCode: 200,
-      body: { accessToken: 'mock-jwt-token-refreshed' },
-    }).as('refreshRequestSuccess');
-
-    // Visit dashboard
+    cy.loginUI();
+    cy.mockRefreshToken(true);
     cy.visit('/dashboard');
     cy.wait(['@getDashboardStats', '@getLevels']);
   });
@@ -181,10 +146,10 @@ describe('Dashboard - Real API Integration', { tags: '@integration' }, () => {
     cy.clearCookies();
     cy.clearLocalStorage();
 
-    cy.visit('/auth/sign-in');
-    cy.typeEmail('test@email.com');
-    cy.typePassword('test@email.com');
-    cy.submitSignIn();
+    // Alias login request for loginUI to wait on
+    cy.intercept('POST', '**/auth/login').as('loginRequest');
+
+    cy.loginUI();
 
     cy.url().should('include', '/dashboard', { timeout: 10000 });
   });
