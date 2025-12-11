@@ -11,6 +11,9 @@ declare namespace Cypress {
     signIn(email: string, password: string): Chainable<Element>;
     mockSuccessfulLogin(): Chainable<null>;
     mockFailedLogin(statusCode?: number, message?: string): Chainable<null>;
+    setupAuthMocks(): Chainable<null>;
+    loginUI(email?: string, password?: string): Chainable<null>;
+    mockRefreshToken(success?: boolean): Chainable<null>;
 
     // Dashboard commands
     visitDashboard(): Chainable<Element>;
@@ -24,6 +27,13 @@ declare namespace Cypress {
     assertPointsAndLevel(expectedPoints?: number, expectedLevel?: number): Chainable<Element>;
     assertMapVisible(): Chainable<Element>;
     assertDashboardLoaded(): Chainable<Element>;
+
+    // Settings commands
+    updateProfileAPI(token: string, profileData: { name: string; language: string }): Chainable<Response<any>>;
+    changePasswordAPI(
+      token: string,
+      passwordData: { currentPassword: string; newPassword: string; confirmPassword: string },
+    ): Chainable<Response<any>>;
   }
   interface SuiteConfigOverrides {
     tags?: string | string[];
