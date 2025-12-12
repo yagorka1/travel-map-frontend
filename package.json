@@ -60,7 +60,7 @@
     "@swc/helpers": "~0.5.11",
     "@types/jest": "^29.5.12",
     "@types/leaflet": "^1.9.21",
-    "@types/node": "^18.16.9",
+    "@types/node": "^18.19.130",
     "@typescript-eslint/utils": "^8.40.0",
     "angular-eslint": "^20.3.0",
     "cypress": "^14.5.4",

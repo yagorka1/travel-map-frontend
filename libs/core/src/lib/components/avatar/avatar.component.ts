@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { environment } from '@env/environment';
 
 type AvatarSize = 'sm' | 'md' | 'lg' | 'xl';
 
@@ -26,7 +27,7 @@ export class AvatarComponent {
       return this.src;
     }
 
-    return `http://localhost:3000/${this.src.replace(/\\/g, '/')}`;
+    return `${environment.apiWebSocketHost}/${this.src.replace(/\\/g, '/')}`;
   }
 
   public get initials(): string {
