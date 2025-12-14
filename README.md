@@ -4,7 +4,7 @@
 
 ## Application Link
 
-[Open Application](https://travel-map-frontend.onrender.com/auth/sign-in)
+[Open Application](https://travel-map-frontend.onrender.com)
 
 ## Key Features
 
