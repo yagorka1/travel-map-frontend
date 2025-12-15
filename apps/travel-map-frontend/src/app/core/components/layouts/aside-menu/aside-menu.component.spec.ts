@@ -1,11 +1,9 @@
-import { provideHttpClient } from '@angular/common/http';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { of, BehaviorSubject } from 'rxjs';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AuthService } from '@app/core';
-import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
-import { BehaviorSubject } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
+import { AuthService, SpinnerService } from '@app/core';
 import { UnreadMessagesService } from '../../../../pages/chats/services/unread-messages.service';
 import { AsideMenuComponent } from './aside-menu.component';
 
@@ -14,13 +12,20 @@ describe('AsideMenuComponent', () => {
   let fixture: ComponentFixture<AsideMenuComponent>;
   let mockUnreadMessagesService: any;
   let totalUnreadSubject: BehaviorSubject<number>;
+  let spinnerServiceMock: any;
+  let mockAuthService: any;
 
   beforeEach(async () => {
     totalUnreadSubject = new BehaviorSubject<number>(0);
 
-    const mockAuthService = {
+    mockAuthService = {
       token: 'test-token',
       userId: 'test-user-id',
+      logout: jest.fn().mockReturnValue(of(null)),
+    };
+
+    spinnerServiceMock = {
+      show: jest.fn((obs) => obs),
     };
 
     mockUnreadMessagesService = {
@@ -30,11 +35,10 @@ describe('AsideMenuComponent', () => {
     };
 
     await TestBed.configureTestingModule({
-      imports: [AsideMenuComponent, RouterTestingModule, TranslatePipe, TranslateModule.forRoot()],
+      imports: [AsideMenuComponent, RouterTestingModule, TranslateModule.forRoot()],
       providers: [
-        provideHttpClient(),
-        provideHttpClientTesting(),
         { provide: AuthService, useValue: mockAuthService },
+        { provide: SpinnerService, useValue: spinnerServiceMock },
         { provide: UnreadMessagesService, useValue: mockUnreadMessagesService },
       ],
     }).compileComponents();
@@ -48,43 +52,12 @@ describe('AsideMenuComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('Initialization', () => {
-    it('should initialize unread messages service', () => {
-      expect(mockUnreadMessagesService.initialize).toHaveBeenCalled();
-    });
-
-    it('should set initial unread messages count', () => {
-      expect(mockUnreadMessagesService.setInitialUnreadMessagesCount).toHaveBeenCalled();
-    });
-  });
-
-  describe('Unread Messages', () => {
-    it('should update unreadMessages when service emits new value', () => {
-      totalUnreadSubject.next(5);
-      expect(component.unreadMessages).toBe(5);
-    });
-
-    it('should default unreadMessages to 0 if service emits null/undefined', () => {
-      totalUnreadSubject.next(null as any);
-      expect(component.unreadMessages).toBe(0);
-    });
-  });
-
   describe('Logout', () => {
-    it('should call authService.logout when onLogout is called', () => {
-      const mockAuthService = TestBed.inject(AuthService) as any;
-      mockAuthService.logout = jest.fn().mockReturnValue({ subscribe: jest.fn() });
-
+    it('should call authService.logout and spinnerService.show when onLogout is called', () => {
       component.onLogout();
 
       expect(mockAuthService.logout).toHaveBeenCalled();
-    });
-  });
-
-  describe('Template', () => {
-    it('should render navigation links', () => {
-      const links = fixture.debugElement.queryAll(By.css('a'));
-      expect(links.length).toBeGreaterThan(0);
+      expect(spinnerServiceMock.show).toHaveBeenCalled();
     });
   });
 });

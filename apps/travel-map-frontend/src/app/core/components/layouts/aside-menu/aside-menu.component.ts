@@ -1,9 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { AuthService } from '@app/core';
+import { AuthService, SpinnerService } from '@app/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { UnreadMessagesService } from '../../../../pages/chats/services/unread-messages.service';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'app-aside-menu',
   imports: [RouterLink, TranslatePipe],
@@ -15,6 +17,7 @@ export class AsideMenuComponent {
 
   private unreadMessagesService = inject(UnreadMessagesService);
   private authService = inject(AuthService);
+  private spinnerService = inject(SpinnerService);
 
   constructor() {
     this.unreadMessagesService.initialize();
@@ -27,6 +30,6 @@ export class AsideMenuComponent {
   }
 
   public onLogout(): void {
-    this.authService.logout().subscribe();
+    this.spinnerService.show(this.authService.logout()).pipe(untilDestroyed(this)).subscribe();
   }
 }
