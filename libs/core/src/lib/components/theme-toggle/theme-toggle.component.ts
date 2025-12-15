@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { TranslateModule } from '@ngx-translate/core';
-import { ThemeEnum, ThemeService } from '../../services/theme.service';
+import { ThemeEnum, ThemeService } from '../../services/theme/theme.service';
 
 @Component({
-  selector: 'app-theme-toggle',
+  selector: 'lib-theme-toggle',
   standalone: true,
   imports: [TranslateModule],
   templateUrl: './theme-toggle.component.html',

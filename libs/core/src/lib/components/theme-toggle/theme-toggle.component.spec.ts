@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { BehaviorSubject } from 'rxjs';
-import { Theme, ThemeEnum, ThemeService } from '../../services/theme.service';
+import { Theme, ThemeEnum, ThemeService } from '../../services/theme/theme.service';
 import { ThemeToggleComponent } from './theme-toggle.component';
 
 describe('ThemeToggleComponent', () => {
