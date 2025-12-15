@@ -1,0 +1,151 @@
+{
+  "mockResponses": {
+    "profile": {
+      "id": "eb2eee14-f1a3-4804-972e-eaf39ea24b91",
+      "name": "User1",
+      "email": "test@email.com",
+      "avatarUrl": "uploads\\avatars\\eb2eee14-f1a3-4804-972e-eaf39ea24b91-1763720185256.png",
+      "bio": null,
+      "language": "en",
+      "createdAt": "2025-11-17T10:42:08.795Z",
+      "updatedAt": "2025-12-01T09:58:03.973Z"
+    },
+    "unreadMessages": {
+      "totalUnread": 0,
+      "chats": [
+        {
+          "chatId": "a95d921d-5916-4457-b146-30148c6cf2a5",
+          "unreadCount": 0,
+          "lastMessage": {
+            "id": "6c77bdd7-b1d9-4db7-84b9-bf76f02ee11c",
+            "content": "tg",
+            "chatId": "a95d921d-5916-4457-b146-30148c6cf2a5",
+            "senderId": "eb2eee14-f1a3-4804-972e-eaf39ea24b91",
+            "created_at": "2025-11-27T14:52:11.499Z"
+          }
+        }
+      ]
+    },
+    "dashboardStats": {
+      "totalTrips": 6,
+      "totalDistance": 1082287,
+      "visitedCities": 15,
+      "visitedCountries": 5,
+      "mostVisitedCity": {
+        "name": "Minsk",
+        "count": 3
+      },
+      "mostVisitedCountry": {
+        "name": "Belarus",
+        "count": 4
+      },
+      "averageTripDuration": 12.17,
+      "totalPoints": 1520,
+      "level": {
+        "id": "53712104-ede0-42a9-8561-765d280a6c9e",
+        "name": "Voyager",
+        "minPoints": 1000,
+        "levelNumber": 4,
+        "description": "~5 countries visited"
+      },
+      "nextLevel": {
+        "id": "815f62fc-db62-46d6-9d6b-9f6cb5df47bc",
+        "name": "Wanderer",
+        "minPoints": 2000,
+        "levelNumber": 5,
+        "description": "~10 countries visited"
+      },
+      "visitedCountriesList": ["Belarus", "Serbia", "Hungary", "Germany", "Czechia"]
+    },
+    "levels": [
+      {
+        "id": "343e8b19-3944-42f4-9c30-3dba319c34f6",
+        "name": "Novice",
+        "minPoints": 0,
+        "levelNumber": 1,
+        "description": "Just starting out"
+      },
+      {
+        "id": "be446d21-eb38-4db8-81b6-5f0de4309d04",
+        "name": "Backpacker",
+        "minPoints": 200,
+        "levelNumber": 2,
+        "description": "First country visited!"
+      },
+      {
+        "id": "059b8182-6277-4c2d-bef2-da22a4f79b8c",
+        "name": "Explorer",
+        "minPoints": 500,
+        "levelNumber": 3,
+        "description": "Getting the hang of it"
+      },
+      {
+        "id": "53712104-ede0-42a9-8561-765d280a6c9e",
+        "name": "Voyager",
+        "minPoints": 1000,
+        "levelNumber": 4,
+        "description": "~5 countries visited"
+      },
+      {
+        "id": "815f62fc-db62-46d6-9d6b-9f6cb5df47bc",
+        "name": "Wanderer",
+        "minPoints": 2000,
+        "levelNumber": 5,
+        "description": "~10 countries visited"
+      },
+      {
+        "id": "4f5f42b0-7ced-4710-a035-a59590d7d1dd",
+        "name": "Nomad",
+        "minPoints": 3500,
+        "levelNumber": 6,
+        "description": "Always on the move"
+      },
+      {
+        "id": "6ebb760f-0723-4e15-b865-a287cc60b690",
+        "name": "Adventurer",
+        "minPoints": 5000,
+        "levelNumber": 7,
+        "description": "~25 countries visited"
+      },
+      {
+        "id": "b456b563-70a0-44f0-ac32-7af033bd7a6d",
+        "name": "Globetrotter",
+        "minPoints": 7500,
+        "levelNumber": 8,
+        "description": "A true citizen of the world"
+      },
+      {
+        "id": "fd89e3fb-4081-4631-b760-647aa51af44c",
+        "name": "Wayfarer",
+        "minPoints": 10000,
+        "levelNumber": 9,
+        "description": "~50 countries visited"
+      },
+      {
+        "id": "0e9cd30b-cb16-4127-9fb9-5f46d764d9f3",
+        "name": "Legend",
+        "minPoints": 15000,
+        "levelNumber": 10,
+        "description": "~75 countries visited"
+      },
+      {
+        "id": "ad9fb5eb-8b36-4595-9d45-511dca6ce619",
+        "name": "Myth",
+        "minPoints": 25000,
+        "levelNumber": 11,
+        "description": "The world is your home"
+      }
+    ],
+    "emptyStats": {
+      "totalTrips": 0,
+      "totalDistance": 0,
+      "visitedCities": 0,
+      "visitedCountries": 0,
+      "mostVisitedCity": null,
+      "mostVisitedCountry": null,
+      "averageTripDuration": 0,
+      "totalPoints": 0,
+      "visitedCountriesList": []
+    }
+  }
+}

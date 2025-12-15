@@ -1,0 +1,103 @@
+<div class="w-full h-full p-2 sm:p-4">
+  <div
+    class="flex flex-col md:flex-row h-full overflow-hidden bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700"
+  >
+    <div
+      class="md:w-80 h-64 md:h-auto bg-gray-100 dark:bg-gray-800 border-b md:border-b-0 md:border-r border-gray-200 dark:border-gray-700 flex flex-col"
+    >
+      <div class="p-4">
+        <div class="relative">
+          <input
+            type="text"
+            [placeholder]="'chats.search_chats' | translate"
+            (input)="loadAvailableUsers($event.target.value)"
+            (focusin)="onInputFocus(true)"
+            class="w-full rounded-lg border border-gray-300 dark:border-gray-700 p-2 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+          />
+
+          @if (isUserSelected) {
+            <button
+              type="button"
+              (click)="onInputFocus(false)"
+              class="cursor-pointer absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+            >
+              ✕
+            </button>
+          }
+        </div>
+      </div>
+
+      <ul class="flex-1 overflow-y-auto divide-y divide-gray-200 dark:divide-gray-700">
+        @if (isUserSelected) {
+          @for (user of users(); track user.id) {
+            <app-chats-list [user]="user" (click)="selectUser(user)"></app-chats-list>
+          }
+        } @else {
+          @for (chat of chats; track chat.chat.id) {
+            <app-chats-list
+              [isActive]="chat.chat.id === selectedChat?.chat?.id"
+              [chat]="chat"
+              (click)="selectChat(chat)"
+            ></app-chats-list>
+          }
+        }
+      </ul>
+    </div>
+
+    <div class="flex-1 flex flex-col bg-white dark:bg-gray-900 p-4 h-full relative">
+      @if (selectedUser || selectedChat) {
+        <div
+          class="flex items-center justify-between p-4 bg-gray-100 dark:bg-gray-800 rounded-t-lg shadow-md flex-shrink-0"
+        >
+          <span class="text-lg font-semibold text-gray-800 dark:text-white">
+            {{ selectedUser?.name || selectedChat?.user?.name }}
+          </span>
+        </div>
+
+        <div
+          #scrollContainer
+          (scroll)="onScroll($event)"
+          class="flex-1 overflow-y-auto p-4 space-y-2 scrollbar-thin relative"
+        >
+          <app-messages
+            #messagesComponent
+            [selectedUser]="selectedUser"
+            [selectedChat]="selectedChat"
+            [messages]="messages"
+          ></app-messages>
+        </div>
+
+        @if (showScrollDown) {
+          <button
+            class="absolute bottom-20 right-10 z-50 bg-blue-500 text-white w-10 h-10 rounded-full shadow-lg flex items-center justify-center hover:bg-blue-600 transition cursor-pointer"
+            (click)="scrollToBottomSmooth()"
+          >
+            ↓
+          </button>
+        }
+
+        <form [formGroup]="form" (ngSubmit)="sendMessage()" class="flex mt-2 flex-shrink-0">
+          <input
+            type="text"
+            [placeholder]="'chats.type_a_message' | translate"
+            formControlName="message"
+            class="flex-1 rounded-l-lg border border-transparent p-2 focus:outline-none focus:ring-0 focus:shadow-md dark:bg-gray-700 dark:text-white box-border"
+          />
+          <button
+            type="submit"
+            [disabled]="form.invalid"
+            class="bg-blue-500 text-white px-4 rounded-r-lg hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+          >
+            {{ 'chats.send' | translate }}
+          </button>
+        </form>
+      } @else {
+        <div class="flex-1 flex flex-col items-center justify-center text-center">
+          <p class="text-gray-500 dark:text-gray-400 mt-2">
+            {{ 'chats.pick_a_user_to_start_the_conversation' | translate }}
+          </p>
+        </div>
+      }
+    </div>
+  </div>
+</div>

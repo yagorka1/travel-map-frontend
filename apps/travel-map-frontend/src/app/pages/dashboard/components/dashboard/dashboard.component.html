@@ -1,0 +1,36 @@
+<div class="w-full h-full p-4 sm:p-6 lg:p-8 bg-gray-50 dark:bg-gray-900 overflow-y-auto">
+  <div class="max-w-7xl mx-auto">
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 auto-rows-fr">
+      @for (stat of stats; track stat.titleKey) {
+        <app-stat-card
+          [icon]="stat.icon"
+          [title]="stat.titleKey | translate"
+          [value]="stat.valueKey | translate: stat.valueParams"
+          [iconColor]="stat.iconColor"
+        >
+        </app-stat-card>
+      }
+
+      <app-points-level-card
+        class="lg:col-span-2"
+        [totalPoints]="totalPoints"
+        [level]="level"
+        [progressPercentage]="progressPercentage"
+        [pointsToNextLevel]="pointsToNextLevel"
+      >
+        <span title>{{ 'dashboard.total_points_level' | translate }}</span>
+        <span progress-text>
+          {{
+            'dashboard.points_to_next_level'
+              | translate: { points: pointsToNextLevel.toLocaleString(), level: level + 1 }
+          }}
+        </span>
+      </app-points-level-card>
+    </div>
+  </div>
+
+  @if (highlightedCountries && highlightedCountries.length) {
+    <app-map [highlightedCountries]="highlightedCountries" [defaultZoom]="2" ></app-map>
+  }
+</div>

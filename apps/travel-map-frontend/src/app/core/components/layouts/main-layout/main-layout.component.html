@@ -1,0 +1,28 @@
+<div class="flex h-screen max-w-full">
+  <!-- Backdrop overlay for mobile -->
+  <div
+    *ngIf="isSidebarOpen"
+    class="fixed inset-0 z-30 bg-gray-900/50 sm:hidden"
+    (click)="closeSidebar()"
+    aria-hidden="true"
+  ></div>
+
+  <aside
+    id="sidebar"
+    [class.-translate-x-full]="!isSidebarOpen"
+    class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700"
+    aria-label="Sidebar"
+  >
+    <app-aside-menu (click)="closeSidebar()"></app-aside-menu>
+  </aside>
+
+  <div class="flex-1 flex flex-col sm:ml-64 max-w-full">
+    <app-header (toggleSidebar)="toggleSidebar()"></app-header>
+
+    <div
+      class="flex-1 p-2 m-2 sm:p-4 sm:m-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 overflow-auto"
+    >
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

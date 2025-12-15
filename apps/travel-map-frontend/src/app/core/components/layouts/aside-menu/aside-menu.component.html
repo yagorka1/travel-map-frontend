@@ -1,0 +1,158 @@
+<button
+  data-drawer-target="default-sidebar"
+  data-drawer-toggle="default-sidebar"
+  aria-controls="default-sidebar"
+  type="button"
+  class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+>
+  <span class="sr-only">Open sidebar</span>
+  <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+    <path
+      clip-rule="evenodd"
+      fill-rule="evenodd"
+      d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
+    ></path>
+  </svg>
+</button>
+
+<div>
+  <div class="h-full px-3 py-4 pt-20 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+    <ul class="space-y-2 font-medium">
+      <li>
+        <a
+          [routerLink]="['/dashboard']"
+          class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+        >
+          <svg
+            class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 22 21"
+          >
+            <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
+            <path
+              d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"
+            />
+          </svg>
+          <span class="ms-3">{{ 'aside_menu.dashboard' | translate }}</span>
+        </a>
+      </li>
+
+      <li>
+        <a
+          [routerLink]="['chats']"
+          class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+        >
+          <svg
+            class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="m17.418 3.623-.018-.008a6.713 6.713 0 0 0-2.4-.569V2h1a1 1 0 1 0 0-2h-2a1 1 0 0 0-1 1v2H9.89A6.977 6.977 0 0 1 12 8v5h-2V8A5 5 0 1 0 0 8v6a1 1 0 0 0 1 1h8v4a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-4h6a1 1 0 0 0 1-1V8a5 5 0 0 0-2.582-4.377ZM6 12H4a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Z"
+            />
+          </svg>
+          <span class="flex-1 ms-3 whitespace-nowrap">{{ 'aside_menu.chats' | translate }}</span>
+
+          @if (unreadMessages) {
+            <span
+              class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300"
+              >{{ unreadMessages }}</span
+            >
+          }
+        </a>
+      </li>
+
+      <li>
+        <a
+          [routerLink]="['settings']"
+          class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+        >
+          <svg
+            class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M1 5h1.424a3.228 3.228 0 0 0 6.152 0H19a1 1 0 1 0 0-2H8.576a3.228 3.228 0 0 0-6.152 0H1a1 1 0 1 0 0 2Zm18 4h-1.424a3.228 3.228 0 0 0-6.152 0H1a1 1 0 1 0 0 2h10.424a3.228 3.228 0 0 0 6.152 0H19a1 1 0 0 0 0-2Zm0 6H8.576a3.228 3.228 0 0 0-6.152 0H1a1 1 0 0 0 0 2h1.424a3.228 3.228 0 0 0 6.152 0H19a1 1 0 0 0 0-2Z"
+            />
+          </svg>
+          <span class="flex-1 ms-3 whitespace-nowrap">{{ 'aside_menu.settings' | translate }}</span>
+        </a>
+      </li>
+
+      <li>
+        <a
+          [routerLink]="['trips']"
+          class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+        >
+          <svg
+            class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 20 20"
+          >
+            <path
+              fill="currentColor"
+              d="M8 1V0v1Zm4 0V0v1Zm2 4v1h1V5h-1ZM6 5H5v1h1V5Zm2-3h4V0H8v2Zm4 0a1 1 0 0 1 .707.293L14.121.879A3 3 0 0 0 12 0v2Zm.707.293A1 1 0 0 1 13 3h2a3 3 0 0 0-.879-2.121l-1.414 1.414ZM13 3v2h2V3h-2Zm1 1H6v2h8V4ZM7 5V3H5v2h2Zm0-2a1 1 0 0 1 .293-.707L5.879.879A3 3 0 0 0 5 3h2Zm.293-.707A1 1 0 0 1 8 2V0a3 3 0 0 0-2.121.879l1.414 1.414ZM2 6h16V4H2v2Zm16 0h2a2 2 0 0 0-2-2v2Zm0 0v12h2V6h-2Zm0 12v2a2 2 0 0 0 2-2h-2Zm0 0H2v2h16v-2ZM2 18H0a2 2 0 0 0 2 2v-2Zm0 0V6H0v12h2ZM2 6V4a2 2 0 0 0-2 2h2Zm16.293 3.293C16.557 11.029 13.366 12 10 12c-3.366 0-6.557-.97-8.293-2.707L.293 10.707C2.557 12.971 6.366 14 10 14c3.634 0 7.444-1.03 9.707-3.293l-1.414-1.414ZM10 9v2a2 2 0 0 0 2-2h-2Zm0 0H8a2 2 0 0 0 2 2V9Zm0 0V7a2 2 0 0 0-2 2h2Zm0 0h2a2 2 0 0 0-2-2v2Z"
+            ></path>
+          </svg>
+          <span class="flex-1 ms-3 whitespace-nowrap">{{ 'aside_menu.trips' | translate }}</span>
+        </a>
+      </li>
+
+      <li>
+        <a
+          [routerLink]="['leaderboard']"
+          class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+        >
+          <svg
+            class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M10 0C8.81331 0 7.65328 0.351894 6.66658 1.01118C5.67988 1.67047 4.91085 2.60754 4.45672 3.7039C4.0026 4.80026 3.88378 6.00666 4.11529 7.17054C4.3468 8.33443 4.91824 9.40353 5.75736 10.2426C6.59648 11.0818 7.66558 11.6532 8.82946 11.8847C9.99335 12.1162 11.1997 11.9974 12.2961 11.5433C13.3925 11.0892 14.3295 10.3201 14.9888 9.33342C15.6481 8.34672 16 7.18669 16 6C16 4.4087 15.3679 2.88258 14.2426 1.75736C13.1174 0.632141 11.5913 0 10 0ZM10 10C9.40666 10 8.82664 9.82405 8.33329 9.49441C7.83994 9.16476 7.45543 8.69623 7.22836 8.14805C7.0013 7.59987 6.94189 6.99667 7.05765 6.41473C7.1734 5.83279 7.45912 5.29824 7.87868 4.87868C8.29824 4.45912 8.83279 4.1734 9.41473 4.05765C9.99667 3.94189 10.5999 4.0013 11.1481 4.22836C11.6962 4.45543 12.1648 4.83994 12.4944 5.33329C12.8241 5.82664 13 6.40666 13 7C13 7.79565 12.6839 8.55871 12.1213 9.12132C11.5587 9.68393 10.7957 10 10 10Z"
+            />
+            <path
+              d="M17.16 12.18C16.5093 11.5253 15.696 11.0528 14.8 10.81V13.19C15.2898 13.3582 15.7429 13.6159 16.1351 13.9488C16.5273 14.2817 16.8509 14.6835 17.09 15.13L17.94 16.75C17.9868 16.8375 18.0122 16.9351 18.0142 17.0347C18.0161 17.1343 17.9945 17.2328 17.9511 17.3221C17.9077 17.4113 17.8436 17.4887 17.7641 17.5475C17.6846 17.6063 17.5921 17.645 17.495 17.66L16.855 17.78C16.7578 17.795 16.6583 17.7886 16.5636 17.7612C16.4689 17.7338 16.3814 17.6861 16.3071 17.6212C16.2328 17.5564 16.1735 17.4758 16.1335 17.3851C16.0935 17.2943 16.0738 17.1957 16.076 17.0965L16.126 16.21C16.1354 16.0116 16.095 15.8139 16.008 15.6349C15.9211 15.456 15.7905 15.3014 15.628 15.184C15.1848 14.8829 14.6688 14.7095 14.14 14.68H5.86C5.33123 14.7095 4.81517 14.8829 4.372 15.184C4.20954 15.3014 4.07886 15.456 3.99195 15.6349C3.90503 15.8139 3.86459 16.0116 3.874 16.21L3.924 17.0965C3.92622 17.1957 3.90647 17.2943 3.86649 17.3851C3.82651 17.4758 3.7672 17.5564 3.69291 17.6212C3.61862 17.6861 3.53106 17.7338 3.43637 17.7612C3.34169 17.7886 3.24223 17.795 3.145 17.78L2.505 17.66C2.40791 17.645 2.31536 17.6063 2.23586 17.5475C2.15636 17.4887 2.09228 17.4113 2.04887 17.3221C2.00547 17.2328 1.98394 17.1343 1.98584 17.0347C1.98774 16.9351 2.01302 16.8375 2.06 16.75L2.91 15.13C3.14907 14.6835 3.47273 14.2817 3.86492 13.9488C4.25712 13.6159 4.71015 13.3582 5.2 13.19V10.81C4.30398 11.0528 3.49074 11.5253 2.84 12.18C2.08628 12.9337 1.53814 13.8663 1.24339 14.8902C0.94865 15.9141 0.916855 16.9959 1.155 18.035L1.35 18.965C1.41359 19.2655 1.58263 19.5334 1.82663 19.7202C2.07062 19.9071 2.37352 20.0007 2.68 20H17.32C17.6265 20.0007 17.9294 19.9071 18.1734 19.7202C18.4174 19.5334 18.5864 19.2655 18.65 18.965L18.845 18.035C19.0832 16.9959 19.0513 15.9141 18.7566 14.8902C18.4619 13.8663 17.9137 12.9337 17.16 12.18Z"
+            />
+          </svg>
+          <span class="flex-1 ms-3 whitespace-nowrap">{{ 'aside_menu.leaderboard' | translate }}</span>
+        </a>
+      </li>
+
+      <li class="mt-30">
+        <button
+          (click)="onLogout()"
+          class="flex cursor-pointer items-center p-2 w-full text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+        >
+          <svg
+            class="shrink-0 w-5 h-5 text-red-500 transition duration-75 dark:text-red-400 group-hover:text-red-600 dark:group-hover:text-red-300"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 16 16"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 8h11m0 0-4-4m4 4-4 4m-5 3H3a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h3"
+            />
+          </svg>
+          <span class="flex-1 ms-3 whitespace-nowrap text-left">{{ 'aside_menu.logout' | translate }}</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
