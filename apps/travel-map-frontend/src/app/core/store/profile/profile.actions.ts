@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { ProfileInterface, UpdateProfileDto } from '../../../pages/settings/interfaces/profile.interface';
+import { ProfileInterface, UpdateProfileDto } from '../../interfaces/profile.interface';
 
 export const loadProfile = createAction('[Load Profile] Load Profile');
 

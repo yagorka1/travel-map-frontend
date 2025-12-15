@@ -1,13 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ChangePasswordDto } from '../../interfaces/profile.interface';
 import { InputComponent } from '@app/core/components/input/input.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { passwordMatchValidator, NotificationService, SpinnerService } from '@app/core';
 import { ProfileService } from '../../../../core/services/profile.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { NotificationTypeEnum } from '@app/core/ui/notification/enums/notification-type.enum';
+import { ChangePasswordDto } from '../../../../core/interfaces/profile.interface';
 
 @UntilDestroy()
 @Component({

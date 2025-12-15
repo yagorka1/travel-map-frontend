@@ -12,6 +12,7 @@ type AvatarSize = 'sm' | 'md' | 'lg' | 'xl';
 })
 export class AvatarComponent {
   @Input() src?: string | null | undefined;
+  @Input() updatedSrc?: string | null | undefined;
   @Input() name = 'User';
   @Input() size: AvatarSize = 'md';
   @Input() alt = 'User avatar';

@@ -21,19 +21,21 @@
             {{ 'settings.profile' | translate }}
           </a>
         </li>
-        <li class="me-2">
-          <a
-            [routerLink]="['password']"
-            #passwordLink="routerLinkActive"
-            routerLinkActive="text-blue-600 border-blue-600 dark:text-blue-500 dark:border-blue-500 active"
-            [attr.aria-current]="passwordLink.isActive ? 'page' : null"
-            [routerLinkActiveOptions]="{ exact: true }"
-            class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-            data-testid="settings-password-link"
-          >
-            {{ 'settings.password' | translate }}
-          </a>
-        </li>
+        @if (!profile?.isOAuth) {
+          <li class="me-2">
+            <a
+              [routerLink]="['password']"
+              #passwordLink="routerLinkActive"
+              routerLinkActive="text-blue-600 border-blue-600 dark:text-blue-500 dark:border-blue-500 active"
+              [attr.aria-current]="passwordLink.isActive ? 'page' : null"
+              [routerLinkActiveOptions]="{ exact: true }"
+              class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+              data-testid="settings-password-link"
+            >
+              {{ 'settings.password' | translate }}
+            </a>
+          </li>
+        }
       </ul>
     </div>
 

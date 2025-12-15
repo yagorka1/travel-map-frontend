@@ -2,11 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { profileApi } from '../api/profile.api';
-import {
-  ProfileInterface,
-  UpdateProfileDto,
-  ChangePasswordDto,
-} from '../../pages/settings/interfaces/profile.interface';
+import { ChangePasswordDto, ProfileInterface, UpdateProfileDto } from '../interfaces/profile.interface';
 
 @Injectable({
   providedIn: 'root',

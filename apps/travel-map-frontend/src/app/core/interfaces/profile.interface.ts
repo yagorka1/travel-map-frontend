@@ -7,6 +7,7 @@ export interface ProfileInterface {
   createdAt: string;
   updatedAt: string;
   language: string;
+  isOAuth: boolean;
 }
 
 export interface UpdateProfileDto {
