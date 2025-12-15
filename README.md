@@ -6,6 +6,23 @@
 
 [Open Application](https://travel-map-frontend.onrender.com)
 
+> ⚠️ **Note:**  
+> The application is hosted on Render (free tier).  
+> The **first load may take up to 20–30 seconds** due to a cold start if the service was inactive.  
+> Subsequent loads are significantly faster.
+
+## Backend
+
+The frontend communicates with a dedicated backend service:
+
+- **Repository**: https://github.com/yagorka1/travel-map-backend
+- **Tech Stack**: NestJS, PostgreSQL, WebSockets (Socket.io), JWT authentication
+- **Responsibilities**:
+  - User authentication and authorization
+  - Trip and route management
+  - Real-time chat functionality
+  - Leaderboard and gamification logic
+
 ## Key Features
 
 - **📊 Dashboard**: Visualize your travel statistics and recent activity at a glance.
