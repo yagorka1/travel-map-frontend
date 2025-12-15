@@ -5,6 +5,7 @@ import { of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { ProfileService } from '../../services/profile.service';
 import * as ProfileActions from './profile.actions';
+import { SpinnerService } from '@app/core';
 
 export const loadProfileEffect = createEffect(
   (
@@ -34,11 +35,12 @@ export const updateProfileEffect = createEffect(
     actions$ = inject(Actions),
     profileService = inject(ProfileService),
     translateService = inject(TranslateService),
+    spinner = inject(SpinnerService),
   ) => {
     return actions$.pipe(
       ofType(ProfileActions.updateProfile),
       switchMap(({ profile }) =>
-        profileService.updateProfile(profile).pipe(
+        spinner.show(profileService.updateProfile(profile)).pipe(
           tap((updatedProfile) => {
             if (updatedProfile.language) {
               localStorage.setItem('language', updatedProfile.language);
