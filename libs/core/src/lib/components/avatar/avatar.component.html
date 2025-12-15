@@ -1,7 +1,7 @@
 <div [ngClass]="sizeClasses" class="relative inline-block">
   @if (formattedSrc) {
     <img
-      [src]="formattedSrc"
+      [src]="updatedSrc || formattedSrc"
       [alt]="alt"
       class="rounded-full object-cover"
       [ngClass]="sizeClasses"

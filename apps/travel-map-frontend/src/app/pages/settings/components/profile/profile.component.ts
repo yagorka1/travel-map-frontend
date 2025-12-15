@@ -8,7 +8,7 @@ import { Store } from '@ngrx/store';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import * as ProfileActions from '../../../../core/store/profile/profile.actions';
 import { selectProfile } from '../../../../core/store/profile/profile.selectors';
-import { ProfileInterface, UpdateProfileDto } from '../../../../pages/settings/interfaces/profile.interface';
+import { ProfileInterface, UpdateProfileDto } from '../../../../core/interfaces/profile.interface';
 
 @UntilDestroy()
 @Component({
@@ -34,6 +34,8 @@ export class ProfileComponent implements OnInit {
 
   public currentProfile: ProfileInterface | null = null;
   public selectedFile: File | null = null;
+
+  public newAvatar!: string;
 
   public languages: SelectOption[] = [
     { value: LanguageEnum.EN, label: 'English' },
@@ -66,6 +68,7 @@ export class ProfileComponent implements OnInit {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
       this.selectedFile = input.files[0];
+      this.newAvatar = URL.createObjectURL(input.files[0]);
     }
   }
 

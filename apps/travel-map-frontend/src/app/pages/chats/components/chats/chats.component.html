@@ -32,7 +32,7 @@
           @for (user of users(); track user.id) {
             <app-chats-list [user]="user" (click)="selectUser(user)"></app-chats-list>
           }
-        } @else {
+        } @else if (chats && chats.length > 0) {
           @for (chat of chats; track chat.chat.id) {
             <app-chats-list
               [isActive]="chat.chat.id === selectedChat?.chat?.id"

@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import * as ProfileActions from './profile.actions';
-import { ProfileInterface } from '../../../pages/settings/interfaces/profile.interface';
+import { ProfileInterface } from '../../interfaces/profile.interface';
 
 export const PROFILE_FEATURE_KEY = 'profile';
 

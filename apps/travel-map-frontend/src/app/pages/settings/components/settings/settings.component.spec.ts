@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { of } from 'rxjs';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { provideMockStore } from '@ngrx/store/testing';
 
 describe('SettingsComponent', () => {
   let component: SettingsComponent;
@@ -20,6 +21,13 @@ describe('SettingsComponent', () => {
     await TestBed.configureTestingModule({
       imports: [SettingsComponent],
       providers: [
+        provideMockStore({
+          initialState: {
+            profile: {
+              profile: null,
+            },
+          },
+        }),
         {
           provide: ActivatedRoute,
           useValue: {},
