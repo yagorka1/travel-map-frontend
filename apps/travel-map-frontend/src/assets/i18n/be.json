@@ -12,7 +12,8 @@
     "create_an_account": "Стварыць акаунт",
     "account_created_successfully": "Акаунт паспяхова створаны",
     "already_have_an_account_sign_in": "Ужо ёсць акаунт? Увайсці",
-    "sign_up": "Зарэгістравацца"
+    "sign_up": "Зарэгістравацца",
+    "or_continue_with": "Ці ўвайсці праз"
   },
   "aside_menu": {
     "dashboard": "Панэль кіравання",
@@ -77,6 +78,7 @@
     "select_language": "Выберыце мову"
   },
   "settings": {
+    "settings": "Налады",
     "profile": "Профіль",
     "password": "Пароль",
     "theme": "Тэма",
@@ -113,7 +115,11 @@
     "points": "Балы",
     "trips_count": "Колькасць паездак",
     "trip_name": "Назва паездкі",
-    "route_points": "Балы маршруту"
+    "route_points": "Балы маршруту",
+    "distance": "Адлегласць",
+    "start_date": "Дата пачатку",
+    "end_date": "Дата заканчэння",
+    "user_name": "Імя карыстальніка"
   },
   "dashboard": {
     "title": "Панэль кіравання",
