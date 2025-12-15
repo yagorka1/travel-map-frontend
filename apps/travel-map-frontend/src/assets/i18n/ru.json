@@ -78,6 +78,7 @@
     "select_language": "Выберите язык"
   },
   "settings": {
+    "settings": "Настройки",
     "profile": "Профиль",
     "password": "Пароль",
     "theme": "Тема",
@@ -114,7 +115,11 @@
     "points": "Баллы",
     "trips_count": "Количество поездок",
     "trip_name": "Название поездки",
-    "route_points": "Баллы маршрута"
+    "route_points": "Баллы маршрута",
+    "distance": "Расстояние",
+    "start_date": "Дата начала",
+    "end_date": "Дата окончания",
+    "user_name": "Имя пользователя"
   },
   "dashboard": {
     "title": "Панель управления",
