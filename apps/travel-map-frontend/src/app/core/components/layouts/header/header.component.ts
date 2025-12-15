@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ThemeToggleComponent } from '../../theme-toggle/theme-toggle.component';
+import { ThemeToggleComponent } from '@app/core';
 
 @Component({
   selector: 'app-header',

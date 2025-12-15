@@ -1,4 +1,8 @@
 <div>
+  <div class="flex justify-end">
+    <lib-theme-toggle></lib-theme-toggle>
+  </div>
+
   <div class="text-center">
     <img class="mx-auto h-12 w-auto" ngSrc="assets/images/logo.png" alt="Logo" height="1024" width="1024" />
     <h2 class="mt-6 text-3xl font-bold text-gray-900 dark:text-white">
@@ -7,7 +11,7 @@
   </div>
 
   <form class="mt-8 space-y-6" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
-    <div class="rounded-md shadow-sm -space-y-px">
+    <div class="rounded-md -space-y-px">
       <lib-input
         formControlName="name"
         [type]="'text'"
@@ -49,7 +53,7 @@
     </div>
 
     <div class="text-sm text-center">
-      <a routerLink="/auth/sign-in" class="font-medium text-indigo-600 hover:text-indigo-500">
+      <a routerLink="/auth/sign-in" class="font-medium text-blue-600 hover:text-blue-500">
         {{ 'auth.already_have_an_account_sign_in' | translate }}
       </a>
     </div>

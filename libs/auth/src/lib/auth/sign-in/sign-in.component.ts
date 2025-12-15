@@ -3,7 +3,7 @@ import type { OnInit } from '@angular/core';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { SpinnerService } from '@app/core';
+import { SpinnerService, ThemeToggleComponent } from '@app/core';
 import { InputComponent } from '@app/core/components/input/input.component';
 import { AuthService } from '@app/core/services/auth/auth.service';
 import { environment } from '@env/environment';
@@ -15,7 +15,7 @@ declare const google: any;
 @UntilDestroy()
 @Component({
   selector: 'lib-sign-in',
-  imports: [RouterLink, ReactiveFormsModule, NgOptimizedImage, TranslatePipe, InputComponent],
+  imports: [RouterLink, ReactiveFormsModule, NgOptimizedImage, TranslatePipe, InputComponent, ThemeToggleComponent],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.scss',
 })

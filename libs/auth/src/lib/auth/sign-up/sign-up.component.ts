@@ -5,14 +5,14 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { InputComponent } from '@app/core/components/input/input.component';
 import { TranslatePipe } from '@ngx-translate/core';
 import { NgOptimizedImage } from '@angular/common';
-import { AuthService, NotificationService, passwordMatchValidator } from '@app/core';
+import { AuthService, NotificationService, passwordMatchValidator, ThemeToggleComponent } from '@app/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { NotificationTypeEnum } from '@app/core/ui/notification/enums/notification-type.enum';
 
 @UntilDestroy()
 @Component({
   selector: 'lib-sign-up',
-  imports: [RouterLink, ReactiveFormsModule, InputComponent, TranslatePipe, NgOptimizedImage],
+  imports: [RouterLink, ReactiveFormsModule, InputComponent, TranslatePipe, NgOptimizedImage, ThemeToggleComponent],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss',
 })

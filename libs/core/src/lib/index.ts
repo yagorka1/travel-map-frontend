@@ -19,3 +19,5 @@ export * from './constants/http-status-code.constant';
 export * from './validators/password-match.validator';
 
 export * from './components/select/select.component';
+export * from './components/theme-toggle/theme-toggle.component';
+export * from './services/theme/theme.service';
