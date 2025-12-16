@@ -1,12 +1,13 @@
 <div class="space-y-6">
-  <div class="flex justify-end">
+  <div class="flex justify-end items-center gap-2">
+    <lib-language-switcher></lib-language-switcher>
     <lib-theme-toggle></lib-theme-toggle>
   </div>
 
   <div class="text-center">
     <img
       class="mx-auto h-12 w-auto"
-      ngSrc="assets/images/logo.png"
+      ngSrc="assets/images/app-logo.png"
       alt="Logo"
       height="1024"
       width="1024"
@@ -79,8 +80,11 @@
       </div>
     </div>
 
-    <div class="mt-6 flex justify-center">
-      <div id="google-btn"></div>
+    <div class="mt-6 flex justify-center h-[44px]">
+      <div
+        id="google-btn"
+        class="h-[44px] w-full flex justify-center items-center"
+      ></div>
     </div>
   </div>
 </div>

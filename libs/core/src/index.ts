@@ -1,6 +1,7 @@
 export * from './lib';
 export * from './lib/components/avatar/avatar.component';
 export * from './lib/components/input/input.component';
+export * from './lib/components/language-switcher/language-switcher.component';
 export * from './lib/components/select/select.component';
 export * from './lib/components/spinner/spinner.component';
 export * from './lib/components/theme-toggle/theme-toggle.component';
