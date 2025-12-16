@@ -101,7 +101,6 @@ export class AuthService implements OnDestroy {
   public logout(): Observable<void> {
     this.clearRefreshTimeout();
     this.accessToken$.next(null);
-    localStorage.removeItem('language');
 
     return this.http.post<void>(authApi.logout, {}, { withCredentials: true }).pipe(
       finalize(() => {
