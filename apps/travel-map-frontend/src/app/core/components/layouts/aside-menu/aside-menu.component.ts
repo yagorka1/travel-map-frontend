@@ -4,11 +4,12 @@ import { AuthService, SpinnerService } from '@app/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { UnreadMessagesService } from '../../../../pages/chats/services/unread-messages.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { NgOptimizedImage } from '@angular/common';
 
 @UntilDestroy()
 @Component({
   selector: 'app-aside-menu',
-  imports: [RouterLink, TranslatePipe],
+  imports: [RouterLink, TranslatePipe, NgOptimizedImage],
   templateUrl: './aside-menu.component.html',
   styleUrl: './aside-menu.component.scss',
 })
