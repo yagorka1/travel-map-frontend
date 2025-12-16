@@ -24,7 +24,7 @@
           },
           {
             "input": "apps/travel-map-frontend/public",
-            "glob": "favicon.png",
+            "glob": "favicon.jpg",
             "output": "./"
           }
         ],
