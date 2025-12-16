@@ -1,18 +1,32 @@
+import { NgOptimizedImage } from '@angular/common';
 import type { OnInit } from '@angular/core';
 import { Component, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import {
+  AuthService,
+  LanguageSwitcherComponent,
+  NotificationService,
+  passwordMatchValidator,
+  ThemeToggleComponent,
+} from '@app/core';
 import { InputComponent } from '@app/core/components/input/input.component';
-import { TranslatePipe } from '@ngx-translate/core';
-import { NgOptimizedImage } from '@angular/common';
-import { AuthService, NotificationService, passwordMatchValidator, ThemeToggleComponent } from '@app/core';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { NotificationTypeEnum } from '@app/core/ui/notification/enums/notification-type.enum';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @UntilDestroy()
 @Component({
   selector: 'lib-sign-up',
-  imports: [RouterLink, ReactiveFormsModule, InputComponent, TranslatePipe, NgOptimizedImage, ThemeToggleComponent],
+  imports: [
+    RouterLink,
+    ReactiveFormsModule,
+    InputComponent,
+    TranslatePipe,
+    NgOptimizedImage,
+    ThemeToggleComponent,
+    LanguageSwitcherComponent,
+  ],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss',
 })
