@@ -57,7 +57,7 @@ describe('Settings', { testIsolation: true }, () => {
         cy.fixture('settings.json').then((settings) => {
           cy.request({
             method: 'POST',
-            url: 'http://localhost:3000/api/auth/login',
+            url: `${Cypress.env('API_URL')}/auth/login`,
             body: settings.api.login,
           }).then((res) => {
             Cypress.env('token', res.body.accessToken);

@@ -10,8 +10,14 @@ export default defineConfig({
         production: 'npx nx run travel-map-frontend:serve-static',
       },
       ciWebServerCommand: 'npx nx run travel-map-frontend:serve-static',
-      ciBaseUrl: 'http://localhost:4200',
+      ciBaseUrl: process.env['NODE_ENV'] === 'production' ? process.env['URL'] : 'http://localhost:4200',
     }),
-    baseUrl: 'http://localhost:4200',
+    baseUrl: process.env['NODE_ENV'] === 'production' ? process.env['URL'] : 'http://localhost:4200',
+    env: {
+      API_URL:
+        process.env['NODE_ENV'] === 'production'
+          ? 'https://travel-map-backend-2vuy.onrender.com'
+          : 'http://localhost:3000',
+    },
   },
 });
