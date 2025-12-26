@@ -1,6 +1,6 @@
 import { NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { LanguageEnum, LanguageSwitcherComponent, SpinnerService, ThemeToggleComponent } from '@app/core';
 import { InputComponent } from '@app/core/components/input/input.component';
@@ -19,7 +19,6 @@ declare const google: any;
   imports: [
     RouterLink,
     ReactiveFormsModule,
-    NgOptimizedImage,
     TranslatePipe,
     InputComponent,
     ThemeToggleComponent,
@@ -29,7 +28,7 @@ declare const google: any;
   styleUrl: './sign-in.component.scss',
 })
 export class SignInComponent implements OnInit {
-  public signInForm!: FormGroup;
+  public signInForm!: FormGroup<{ email: FormControl<string>; password: FormControl<string> }>;
 
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
@@ -39,10 +38,10 @@ export class SignInComponent implements OnInit {
 
   private googleInitialized = false;
 
-  ngOnInit(): void {
-    this.signInForm = this.fb.group({
+  public ngOnInit(): void {
+    this.signInForm = this.fb.nonNullable.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+      password: ['', [Validators.required]],
     });
 
     this.loadGoogleScript$()
@@ -126,7 +125,7 @@ export class SignInComponent implements OnInit {
     const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
     this.spinnerService
-      .show(this.authService.login(this.signInForm.value, returnUrl))
+      .show(this.authService.login(this.signInForm.getRawValue(), returnUrl))
       .pipe(untilDestroyed(this))
       .subscribe();
   }

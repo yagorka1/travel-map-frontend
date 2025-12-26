@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { dateRangeValidator, InputComponent, NotificationService } from '@app/core';
 import { NotificationTypeEnum } from '@app/core/ui/notification/enums/notification-type.enum';
@@ -29,14 +29,16 @@ export class CreateTripComponent {
   private translateService: TranslateService = inject(TranslateService);
   private spinnerService: SpinnerService = inject(SpinnerService);
 
-  public form = new FormGroup(
+  private fb = inject(FormBuilder);
+
+  public form = this.fb.group(
     {
-      name: new FormControl('', [Validators.required]),
-      description: new FormControl('', [Validators.required]),
-      startDate: new FormControl<Date | null>(null, [Validators.required]),
-      endDate: new FormControl<Date | null>(null, [Validators.required]),
-      points: new FormControl<{ lat: number; lng: number }[]>([], [Validators.required]),
-      color: new FormControl('#3B82F6', [Validators.required]),
+      name: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      startDate: this.fb.control<Date | null>(null, [Validators.required]),
+      endDate: this.fb.control<Date | null>(null, [Validators.required]),
+      points: [[] as { lat: number; lng: number }[], [Validators.required]],
+      color: ['#3B82F6', [Validators.required]],
     },
     { validators: dateRangeValidator },
   );
