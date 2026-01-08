@@ -1,6 +1,7 @@
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import type { ApplicationConfig } from '@angular/core';
 import { provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
+import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 import { LanguageEnum } from '@app/core';
 import { authInterceptor } from '@app/core/interceptors/auth.interceptor';
@@ -20,9 +21,11 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
-    provideHttpClient(withInterceptors([authInterceptor, refreshInterceptor, endpointInterceptor, errorInterceptor])),
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([authInterceptor, refreshInterceptor, endpointInterceptor, errorInterceptor]),
+    ),
     provideTranslateService({
-      lang: localStorage.getItem('language') || LanguageEnum.EN,
       fallbackLang: LanguageEnum.EN,
       loader: provideTranslateHttpLoader({
         prefix: 'assets/i18n/',
@@ -33,5 +36,6 @@ export const appConfig: ApplicationConfig = {
       profile: profileReducer,
     }),
     provideEffects(ProfileEffects),
+    provideClientHydration(withEventReplay()),
   ],
 };

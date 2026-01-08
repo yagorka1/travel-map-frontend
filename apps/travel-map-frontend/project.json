@@ -8,12 +8,16 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
-        "outputPath": "dist/apps/travel-map-frontend",
+        "outputPath": "dist/travel-map-frontend/browser",
         "index": "apps/travel-map-frontend/src/index.html",
         "main": "apps/travel-map-frontend/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js"
+        ],
         "tsConfig": "apps/travel-map-frontend/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
@@ -28,7 +32,9 @@
             "output": "./"
           }
         ],
-        "styles": ["apps/travel-map-frontend/src/styles.css"]
+        "styles": [
+          "apps/travel-map-frontend/src/styles.css"
+        ]
       },
       "configurations": {
         "production": {
@@ -51,7 +57,10 @@
             }
           ],
           "outputHashing": "all",
-          "allowedCommonJsDependencies": ["leaflet", "leaflet-ant-path"]
+          "allowedCommonJsDependencies": [
+            "leaflet",
+            "leaflet-ant-path"
+          ]
         },
         "development": {
           "buildOptimizer": false,
@@ -88,7 +97,9 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/travel-map-frontend/jest.config.ts",
         "tsConfig": "apps/travel-map-frontend/tsconfig.spec.json"
@@ -102,6 +113,67 @@
         "port": 4200,
         "spa": true
       }
+    },
+    "server": {
+      "executor": "@angular-devkit/build-angular:server",
+      "options": {
+        "outputPath": "dist/travel-map-frontend/server",
+        "main": "apps/travel-map-frontend/src/server.ts",
+        "tsConfig": "apps/travel-map-frontend/tsconfig.server.json",
+        "inlineStyleLanguage": "scss"
+      },
+      "configurations": {
+        "production": {
+          "outputHashing": "media",
+          "fileReplacements": [
+            {
+              "replace": "environments/environment.ts",
+              "with": "environments/environment.prod.ts"
+            }
+          ]
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "sourceMap": true,
+          "extractLicenses": false,
+          "vendorChunk": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve-ssr": {
+      "executor": "@angular-devkit/build-angular:ssr-dev-server",
+      "configurations": {
+        "development": {
+          "browserTarget": "travel-map-frontend:build:development",
+          "serverTarget": "travel-map-frontend:server:development"
+        },
+        "production": {
+          "browserTarget": "travel-map-frontend:build:production",
+          "serverTarget": "travel-map-frontend:server:production"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "prerender": {
+      "executor": "@angular-devkit/build-angular:prerender",
+      "options": {
+        "routes": [
+          "/"
+        ]
+      },
+      "configurations": {
+        "production": {
+          "browserTarget": "travel-map-frontend:build:production",
+          "serverTarget": "travel-map-frontend:server:production"
+        },
+        "development": {
+          "browserTarget": "travel-map-frontend:build:development",
+          "serverTarget": "travel-map-frontend:server:development"
+        }
+      },
+      "defaultConfiguration": "production"
     }
   }
 }

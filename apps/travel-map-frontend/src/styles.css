@@ -16,7 +16,7 @@ body {
 
 /* Tailwind v4 dark mode - class-based configuration */
 /* Override Flowbite's default prefers-color-scheme behavior */
-@custom-variant dark (&:where(.dark, .dark *));
+@variant dark (&:where(.dark, .dark *));
 
 /* CRITICAL: Override system dark mode when .dark class is not present */
 /* This prevents Flowbite from applying dark mode based on prefers-color-scheme */
@@ -118,5 +118,5 @@ body {
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(100,100,100,0.4) transparent;
+  scrollbar-color: rgba(100, 100, 100, 0.4) transparent;
 }

@@ -1,8 +1,7 @@
-import { NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { LanguageEnum, LanguageSwitcherComponent, SpinnerService, ThemeToggleComponent } from '@app/core';
+import { isBrowser, LanguageEnum, LanguageSwitcherComponent, SpinnerService, ThemeToggleComponent } from '@app/core';
 import { InputComponent } from '@app/core/components/input/input.component';
 import { AuthService } from '@app/core/services/auth/auth.service';
 import { environment } from '@env/environment';
@@ -37,6 +36,7 @@ export class SignInComponent implements OnInit {
   private translate = inject(TranslateService);
 
   private googleInitialized = false;
+  private readonly isBrowserEnv = isBrowser();
 
   public ngOnInit(): void {
     this.signInForm = this.fb.nonNullable.group({
@@ -54,6 +54,11 @@ export class SignInComponent implements OnInit {
 
   private loadGoogleScript$(): Observable<void> {
     return new Observable<void>((observer) => {
+      if (!this.isBrowserEnv) {
+        observer.complete();
+        return;
+      }
+
       if ((window as any).google) {
         observer.next();
         observer.complete();

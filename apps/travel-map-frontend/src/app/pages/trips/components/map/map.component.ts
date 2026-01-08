@@ -90,8 +90,9 @@ export class MapComponent implements AfterViewInit, OnChanges {
   }
 
   private async loadLeaflet(): Promise<void> {
-    const [leaflet] = await Promise.all([import('leaflet'), import('leaflet-ant-path')]);
-    this.L = leaflet.default || leaflet;
+    const leafletModule: any = await import('leaflet');
+    await import('leaflet-ant-path');
+    this.L = leafletModule.default || leafletModule;
   }
 
   public ngOnChanges(changes: SimpleChanges): void {

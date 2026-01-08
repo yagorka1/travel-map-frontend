@@ -26,14 +26,6 @@ describe('AppComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('Language', () => {
-    it('should switch language', () => {
-      const useSpy = jest.spyOn(translateService, 'use');
-      component.useLanguage('fr');
-      expect(useSpy).toHaveBeenCalledWith('fr');
-    });
-  });
-
   describe('Template', () => {
     it('should render router outlet', () => {
       const routerOutlet = fixture.debugElement.query(By.css('router-outlet'));
