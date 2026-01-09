@@ -58,7 +58,7 @@ describe('SignInComponent', () => {
 
     component.onSubmit();
 
-    expect(loginSpy).toHaveBeenCalledWith({ email: 'test@test.com', password: '123456' }, '/');
+    expect(loginSpy).toHaveBeenCalledWith({ email: 'test@test.com', password: '123456' }, '/dashboard');
   });
 
   it('should not call authService.login on invalid form submit', () => {

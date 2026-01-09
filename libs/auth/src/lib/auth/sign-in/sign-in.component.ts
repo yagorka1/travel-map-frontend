@@ -127,7 +127,7 @@ export class SignInComponent implements OnInit {
   public onSubmit(): void {
     if (this.signInForm.invalid) return;
 
-    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
 
     this.spinnerService
       .show(this.authService.login(this.signInForm.getRawValue(), returnUrl))
