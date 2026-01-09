@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener, inject } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { LanguageEnum } from '../../enums/language.enum';
+import { LanguageService } from '../../services/language/language.service';
 
 @Component({
   selector: 'lib-language-switcher',
@@ -10,7 +10,7 @@ import { LanguageEnum } from '../../enums/language.enum';
   templateUrl: './language-switcher.component.html',
 })
 export class LanguageSwitcherComponent {
-  public translate = inject(TranslateService);
+  private languageService = inject(LanguageService);
   public isOpen = false;
 
   public readonly languages = [
@@ -29,7 +29,7 @@ export class LanguageSwitcherComponent {
   }
 
   public get currentLangLabel(): string {
-    const currentLang = this.translate.currentLang;
+    const currentLang = this.languageService.currentLang;
     const found = this.languages.find((l) => l.code === currentLang);
     return found ? found.label : LanguageEnum.EN;
   }
@@ -39,8 +39,7 @@ export class LanguageSwitcherComponent {
   }
 
   public selectLanguage(code: string): void {
-    this.translate.use(code);
-    localStorage.setItem('language', code);
+    this.languageService.setLanguage(code);
     this.isOpen = false;
   }
 }

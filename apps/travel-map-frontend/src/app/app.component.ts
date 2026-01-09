@@ -1,18 +1,18 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SpinnerComponent } from '@app/core/components/spinner/spinner.component';
-import { TranslateService } from '@ngx-translate/core';
 import { NotificationsComponent } from '@app/core/ui/notification/components/notifications/notifications.component';
+import { LanguageService } from '@app/core';
 
 @Component({
   imports: [RouterModule, SpinnerComponent, NotificationsComponent],
   selector: 'app-root',
   templateUrl: './app.component.html',
 })
-export class AppComponent {
-  private translate = inject(TranslateService);
+export class AppComponent implements OnInit {
+  private languageService = inject(LanguageService);
 
-  public useLanguage(language: string): void {
-    this.translate.use(language);
+  public ngOnInit() {
+    this.languageService.init();
   }
 }

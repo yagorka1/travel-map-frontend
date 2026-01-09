@@ -1,8 +1,9 @@
 export * from './services/auth/auth.interface';
 export * from './services/auth/auth.service';
+export * from './services/language/language.service';
 export * from './services/spinner/spinner.service';
+export * from './services/theme/theme.service';
 export * from './services/web-socket/web-socket.service';
-export * from './ui/notification/services/notification.service';
 
 export * from './guards/authenticated.guard';
 export * from './guards/not-authenticated.guard';
@@ -20,4 +21,7 @@ export * from './validators/password-match.validator';
 
 export * from './components/select/select.component';
 export * from './components/theme-toggle/theme-toggle.component';
-export * from './services/theme/theme.service';
+
+export * from './ui/notification/services/notification.service';
+
+export * from './helpers/is-browser';

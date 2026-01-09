@@ -139,5 +139,41 @@
     "most_visited_country_value": "{{country}} ({{count}})",
     "total_points_level": "Total Points / Level",
     "points_to_next_level": "{{points}} points to level {{level}}"
+  },
+  "landing": {
+    "login": "Login",
+    "sign_up": "Sign Up",
+    "go_to_dashboard": "Go to Dashboard",
+    "hero": {
+      "title_start": "Track your travels.",
+      "title_end": "Compete with the world.",
+      "description": "The ultimate travel tracker that turns your journeys into a game. Earn points, unlock achievements, and see how you rank against friends.",
+      "get_started": "Get Started",
+      "floating_card": {
+        "flight": "Flight to Paris",
+        "time": "10:30 AM"
+      }
+    },
+    "features": {
+      "why_choose": "Why choose TravelMap?",
+      "subtitle": "More than just a logbook. It's a game of exploration where every trip counts.",
+      "map": {
+        "title": "Map Your Journey",
+        "desc": "Build your personal travel history. Mark every city and hidden gem you've visited on an interactive map."
+      },
+      "compete": {
+        "title": "Earn Points & Compete",
+        "desc": "Get a Travel Score for every trip. Compare your stats with friends on the leaderboard and claim the top spot."
+      },
+      "budget": {
+        "title": "Budget Control",
+        "desc": "Keep your finances in check without the hassle. Track expenses in any currency and never overspend again."
+      }
+    },
+    "footer": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "rights": "© 2026 TravelApp. All rights reserved."
+    }
   }
 }

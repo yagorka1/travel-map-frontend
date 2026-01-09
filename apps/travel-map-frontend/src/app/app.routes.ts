@@ -10,6 +10,11 @@ export const appRoutes: Route[] = [
   },
   {
     path: '',
+    pathMatch: 'full',
+    loadComponent: () => import('./pages/landing/landing.component').then((m) => m.LandingPageComponent),
+  },
+  {
+    path: '',
     canActivate: [authenticatedGuard],
     loadComponent: () =>
       import('./core/components/layouts/main-layout/main-layout.component').then((m) => m.MainLayoutComponent),

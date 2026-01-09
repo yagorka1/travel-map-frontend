@@ -45,6 +45,21 @@ export class AuthService implements OnDestroy {
     return null;
   }
 
+  public get isAuthenticated$(): Observable<boolean> {
+    return this.accessToken$.pipe(map((token) => !!token));
+  }
+
+  public checkSession(): Observable<boolean> {
+    if (this.token) {
+      return of(true);
+    }
+
+    return this.refreshWithQueue().pipe(
+      map(() => true),
+      catchError(() => of(false)),
+    );
+  }
+
   public setToken(token: string): void {
     this.accessToken$.next(token);
     this.scheduleProactiveRefresh(token);
@@ -54,7 +69,7 @@ export class AuthService implements OnDestroy {
     return this.http.post<AuthResponse>(authApi.login, dto, { withCredentials: true }).pipe(
       tap((res: AuthResponse) => {
         this.setToken(res.accessToken);
-        this.router.navigate([returnUrl || '/']);
+        this.router.navigate([returnUrl || '/dashboard']);
       }),
     );
   }
@@ -153,7 +168,7 @@ export class AuthService implements OnDestroy {
     return this.http.post<AuthResponse>(authApi.googleLogin, dto, { withCredentials: true }).pipe(
       tap((res: AuthResponse) => {
         this.setToken(res.accessToken);
-        this.router.navigate(['/']);
+        this.router.navigate(['/dashboard']);
       }),
     );
   }
