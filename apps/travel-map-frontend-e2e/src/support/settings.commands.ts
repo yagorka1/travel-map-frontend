@@ -17,7 +17,7 @@ export const settingsPage = {
 Cypress.Commands.add('updateProfileAPI', (token: string, profileData: { name: string; language: string }) => {
   cy.request({
     method: 'PATCH',
-    url: 'http://localhost:3000/api/users/profile',
+    url: `${Cypress.env('API_URL')}/api/users/profile`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -31,7 +31,7 @@ Cypress.Commands.add(
   (token: string, passwordData: { currentPassword: string; newPassword: string; confirmPassword: string }) => {
     cy.request({
       method: 'POST',
-      url: 'http://localhost:3000/api/users/change-password',
+      url: `${Cypress.env('API_URL')}/api/users/change-password`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
